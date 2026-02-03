@@ -11,8 +11,8 @@
 /* Scene container */
 .typewriter-scene {
   position: relative;
-  min-height: 600px;
-  padding-top: 80px;
+  min-height: 500px;
+  padding-top: 20px;
 }
 
 /* Individual floating stamp - sits ON TOP of everything */
@@ -154,7 +154,7 @@
   z-index: 10;
   width: 380px;
   margin: 0 auto;
-  padding-top: 200px;
+  padding-top: 40px;
 }
 
 /* Paper */
