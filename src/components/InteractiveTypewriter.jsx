@@ -9,16 +9,16 @@ const KEYBOARD_ROWS = [
   ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.']
 ]
 
-// Simple horizontal row of stamps above typewriter
+// Naturally scattered stamps - messy like tossed on desk
 const STAMP_POSITIONS = [
-  { x: -280, y: -160, rotation: -12 },   // Far left
-  { x: -200, y: -180, rotation: -8 },    // Left
-  { x: -120, y: -190, rotation: -4 },    // Left-center
-  { x: -40, y: -195, rotation: 0 },      // Center left
-  { x: 40, y: -195, rotation: 0 },       // Center right
-  { x: 120, y: -190, rotation: 4 },      // Right-center
-  { x: 200, y: -180, rotation: 8 },      // Right
-  { x: 280, y: -160, rotation: 12 },     // Far right
+  { x: -260, y: -140, rotation: -18 },   // Far left, lower
+  { x: -170, y: -180, rotation: 12 },    // Left, tilted other way
+  { x: -90, y: -120, rotation: -8 },     // Left-center, overlapping area
+  { x: -20, y: -200, rotation: 3 },      // Near center, higher
+  { x: 50, y: -160, rotation: -15 },     // Right of center, tilted
+  { x: 130, y: -210, rotation: 20 },     // Right, high and tilted
+  { x: 200, y: -130, rotation: -5 },     // Right, lower
+  { x: 290, y: -170, rotation: 25 },     // Far right, tilted
 ]
 
 // Simple floating stamp - no drag, just click
