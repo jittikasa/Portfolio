@@ -1,0 +1,141 @@
+/* ============================================
+   HOME - Single Page Interactive Experience
+   ============================================ */
+
+.home {
+  min-height: 100vh;
+  background: #FAFAF8;
+}
+
+/* Full Page Hero */
+.hero-full {
+  min-height: 200vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 48px;
+  background: linear-gradient(180deg, #FAF8F3 0%, #F5F0E6 100%);
+  position: relative;
+}
+
+.hero-full__container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+/* Narrative side */
+.hero-full__narrative {
+  max-width: 420px;
+}
+
+.hero-full__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.hero-full__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #2C2C2C;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+
+.hero-full__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-full__description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #666;
+}
+
+/* Typewriter side - 15% bigger */
+.hero-full__typewriter {
+  display: flex;
+  justify-content: center;
+  transform: scale(1.15);
+  transform-origin: center center;
+}
+
+/* Footer within hero */
+.hero-full__footer {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.hero-full__divider {
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .hero-full__container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  
+  .hero-full__narrative {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .hero-full__typewriter {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-full {
+    min-height: 150vh;
+    padding: 60px 24px;
+  }
+  
+  .hero-full__typewriter {
+    transform: scale(0.9);
+  }
+  
+  .hero-full__footer {
+    bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-full {
+    min-height: auto;
+    padding: 40px 20px 80px;
+  }
+  
+  .hero-full__title {
+    font-size: 2.25rem;
+  }
+  
+  .hero-full__typewriter {
+    transform: scale(0.75);
+  }
+}

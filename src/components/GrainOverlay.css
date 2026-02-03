@@ -1,0 +1,12 @@
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
+}
+
+.grain-overlay__svg {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,269 @@
+/* ============================================
+   TYPEWRITER ANCHOR - Editorial, Refined
+   Sophisticated, minimal, aesthetic
+   ============================================ */
+
+.typewriter-anchor {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.typewriter-anchor__inner {
+  position: relative;
+}
+
+/* Paper - refined cream color */
+.typewriter-anchor__paper {
+  position: relative;
+  background: #FAF8F3;
+  padding: 36px 32px 28px;
+  margin: 0 20px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+/* Subtle paper texture */
+.typewriter-anchor__paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Header */ 
+.typewriter-anchor__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(44,44,44,0.15);
+  margin-bottom: 32px;
+}
+
+.typewriter-anchor__header span {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: #2C2C2C;
+}
+
+.typewriter-anchor__header span:last-child {
+  color: #888;
+}
+
+/* Content */
+.typewriter-anchor__content {
+  font-family: 'Courier New', monospace;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #2C2C2C;
+  min-height: 160px;
+}
+
+.typewriter-anchor__line {
+  min-height: 1.7em;
+}
+
+.typewriter-anchor__line--empty {
+  height: 0.8em;
+}
+
+.typewriter-anchor__cursor {
+  display: inline-block;
+  color: #2C2C2C;
+  opacity: 0;
+  font-weight: 300;
+  margin-left: 2px;
+}
+
+.typewriter-anchor__cursor--visible {
+  opacity: 1;
+}
+
+/* Footer dots */
+.typewriter-anchor__footer {
+  margin-top: 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #2C2C2C;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
+/* Typewriter Body - Minimal */ 
+.typewriter-anchor__body {
+  position: relative;
+  margin-top: -2px;
+}
+
+/* Roller */ 
+.typewriter-anchor__roller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  margin-bottom: 4px;
+}
+
+.typewriter-anchor__roller-knob {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(145deg, #B8C5D6 0%, #9AACBF 100%);
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 1px 2px rgba(255,255,255,0.3),
+    0 1px 2px rgba(0,0,0,0.1);
+}
+
+.typewriter-anchor__roller-bar {
+  flex: 1;
+  height: 6px;
+  background: linear-gradient(180deg, #C5D0E0 0%, #A8B8CC 100%);
+  margin: 0 4px;
+  border-radius: 3px;
+}
+
+/* Chassis */
+.typewriter-anchor__chassis {
+  background: linear-gradient(
+    180deg,
+    #C5D4E5 0%,
+    #B0C0D5 40%,
+    #A0B0C8 100%
+  );
+  border-radius: 16px 16px 24px 24px;
+  padding: 16px 14px 20px;
+  box-shadow: 
+    0 8px 24px rgba(74, 90, 110, 0.15),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+/* Ribbon */
+.typewriter-anchor__ribbon {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+
+.typewriter-anchor__ribbon-slot {
+  width: 4px;
+  height: 12px;
+  background: #4A5568;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+/* Brand */
+.typewriter-anchor__brand {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Keys - minimal, elegant */
+.typewriter-anchor__keys {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.typewriter-anchor__key-row {
+  display: flex;
+  gap: 4px;
+}
+
+.typewriter-anchor__key-row--offset {
+  padding-left: 12px;
+}
+
+.typewriter-anchor__key {
+  width: 24px;
+  height: 26px;
+  background: linear-gradient(145deg, #E8EEF5 0%, #D0D8E5 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #3D4852;
+  box-shadow: 
+    0 2px 0 #9AACBF,
+    0 3px 5px rgba(0,0,0,0.1);
+}
+
+/* Shadow */
+.typewriter-anchor__shadow {
+  position: absolute;
+  bottom: -16px;
+  left: 15%;
+  right: 15%;
+  height: 24px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0.08) 0%,
+    transparent 70%
+  );
+  filter: blur(6px);
+  z-index: -1;
+}
+
+/* Glow effect on hover */
+.typewriter-anchor__glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(196, 92, 62, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .typewriter-anchor {
+    max-width: 320px;
+  }
+  
+  .typewriter-anchor__paper {
+    padding: 28px 24px 22px;
+    margin: 0 16px;
+  }
+  
+  .typewriter-anchor__content {
+    font-size: 1rem;
+    min-height: 140px;
+  }
+  
+  .typewriter-anchor__key {
+    width: 20px;
+    height: 22px;
+    font-size: 0.55rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-anchor__cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
