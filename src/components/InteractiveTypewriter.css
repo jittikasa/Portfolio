@@ -5,15 +5,15 @@
 .interactive-typewriter {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* Scene container */
+/* Scene container - wider for half-circle stamp layout */
 .typewriter-scene {
   position: relative;
-  min-height: 500px;
-  padding: 80px 120px;
+  min-height: 580px;
+  padding: 100px 60px 40px;
 }
 
 /* Individual floating stamp */
@@ -364,11 +364,22 @@
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .typewriter-scene {
+    padding: 80px 20px 40px;
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+  
+  .desk-stamp {
+    width: 80px;
+  }
+}
+
 @media (max-width: 768px) {
   .typewriter-scene {
-    padding: 40px 20px;
-    transform: scale(0.85);
-    transform-origin: top center;
+    padding: 60px 10px 40px;
+    transform: scale(0.65);
   }
   
   .desk-stamp {

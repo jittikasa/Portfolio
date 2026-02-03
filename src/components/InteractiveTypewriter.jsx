@@ -9,16 +9,16 @@ const KEYBOARD_ROWS = [
   ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.']
 ]
 
-// Evenly distributed positions around typewriter
+// Stamps scattered in half circle above typewriter
 const STAMP_POSITIONS = [
-  { x: -180, y: -120, rotation: -20 },   // Top left
-  { x: 0, y: -140, rotation: -5 },       // Top center
-  { x: 180, y: -120, rotation: 15 },     // Top right
-  { x: 220, y: 0, rotation: 10 },        // Right middle
-  { x: 180, y: 140, rotation: -15 },     // Bottom right
-  { x: 0, y: 160, rotation: 5 },         // Bottom center
-  { x: -180, y: 140, rotation: 20 },     // Bottom left
-  { x: -220, y: 0, rotation: -10 },      // Left middle
+  { x: -320, y: -80, rotation: -25 },    // Far left
+  { x: -220, y: -140, rotation: -15 },   // Left
+  { x: -100, y: -180, rotation: -8 },    // Left-center
+  { x: 0, y: -200, rotation: 0 },        // Top center
+  { x: 100, y: -180, rotation: 8 },      // Right-center
+  { x: 220, y: -140, rotation: 15 },     // Right
+  { x: 320, y: -80, rotation: 25 },      // Far right
+  { x: 0, y: -120, rotation: -3 },       // Inner center (slightly lower)
 ]
 
 // Proper Stamp with SVG perforations and floating
@@ -77,18 +77,19 @@ const DeskStamp = ({ project, position, onDrop, isDropped, onClick, index }) => 
         left: position.x,
         top: position.y
       }}
-      animate={{
+      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1,
         y: [0, -6 - (index % 3), 0],
         rotate: [position.rotation, position.rotation + (index % 2 === 0 ? 2 : -2), position.rotation]
       }}
       transition={{
-        duration: 3 + (index % 2),
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: index * 0.15
+        opacity: { duration: 0.5, delay: index * 0.1 },
+        scale: { duration: 0.5, delay: index * 0.1 },
+        y: { duration: 3 + (index % 2), repeat: Infinity, ease: "easeInOut", delay: index * 0.15 },
+        rotate: { duration: 4 + (index % 3), repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }
       }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
       onMouseDown={handleMouseDown}
       onClick={() => !isDragging && onClick(project)}
       whileHover={{ 
