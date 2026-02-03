@@ -5,35 +5,34 @@
 .interactive-typewriter {
   position: relative;
   width: 100%;
-  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* Scene container - wider for half-circle stamp layout */
+/* Scene container */
 .typewriter-scene {
   position: relative;
-  min-height: 580px;
-  padding: 100px 60px 40px;
+  min-height: 600px;
+  padding-top: 80px;
 }
 
-/* Individual floating stamp */
+/* Individual floating stamp - sits ON TOP of everything */
 .desk-stamp {
   position: absolute;
-  width: 90px;
-  cursor: grab;
-  z-index: 20;
+  width: 80px;
+  cursor: pointer;
+  z-index: 100;
+  pointer-events: auto;
 }
 
-.desk-stamp--dragging {
-  cursor: grabbing;
-  z-index: 100 !important;
+.desk-stamp:hover {
+  z-index: 1000;
 }
 
 /* Stamps always look the same, no visual change when used */
 
 .desk-stamp__inner {
   position: relative;
-  transition: transform 0.1s;
+  transition: transform 0.2s ease;
 }
 
 /* Stamp SVG Component */
@@ -149,14 +148,13 @@
   filter: blur(8px);
 }
 
-/* Typewriter unit - centered */
+/* Typewriter unit - centered, below stamps */
 .typewriter-unit {
   position: relative;
-  z-index: 30;
+  z-index: 10;
   width: 380px;
   margin: 0 auto;
-  left: 50%;
-  transform: translateX(-50%);
+  padding-top: 200px;
 }
 
 /* Paper */
@@ -366,20 +364,8 @@
 /* Responsive */
 @media (max-width: 900px) {
   .typewriter-scene {
-    padding: 80px 20px 40px;
-    transform: scale(0.75);
+    transform: scale(0.85);
     transform-origin: top center;
-  }
-  
-  .desk-stamp {
-    width: 80px;
-  }
-}
-
-@media (max-width: 768px) {
-  .typewriter-scene {
-    padding: 60px 10px 40px;
-    transform: scale(0.65);
   }
   
   .desk-stamp {
@@ -387,13 +373,23 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .typewriter-scene {
-    padding: 20px 10px;
     transform: scale(0.7);
   }
   
   .desk-stamp {
-    display: none;
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .typewriter-scene {
+    transform: scale(0.6);
+    padding-top: 40px;
+  }
+  
+  .desk-stamp {
+    width: 50px;
   }
 }

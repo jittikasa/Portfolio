@@ -9,101 +9,51 @@ const KEYBOARD_ROWS = [
   ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.']
 ]
 
-// Stamps scattered in half circle above typewriter
+// Simple horizontal row of stamps above typewriter
 const STAMP_POSITIONS = [
-  { x: -320, y: -80, rotation: -25 },    // Far left
-  { x: -220, y: -140, rotation: -15 },   // Left
-  { x: -100, y: -180, rotation: -8 },    // Left-center
-  { x: 0, y: -200, rotation: 0 },        // Top center
-  { x: 100, y: -180, rotation: 8 },      // Right-center
-  { x: 220, y: -140, rotation: 15 },     // Right
-  { x: 320, y: -80, rotation: 25 },      // Far right
-  { x: 0, y: -120, rotation: -3 },       // Inner center (slightly lower)
+  { x: -280, y: -160, rotation: -12 },   // Far left
+  { x: -200, y: -180, rotation: -8 },    // Left
+  { x: -120, y: -190, rotation: -4 },    // Left-center
+  { x: -40, y: -195, rotation: 0 },      // Center left
+  { x: 40, y: -195, rotation: 0 },       // Center right
+  { x: 120, y: -190, rotation: 4 },      // Right-center
+  { x: 200, y: -180, rotation: 8 },      // Right
+  { x: 280, y: -160, rotation: 12 },     // Far right
 ]
 
-// Proper Stamp with SVG perforations and floating
-const DeskStamp = ({ project, position, onDrop, isDropped, onClick, index }) => {
-  const [isDragging, setIsDragging] = useState(false)
-  const [dragPos, setDragPos] = useState({ x: 0, y: 0 })
-  const stampRef = useRef(null)
-  const dragStart = useRef({ x: 0, y: 0 })
-
-  const handleMouseDown = (e) => {
-    if (isDropped) return
-    setIsDragging(true)
-    dragStart.current = { x: e.clientX, y: e.clientY }
-    
-    const onMove = (e) => {
-      setDragPos({
-        x: e.clientX - dragStart.current.x,
-        y: e.clientY - dragStart.current.y
-      })
-    }
-    
-    const onUp = () => {
-      setIsDragging(false)
-      
-      const paper = document.querySelector('.typewriter-paper')
-      if (paper && stampRef.current) {
-        const paperRect = paper.getBoundingClientRect()
-        const stampRect = stampRef.current.getBoundingClientRect()
-        const centerX = stampRect.left + stampRect.width / 2
-        const centerY = stampRect.top + stampRect.height / 2
-        
-        if (centerX >= paperRect.left && centerX <= paperRect.right &&
-            centerY >= paperRect.top && centerY <= paperRect.bottom) {
-          onDrop(project)
-        }
-      }
-      
-      setDragPos({ x: 0, y: 0 })
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseup', onUp)
-    }
-    
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseup', onUp)
-  }
-
-  // Stamp behavior - no visual change when used, always clickable
-
+// Simple floating stamp - no drag, just click
+const DeskStamp = ({ project, position, onClick, index }) => {
   return (
     <motion.div
-      ref={stampRef}
-      className={`desk-stamp ${isDragging ? 'desk-stamp--dragging' : ''}`}
+      className="desk-stamp"
       style={{
         '--stamp-color': project.color,
         '--stamp-accent': project.accentColor,
-        left: position.x,
+        left: `calc(50% + ${position.x}px)`,
         top: position.y
       }}
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+      initial={{ opacity: 0, scale: 0.8, y: 30 }}
       animate={{ 
         opacity: 1, 
         scale: 1,
-        y: [0, -6 - (index % 3), 0],
-        rotate: [position.rotation, position.rotation + (index % 2 === 0 ? 2 : -2), position.rotation]
+        y: [0, -5, 0],
       }}
       transition={{
-        opacity: { duration: 0.5, delay: index * 0.1 },
-        scale: { duration: 0.5, delay: index * 0.1 },
-        y: { duration: 3 + (index % 2), repeat: Infinity, ease: "easeInOut", delay: index * 0.15 },
-        rotate: { duration: 4 + (index % 3), repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }
+        opacity: { duration: 0.4, delay: index * 0.08 },
+        scale: { duration: 0.4, delay: index * 0.08 },
+        y: { duration: 2.5 + (index % 3) * 0.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }
       }}
-      onMouseDown={handleMouseDown}
-      onClick={() => !isDragging && onClick(project)}
+      onClick={() => onClick(project)}
       whileHover={{ 
-        scale: 1.08, 
-        rotate: 0,
-        zIndex: 100,
-        transition: { type: 'spring', stiffness: 300, damping: 20 }
+        scale: 1.1, 
+        y: -10,
+        zIndex: 1000,
+        transition: { type: 'spring', stiffness: 400, damping: 15 }
       }}
     >
       <div 
         className="desk-stamp__inner"
-        style={{
-          transform: `translate(${dragPos.x}px, ${dragPos.y}px) rotate(${position.rotation}deg)`
-        }}
+        style={{ transform: `rotate(${position.rotation}deg)` }}
       >
         <StampSVG project={project} />
       </div>
@@ -184,8 +134,6 @@ export default function InteractiveTypewriter({ onSelectProject }) {
   const [currentLine, setCurrentLine] = useState(0)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [pressedKey, setPressedKey] = useState(null)
-  const [stampedProject, setStampedProject] = useState(null)
-  const [usedStamps, setUsedStamps] = useState([])
   const paperRef = useRef(null)
 
   useEffect(() => {
@@ -235,19 +183,7 @@ export default function InteractiveTypewriter({ onSelectProject }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [handleType, handleBackspace, handleEnter])
 
-  const handleStampDrop = (project) => {
-    setStampedProject(project)
-    setUsedStamps(prev => [...prev, project.id])
-    setLines(prev => {
-      const newLines = [...prev]
-      newLines[currentLine] += ` [${project.title}]`
-      return newLines
-    })
-    setTimeout(() => {
-      setStampedProject(null)
-      onSelectProject(project)
-    }, 600)
-  }
+
 
   return (
     <div className="interactive-typewriter">
@@ -257,8 +193,6 @@ export default function InteractiveTypewriter({ onSelectProject }) {
             key={project.id}
             project={project}
             position={STAMP_POSITIONS[index] || { x: 0, y: 0, rotation: 0 }}
-            onDrop={handleStampDrop}
-            isDropped={usedStamps.includes(project.id)}
             onClick={onSelectProject}
             index={index}
           />
@@ -266,27 +200,6 @@ export default function InteractiveTypewriter({ onSelectProject }) {
 
         <div className="typewriter-unit">
           <div className="typewriter-paper" ref={paperRef}>
-            {stampedProject && (
-              <motion.div
-                className="stamp-impression"
-                initial={{ scale: 1.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.1 }}
-                exit={{ opacity: 0 }}
-                style={{ color: stampedProject.accentColor }}
-              >
-                <svg viewBox="0 0 100 100">
-                  <defs>
-                    <path id="imp" d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"/>
-                  </defs>
-                  <text fontSize="6" fontFamily="monospace" letterSpacing="2">
-                    <textPath href="#imp">
-                      {stampedProject.title} • {stampedProject.year} •
-                    </textPath>
-                  </text>
-                </svg>
-              </motion.div>
-            )}
-
             <div className="typewriter-paper__header">
               <span>jittika.2024</span>
               <span>design studio</span>
