@@ -9,16 +9,16 @@ const KEYBOARD_ROWS = [
   ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.']
 ]
 
-// Widely spread stamps - 50% more spacing
+// Clean spread - 4 left, 4 right, natural desk arrangement
 const STAMP_POSITIONS = [
-  { x: -360, y: 40, rotation: -30 },     // Far left
-  { x: -260, y: -30, rotation: 20 },     // Left
-  { x: -140, y: -90, rotation: -10 },    // Left-top
-  { x: 0, y: -120, rotation: 0 },        // Top center
-  { x: 140, y: -90, rotation: 10 },      // Right-top
-  { x: 260, y: -30, rotation: -20 },     // Right
-  { x: 360, y: 40, rotation: 30 },       // Far right
-  { x: 0, y: -40, rotation: 5 },         // Inner center
+  { x: -320, y: -20, rotation: -8 },     // Far left
+  { x: -220, y: -60, rotation: 12 },     // Left upper
+  { x: -120, y: -80, rotation: -5 },     // Left top
+  { x: -40, y: -90, rotation: 3 },       // Near left
+  { x: 40, y: -90, rotation: -3 },       // Near right
+  { x: 120, y: -80, rotation: 5 },       // Right top
+  { x: 220, y: -60, rotation: -12 },     // Right upper
+  { x: 320, y: -20, rotation: 8 },       // Far right
 ]
 
 // Simple floating stamp - no drag, just click
