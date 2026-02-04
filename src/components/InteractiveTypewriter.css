@@ -5,20 +5,22 @@
 .interactive-typewriter {
   position: relative;
   width: 100%;
+  max-width: 900px;
   margin: 0 auto;
+  overflow: visible;
 }
 
 /* Scene container */
 .typewriter-scene {
   position: relative;
-  min-height: 500px;
-  padding-top: 20px;
+  min-height: 520px;
+  padding: 40px 60px 0;
 }
 
 /* Individual floating stamp - sits ON TOP of everything */
 .desk-stamp {
   position: absolute;
-  width: 80px;
+  width: 75px;
   cursor: pointer;
   z-index: 100;
   pointer-events: auto;
