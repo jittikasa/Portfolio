@@ -5,7 +5,7 @@
 .interactive-typewriter {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   overflow: visible;
 }
@@ -13,8 +13,8 @@
 /* Scene container */
 .typewriter-scene {
   position: relative;
-  min-height: 520px;
-  padding: 40px 60px 0;
+  min-height: 540px;
+  padding: 60px 120px 0;
 }
 
 /* Individual floating stamp - sits ON TOP of everything */
