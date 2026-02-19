@@ -53,6 +53,9 @@ export default function Header() {
 
   return (
     <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
+      <div className="header__announce">
+        <span>Designer &amp; Maker · Available for projects</span>
+      </div>
       <div className="header__container">
         <Link to="/" className="header__logo">
           <span className="header__logo-text">J</span>

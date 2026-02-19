@@ -1,5 +1,5 @@
-// Portfolio projects - each represented as a stamp
-// Types: 'website' | 'design' | 'app'
+// Portfolio projects — each represented as a stamp
+// Palette: Monet Giverny — sage, water, petal, bloom, canvas
 
 export const projects = [
   {
@@ -10,14 +10,11 @@ export const projects = [
     type: 'app',
     year: '2024',
     tags: ['iOS', 'Product Design', 'SwiftUI'],
-    color: '#E8D5C4',
-    accentColor: '#C45C3E',
+    color: '#D9E4D2',       // sage pale
+    accentColor: '#3E5234', // sage deep
     rotation: -2,
     featured: true,
-    links: {
-      appStore: '#',
-      caseStudy: '#'
-    },
+    links: { appStore: '#', caseStudy: '#' },
     images: []
   },
   {
@@ -28,14 +25,11 @@ export const projects = [
     type: 'app',
     year: '2023',
     tags: ['iOS', 'Photography', 'UI Design'],
-    color: '#D4E5E0',
-    accentColor: '#2C5F5D',
+    color: '#C5D8E8',       // water mist
+    accentColor: '#5B7A96', // water deep
     rotation: 1.5,
     featured: true,
-    links: {
-      appStore: '#',
-      caseStudy: '#'
-    },
+    links: { appStore: '#', caseStudy: '#' },
     images: []
   },
   {
@@ -46,14 +40,11 @@ export const projects = [
     type: 'website',
     year: '2024',
     tags: ['Web Design', 'Development', 'GSAP'],
-    color: '#F5F0E6',
-    accentColor: '#1a1a1a',
+    color: '#EDE4D5',       // bloom pale
+    accentColor: '#2A1F14', // ink
     rotation: -1,
     featured: false,
-    links: {
-      live: '#',
-      caseStudy: '#'
-    },
+    links: { live: '#', caseStudy: '#' },
     images: []
   },
   {
@@ -64,13 +55,11 @@ export const projects = [
     type: 'design',
     year: '2024',
     tags: ['Branding', 'Packaging', 'Print'],
-    color: '#E8E0D5',
-    accentColor: '#4A6741',
+    color: '#A8B89A',       // sage mist
+    accentColor: '#3E5234', // sage deep
     rotation: 2.5,
     featured: false,
-    links: {
-      caseStudy: '#'
-    },
+    links: { caseStudy: '#' },
     images: []
   },
   {
@@ -81,14 +70,11 @@ export const projects = [
     type: 'website',
     year: '2023',
     tags: ['Web App', 'UX Design', 'React'],
-    color: '#DDE5F0',
-    accentColor: '#3D5A80',
+    color: '#8BAABF',       // water
+    accentColor: '#3E5234', // sage deep
     rotation: -3,
     featured: false,
-    links: {
-      live: '#',
-      caseStudy: '#'
-    },
+    links: { live: '#', caseStudy: '#' },
     images: []
   },
   {
@@ -99,13 +85,11 @@ export const projects = [
     type: 'design',
     year: '2023',
     tags: ['Editorial', 'Typography', 'Print'],
-    color: '#F0E8E0',
-    accentColor: '#8B4513',
+    color: '#E8D5C0',       // petal/bloom warm
+    accentColor: '#7A4F28', // warm brown
     rotation: 1,
     featured: false,
-    links: {
-      caseStudy: '#'
-    },
+    links: { caseStudy: '#' },
     images: []
   },
   {
@@ -116,32 +100,26 @@ export const projects = [
     type: 'app',
     year: '2023',
     tags: ['UI/UX', 'Mobile', 'Concept'],
-    color: '#E5D4E0',
-    accentColor: '#6B3A6B',
+    color: '#D8C8D8',       // dusty lavender
+    accentColor: '#5A3F6B', // deep violet
     rotation: -2.5,
     featured: false,
-    links: {
-      caseStudy: '#',
-      prototype: '#'
-    },
+    links: { caseStudy: '#', prototype: '#' },
     images: []
   },
   {
     id: 'kinfolk-cafe',
     title: 'Kinfolk Café',
     subtitle: 'Restaurant website & branding',
-    description: 'Brand identity and website for a specialty coffee shop. Warm, welcoming aesthetic that reflects the café\'s community-focused values.',
+    description: "Brand identity and website for a specialty coffee shop. Warm, welcoming aesthetic that reflects the café's community-focused values.",
     type: 'website',
     year: '2024',
     tags: ['Branding', 'Web Design', 'Development'],
-    color: '#EDE5D8',
-    accentColor: '#8B6914',
+    color: '#E8E0CF',       // parchment
+    accentColor: '#7A5A28', // golden amber
     rotation: 2,
     featured: false,
-    links: {
-      live: '#',
-      caseStudy: '#'
-    },
+    links: { live: '#', caseStudy: '#' },
     images: []
   }
 ]

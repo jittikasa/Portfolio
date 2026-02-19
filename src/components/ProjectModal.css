@@ -15,8 +15,8 @@
 .project-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(42, 31, 20, 0.55);
+  backdrop-filter: blur(10px);
 }
 
 .project-modal__container {
@@ -24,10 +24,12 @@
   width: 100%;
   max-width: 800px;
   max-height: 90vh;
-  background: #FAFAF8;
-  border-radius: 4px;
+  background: var(--canvas);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 8px 32px rgba(42, 31, 20, 0.15),
+    0 32px 80px rgba(42, 31, 20, 0.12);
 }
 
 .project-modal__close {
@@ -144,13 +146,13 @@
 
 .project-modal__type {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #C45C3E;
+  color: var(--sage-deep);
   padding: 4px 10px;
-  background: rgba(196, 92, 62, 0.08);
-  border-radius: 2px;
+  background: var(--sage-pale);
+  border-radius: 4px;
 }
 
 .project-modal__year {
@@ -219,12 +221,12 @@
 }
 
 .project-modal__btn--primary {
-  background: #2C2C2C;
-  color: #fff;
+  background: var(--sage-deep);
+  color: var(--canvas);
 }
 
 .project-modal__btn--primary:hover {
-  background: #1a1a1a;
+  background: var(--sage);
   transform: translateY(-1px);
 }
 

@@ -1,5 +1,5 @@
 /* ============================================
-   INTERACTIVE TYPEWRITER - Floating Stamps
+   INTERACTIVE TYPEWRITER — Monet Garden Sage
    ============================================ */
 
 .interactive-typewriter {
@@ -17,7 +17,7 @@
   padding: 80px 80px 0;
 }
 
-/* Individual floating stamp - sits ON TOP of everything */
+/* ─── Desk Stamps ─── */
 .desk-stamp {
   position: absolute;
   width: 75px;
@@ -30,18 +30,16 @@
   z-index: 1000;
 }
 
-/* Stamps always look the same, no visual change when used */
-
 .desk-stamp__inner {
   position: relative;
   transition: transform 0.2s ease;
 }
 
-/* Stamp SVG Component */
+/* Stamp SVG */
 .stamp-svg {
   position: relative;
   width: 100%;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  filter: drop-shadow(0 4px 10px rgba(42, 31, 20, 0.15));
 }
 
 .stamp-svg__border {
@@ -69,11 +67,11 @@
   transform: translate(-50%, -50%) rotate(-15deg);
   width: 50px;
   height: 50px;
-  opacity: 0.5;
+  opacity: 0.45;
   pointer-events: none;
 }
 
-/* Header */
+/* Stamp header row */
 .stamp-svg__header {
   display: flex;
   justify-content: space-between;
@@ -85,10 +83,10 @@
   font-family: var(--font-mono);
   font-size: 0.45rem;
   letter-spacing: 0.05em;
-  color: rgba(44,44,44,0.5);
+  color: rgba(42, 31, 20, 0.45);
 }
 
-/* Artwork */
+/* Artwork circle */
 .stamp-svg__artwork {
   width: 42px;
   height: 42px;
@@ -97,23 +95,23 @@
   align-items: center;
   justify-content: center;
   margin: 4px 0;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 10px rgba(42, 31, 20, 0.18);
 }
 
 .stamp-svg__artwork span {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 500;
-  color: white;
+  color: rgba(252, 249, 243, 0.95);
 }
 
-/* Value */
+/* Denomination */
 .stamp-svg__value {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 600;
-  color: rgba(44,44,44,0.4);
-  background: rgba(255,255,255,0.5);
+  color: rgba(42, 31, 20, 0.38);
+  background: rgba(252, 249, 243, 0.55);
   padding: 2px 6px;
   border-radius: 8px;
   margin: 4px 0;
@@ -124,7 +122,7 @@
   font-family: var(--font-display);
   font-size: 0.65rem;
   text-align: center;
-  color: #2C2C2C;
+  color: rgba(42, 31, 20, 0.75);
   margin-top: auto;
   white-space: nowrap;
   overflow: hidden;
@@ -139,7 +137,7 @@
   left: 10%;
   right: 10%;
   height: 20px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(42, 31, 20, 0.18) 0%, transparent 70%);
   filter: blur(6px);
   opacity: 0.5;
   z-index: -1;
@@ -150,7 +148,7 @@
   filter: blur(8px);
 }
 
-/* Typewriter unit - centered, below stamps */
+/* ─── Typewriter Unit ─── */
 .typewriter-unit {
   position: relative;
   z-index: 10;
@@ -159,37 +157,30 @@
   padding-top: 40px;
 }
 
-/* Paper */
+/* ─── Paper — vintage French postcard ─── */
 .typewriter-paper {
   position: relative;
-  background: #FAF8F3;
+  background: linear-gradient(180deg, #FDFBF7 0%, #FAF7F0 100%);
   padding: 28px 24px 22px;
   margin: 0 30px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow:
+    0 1px 3px rgba(42, 31, 20, 0.05),
+    0 4px 16px rgba(42, 31, 20, 0.07);
   min-height: 220px;
   z-index: 10;
-}
-
-.stamp-impression {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90px;
-  height: 90px;
-  pointer-events: none;
-  z-index: 5;
+  border-top: 2.5px solid var(--sage);
+  border-radius: 0 0 2px 2px;
 }
 
 .typewriter-paper__header {
   display: flex;
   justify-content: space-between;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  color: #888;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--sage-mist);
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(44,44,44,0.1);
+  border-bottom: 1px solid rgba(107, 124, 90, 0.15);
   margin-bottom: 20px;
 }
 
@@ -197,7 +188,7 @@
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #2C2C2C;
+  color: var(--ink);
   min-height: 130px;
 }
 
@@ -210,6 +201,7 @@
   display: inline-block;
   opacity: 0;
   margin-left: 1px;
+  color: var(--sage);
 }
 
 .cursor--on {
@@ -222,18 +214,18 @@
   align-items: center;
   margin-top: 16px;
   padding-top: 10px;
-  border-top: 1px dashed rgba(44,44,44,0.12);
+  border-top: 1px dashed rgba(107, 124, 90, 0.2);
 }
 
 .typewriter-paper__footer span {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #2C2C2C;
-  opacity: 0.3;
+  color: var(--sage-mist);
+  opacity: 0.5;
   letter-spacing: 2px;
 }
 
-/* Typewriter body */
+/* ─── Typewriter Body — sage garden green ─── */
 .typewriter-body {
   position: relative;
   margin-top: -2px;
@@ -250,24 +242,25 @@
 .roller-knob {
   width: 20px;
   height: 20px;
-  background: linear-gradient(145deg, #B8C5D6 0%, #9AACBF 100%);
+  background: linear-gradient(145deg, #A8B89A 0%, #8B9E7E 100%);
   border-radius: 50%;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+  box-shadow: inset 0 1px 2px rgba(252, 249, 243, 0.35);
 }
 
 .roller-bar {
   flex: 1;
   height: 5px;
-  background: linear-gradient(180deg, #C5D0E0 0%, #A8B8CC 100%);
+  background: linear-gradient(180deg, #A8B89A 0%, #8B9E7E 100%);
   margin: 0 3px;
   border-radius: 2px;
 }
 
+/* Sage green chassis */
 .typewriter-chassis {
-  background: linear-gradient(180deg, #C5D4E5 0%, #B0C0D5 40%, #A0B0C8 100%);
+  background: linear-gradient(180deg, #7A8D6E 0%, #6B7C5A 40%, #5A6A4A 100%);
   border-radius: 14px 14px 20px 20px;
   padding: 14px 12px 18px;
-  box-shadow: 0 8px 24px rgba(74, 90, 110, 0.2);
+  box-shadow: 0 8px 28px rgba(62, 82, 52, 0.28);
 }
 
 .typewriter-ribbon {
@@ -276,27 +269,28 @@
   gap: 3px;
   margin-bottom: 10px;
   padding: 6px;
-  background: rgba(0,0,0,0.08);
+  background: rgba(42, 31, 20, 0.12);
   border-radius: 10px;
 }
 
 .ribbon-slot {
   width: 3.5px;
   height: 10px;
-  background: #4A5568;
+  background: var(--sage-deep);
   border-radius: 1.5px;
   opacity: 0.7;
 }
 
 .typewriter-brand {
   text-align: center;
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.55);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  color: rgba(252, 249, 243, 0.45);
   margin-bottom: 12px;
 }
 
+/* ─── Keys — warm cream with sage accents ─── */
 .typewriter-keys {
   display: flex;
   flex-direction: column;
@@ -321,22 +315,23 @@
 .key {
   width: 24px;
   height: 26px;
-  background: linear-gradient(145deg, #E8EEF5 0%, #D0D8E5 100%);
+  background: linear-gradient(145deg, #F5F0E8 0%, #EBE4D8 100%);
   border: none;
   border-radius: 50%;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #3D4852;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--sage-deep);
   cursor: pointer;
-  box-shadow: 0 2px 0 #8A9AAF, 0 3px 6px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 0 #3E5234, 0 3px 6px rgba(62, 82, 52, 0.2);
   transition: all 0.05s ease;
+  letter-spacing: 0;
 }
 
 .key:active,
 .key--pressed {
   transform: translateY(2px);
-  box-shadow: 0 0 0 #8A9AAF;
+  box-shadow: 0 0 0 #3E5234;
 }
 
 .key--wide {
@@ -350,39 +345,32 @@
   border-radius: 12px;
 }
 
-/* Hint */
+/* ─── Scene hint ─── */
 .scene-hint {
   text-align: center;
   margin-top: 24px;
 }
 
 .handwritten {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 1rem;
+  color: var(--sage-mist);
+  letter-spacing: 0.01em;
 }
 
-/* Responsive */
+/* ─── Responsive ─── */
 @media (max-width: 900px) {
   .typewriter-scene {
     transform: scale(0.85);
     transform-origin: top center;
   }
-  
-  .desk-stamp {
-    width: 70px;
-  }
+  .desk-stamp { width: 70px; }
 }
 
 @media (max-width: 600px) {
-  .typewriter-scene {
-    transform: scale(0.7);
-  }
-  
-  .desk-stamp {
-    width: 60px;
-  }
+  .typewriter-scene { transform: scale(0.7); }
+  .desk-stamp { width: 60px; }
 }
 
 @media (max-width: 480px) {
@@ -390,8 +378,5 @@
     transform: scale(0.6);
     padding-top: 40px;
   }
-  
-  .desk-stamp {
-    width: 50px;
-  }
+  .desk-stamp { width: 50px; }
 }
