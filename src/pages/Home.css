@@ -23,7 +23,7 @@
 .h-hero-inner {
   position: absolute;
   z-index: 2;
-  bottom: 10vh;
+  bottom: 14vh;
   left: 0;
   right: 0;
   text-align: center;
@@ -32,14 +32,25 @@
   align-items: center;
 }
 
+.hero-signature {
+  width: 250px;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.hero-signature .sig-svg {
+  width: 100%;
+  height: auto;
+}
+
 .hero-tagline {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: 'Shorelines Script', cursive;
+  font-size: 2.6rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--ink);
   opacity: 0.7;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   max-width: none;
 }
 
@@ -94,6 +105,19 @@
   position: relative;
   z-index: 1;
   background: var(--canvas);
+}
+
+/* Soft fade from hero/beach into services */
+.h-services::before {
+  content: '';
+  position: absolute;
+  top: -12vh;
+  left: 0;
+  right: 0;
+  height: 12vh;
+  background: linear-gradient(to bottom, transparent, var(--canvas));
+  pointer-events: none;
+  z-index: 2;
 }
 
 .section-title-center {

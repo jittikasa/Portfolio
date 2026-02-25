@@ -1,0 +1,100 @@
+/* ============================================
+   HERO CLOUDS — Monet impressionist oil-paint
+   ============================================ */
+
+.hero-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ── Individual cloud wrapper ── */
+.cloud-solo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* ── SVG cloud base ── */
+.monet-cloud {
+  position: absolute;
+  overflow: visible;
+}
+
+/* ── Size variants ── */
+.monet-cloud.sz-xs {
+  width: 260px;
+  height: 130px;
+}
+
+.monet-cloud.sz-sm {
+  width: 420px;
+  height: 200px;
+}
+
+.monet-cloud.sz-md {
+  width: 600px;
+  height: 280px;
+}
+
+.monet-cloud.sz-lg {
+  width: 800px;
+  height: 360px;
+}
+
+/* ── Subtle idle drift — organic, slow, painterly ── */
+.monet-cloud.sz-lg { animation: monet-drift-lg 18s ease-in-out infinite alternate; }
+.monet-cloud.sz-md { animation: monet-drift-md 22s ease-in-out infinite alternate-reverse; }
+.monet-cloud.sz-sm { animation: monet-drift-sm 26s ease-in-out infinite alternate; }
+.monet-cloud.sz-xs { animation: monet-drift-xs 30s ease-in-out infinite alternate-reverse; }
+
+@keyframes monet-drift-lg {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(10px, -5px) scale(1.02); }
+  100% { transform: translate(18px, -8px) scale(1); }
+}
+
+@keyframes monet-drift-md {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-8px, 4px) scale(0.98); }
+  100% { transform: translate(12px, -6px) scale(1.01); }
+}
+
+@keyframes monet-drift-sm {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(10px, -4px); }
+}
+
+@keyframes monet-drift-xs {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-8px, 3px); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .monet-cloud.sz-lg { width: 550px; height: 250px; }
+  .monet-cloud.sz-md { width: 400px; height: 185px; }
+  .monet-cloud.sz-sm { width: 300px; height: 140px; }
+  .monet-cloud.sz-xs { width: 180px; height: 90px; }
+}
+
+@media (max-width: 768px) {
+  .monet-cloud.sz-lg { width: 400px; height: 180px; }
+  .monet-cloud.sz-md { width: 300px; height: 140px; }
+  .monet-cloud.sz-sm { width: 220px; height: 100px; }
+  .monet-cloud.sz-xs { width: 150px; height: 70px; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .monet-cloud { animation: none !important; }
+}

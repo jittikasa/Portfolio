@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
+import HeroClouds from './HeroClouds'
 import './HeroScene.css'
 
 export default function HeroScene() {
@@ -17,6 +18,7 @@ export default function HeroScene() {
       <motion.div className="scene-painting" style={{ scale }}>
         <img src="/beach.jpg" alt="" draggable="false" />
       </motion.div>
+      <HeroClouds />
     </motion.div>
   )
 }

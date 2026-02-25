@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 import ProjectModal from '../components/ProjectModal'
 import HeroScene from '../components/HeroScene'
+import SignatureName from '../components/SignatureName'
 import './Home.css'
 
 const fade = {
@@ -41,11 +42,11 @@ export default function Home() {
           <div className="h-hero-inner">
             <motion.p
               className="hero-tagline"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+              initial={{ clipPath: 'inset(-20% 100% -20% -5%)', opacity: 0 }}
+              animate={{ clipPath: 'inset(-20% -5% -20% -5%)', opacity: 0.7 }}
+              transition={{ duration: 2.0, delay: 3.2, ease: [0.4, 0, 0.2, 1] }}
             >
-              Designer &amp; maker · Phuket, TH
+              Designer &amp; maker
             </motion.p>
 
             <motion.p
@@ -54,7 +55,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
             >
-              Designer and maker based in Phuket, Thailand. I build iOS apps, craft brand identities, and design digital experiences — with an eye for detail and a soft spot for things that feel considered.
+              Designer and maker based in Phuket, Thailand. I build website, iOS apps, craft brand identities, and design digital experiences — with an eye for detail and a soft spot for things that feel considered.
             </motion.p>
 
             <motion.div

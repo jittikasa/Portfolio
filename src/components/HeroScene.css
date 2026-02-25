@@ -5,8 +5,19 @@
 .hero-scene {
   position: fixed;
   inset: 0;
-  overflow: hidden;
+  overflow: visible;
   z-index: -1;
+}
+
+/* Clouds sit above the painting within the scene */
+.hero-scene .hero-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45vh;
+  z-index: 1;
+  overflow: visible;
 }
 
 .scene-painting {
@@ -14,6 +25,7 @@
   inset: 0;
   transform-origin: center top;
   will-change: transform;
+  overflow: hidden;
 }
 
 .scene-painting img {

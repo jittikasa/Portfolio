@@ -8,6 +8,7 @@ const LINE = "M1.58888 2.42268C0.761907 2.37359 0.0517218 3.00419 0.00263549 3.8
 const S_DOT = "M7.66602 0C9.74933 0.244146 10.791 1.1963 10.791 2.85645V3.73535C10.7909 5.34663 9.57833 7.29992 7.15332 9.59473C6.31796 10.1516 5.69432 10.5466 5.28223 10.7793C6.6446 12.1516 7.80384 13.028 8.76465 13.4033C11.0758 12.1175 15.6413 10.6201 22.4609 8.91113L28.9795 7.59277C29.9397 7.93457 30.4199 8.50425 30.4199 9.30176C30.4198 10.3921 29.5653 11.0189 27.8564 11.1816C22.1761 12.2721 17.4235 13.4928 13.5986 14.8438C13.5841 14.8835 13.1641 15.0691 12.3398 15.4033C15.7343 17.1977 17.4316 19.2655 17.4316 21.6064C17.4315 23.7222 16.0643 25.7895 13.3301 27.8076C12.0606 28.3773 10.7828 28.6621 9.49707 28.6621C6.61627 28.6621 4.25617 27.3192 2.41699 24.6338C2.04269 23.6085 1.85552 22.7946 1.85547 22.1924C1.85547 19.6696 3.16577 17.4316 5.78613 15.4785C1.92881 12.9883 0.000100452 10.1806 0 7.05566C0 5.13511 1.59513 3.0029 4.78516 0.65918C5.79427 0.219727 6.61621 0 7.25098 0H7.66602ZM8.78906 17.2363C6.41284 19.0592 5.22461 20.5811 5.22461 21.8018V22.583C5.22479 23.8199 6.5757 24.7559 9.27734 25.3906H9.69238C11.7757 25.3906 13.2324 24.1942 14.0625 21.8018V21.4111C14.0625 20.3369 12.3046 18.9453 8.78906 17.2363ZM31.3008 15.4541C33.2539 16.1865 34.2305 17.0817 34.2305 18.1396C33.5306 20.4995 32.3505 21.6797 30.6904 21.6797C29.4861 21.6797 28.6966 20.8495 28.3223 19.1895V18.8232C28.3223 17.1794 29.1443 16.097 30.7881 15.5762C30.8206 15.5762 30.9916 15.5355 31.3008 15.4541ZM7.34863 3.27148C6.22559 3.27148 4.89909 4.43522 3.36914 6.7627C3.36906 6.82806 3.33651 7.03168 3.27148 7.37305C3.3203 7.74725 3.36915 7.97528 3.41797 8.05664C6.08763 6.54701 7.45342 4.95178 7.5166 3.27148H7.34863Z"
 
 export default function SignatureName({ variant = 'logo' }) {
+  const id = variant // unique prefix per instance
   return (
     <svg
       className={`sig-svg sig-${variant}`}
@@ -18,7 +19,7 @@ export default function SignatureName({ variant = 'logo' }) {
       {/* jittika letters — clipPath sweeps left to right */}
       <svg x="0" y="0" width="179" height="89" viewBox="0 0 179 89" overflow="visible">
         <defs>
-          <clipPath id="sig-clip-jittika">
+          <clipPath id={`sig-clip-jittika-${id}`}>
             <motion.rect
               x="0" y="-5" height="99"
               initial={{ width: 0 }}
@@ -27,13 +28,13 @@ export default function SignatureName({ variant = 'logo' }) {
             />
           </clipPath>
         </defs>
-        <path d={JITTIKA} fill="currentColor" clipPath="url(#sig-clip-jittika)" />
+        <path d={JITTIKA} fill="currentColor" clipPath={`url(#sig-clip-jittika-${id})`} />
       </svg>
 
       {/* t-crossbar line, laid over the t's */}
       <svg x="20" y="22" width="121" height="8" viewBox="0 0 121 8" overflow="visible">
         <defs>
-          <clipPath id="sig-clip-line">
+          <clipPath id={`sig-clip-line-${id}`}>
             <motion.rect
               x="0" y="-2" height="12"
               initial={{ width: 0 }}
@@ -42,13 +43,13 @@ export default function SignatureName({ variant = 'logo' }) {
             />
           </clipPath>
         </defs>
-        <path d={LINE} fill="currentColor" clipPath="url(#sig-clip-line)" />
+        <path d={LINE} fill="currentColor" clipPath={`url(#sig-clip-line-${id})`} />
       </svg>
 
       {/* s. — positioned to the right of jittika */}
       <svg x="187" y="28" width="35" height="29" viewBox="0 0 35 29">
         <defs>
-          <clipPath id="sig-clip-sdot">
+          <clipPath id={`sig-clip-sdot-${id}`}>
             <motion.rect
               x="0" y="-2" height="33"
               initial={{ width: 0 }}
@@ -57,7 +58,7 @@ export default function SignatureName({ variant = 'logo' }) {
             />
           </clipPath>
         </defs>
-        <path d={S_DOT} fill="currentColor" clipPath="url(#sig-clip-sdot)" />
+        <path d={S_DOT} fill="currentColor" clipPath={`url(#sig-clip-sdot-${id})`} />
       </svg>
     </svg>
   )

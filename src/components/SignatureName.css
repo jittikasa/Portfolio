@@ -6,7 +6,7 @@
 
 /* logo variant — in the header */
 .sig-logo {
-  height: clamp(2rem, 3.5vw, 2.8rem);
+  height: 48px;
   width: auto;
 }
 
