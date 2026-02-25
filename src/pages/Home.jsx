@@ -271,7 +271,7 @@ export default function Home() {
           <div className="footer__socials">
             <a href="mailto:hello@jittika.com" className="footer__social">hello@jittika.com</a>
           </div>
-          <p className="footer__fine">© 2026 Jittika Suriyapakorn · All rights reserved</p>
+          <p className="footer__fine">© 2026 Jittika Sakulchit · All rights reserved</p>
         </div>
       </footer>
 
