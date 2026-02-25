@@ -6,8 +6,15 @@
   height: 100vh;
   z-index: -1;
   overflow: hidden;
-  background: #6b8c85; /* Deep pond green base */
-  background: linear-gradient(180deg, #8baabf 0%, #6b8c85 40%, #3e5234 100%);
+  /* Soft pastel pond gradient */
+  background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); /* Placeholder */
+  background: linear-gradient(
+    180deg,
+    #B5EAD7 0%,   /* Mint sky/reflection */
+    #95B8D1 30%,  /* Soft blue water */
+    #6B8C85 70%,  /* Deeper green water */
+    #3E5234 100%  /* Dark pond depths */
+  );
 }
 
 .monet-scene__blur-layer {
@@ -16,34 +23,38 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  filter: blur(80px);
-  opacity: 0.6;
+  filter: blur(60px); /* Soften the blobs into a painting */
+  opacity: 0.8;
+  transform: scale(1.1);
 }
 
 .monet-blob {
   position: absolute;
-  border-radius: 50%;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* Organic shapes */
   background-blend-mode: overlay;
+  mix-blend-mode: hard-light;
 }
 
-/* Water texture overlay */
+/* Texture simulates canvas grain */
 .monet-water-texture {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
+  opacity: 0.5;
   mix-blend-mode: overlay;
   pointer-events: none;
+  z-index: 5;
 }
 
-/* Particles */
-.monet-particle {
+/* Flowers - dabs of paint */
+.monet-flower {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
   pointer-events: none;
+  filter: blur(1px);
+  mix-blend-mode: screen;
 }
