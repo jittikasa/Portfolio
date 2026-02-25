@@ -1,0 +1,28 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sage);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+  transform-origin: center center;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-cursor.hovering {
+  width: 64px;
+  height: 64px;
+  background: var(--water-deep);
+  opacity: 0.12;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}

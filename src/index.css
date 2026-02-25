@@ -48,6 +48,7 @@
   --font-display: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
   --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:    'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  --font-hand:    'La Belle Aurore', cursive;
 
   /* ── Spacing ── */
   --space-xs:  4px;
@@ -71,6 +72,10 @@ html {
 body {
   font-family: var(--font-body);
   background: var(--canvas);
+  background-image: 
+    linear-gradient(90deg, rgba(42, 31, 20, 0.015) 1px, transparent 1px),
+    linear-gradient(rgba(42, 31, 20, 0.015) 1px, transparent 1px);
+  background-size: 20px 20px; /* Tiny weave */
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

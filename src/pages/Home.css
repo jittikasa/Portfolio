@@ -1,567 +1,247 @@
 /* ============================================
-   HOME — West & Co editorial layout
+   HOME PAGE — Monet Floating Atelier
    ============================================ */
 
-.home { background: var(--canvas); }
-
-/* ─── Shared utilities ─── */
-.label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sage);
-  margin-bottom: 18px;
-}
-
-.underline-link {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(42,31,20,0.35);
-  transition: text-decoration-color 0.2s;
-}
-.underline-link:hover { text-decoration-color: var(--ink); }
-.underline-link--sm { font-size: 0.78rem; }
-
-.btn-cta {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--canvas);
-  background: var(--water-deep);
-  text-decoration: none;
-  padding: 14px 32px;
-  border-radius: 3px;
-  letter-spacing: 0.03em;
-  transition: background 0.2s ease;
-  margin-top: 8px;
-}
-.btn-cta:hover { background: var(--water); }
-
-/* ══════════════════════════════════════════
-   HERO — split layout: text left, typewriter top-right
-══════════════════════════════════════════ */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  background: var(--canvas);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.hero__left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 80px 80px;
-  position: relative;
-}
-
-.hero__right {
-  position: relative;
-  overflow: hidden;
-  background: var(--parchment);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 60px;
-}
-
-.hero__img {
-  width: 90%;
-  max-width: 560px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 64px rgba(42,31,20,0.18));
-}
-
-.hero__eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--ink-muted); display: block; margin-bottom: 24px; opacity: 0.6;
-}
-.hero__headline {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 5.5vw, 6rem);
-  font-weight: 400; line-height: 1.05;
-  color: var(--ink); letter-spacing: -0.02em; margin-bottom: 40px;
-}
-.hero__cta {
-  display: inline-block;
-  font-family: var(--font-mono); font-size: 0.72rem;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink); text-decoration: none;
-  padding-bottom: 6px; border-bottom: 1px solid rgba(42,31,20,0.35);
-  transition: border-color 0.25s;
-}
-.hero__cta:hover { border-color: var(--ink); }
-.hero__scroll-hint {
-  position: absolute; bottom: 40px; left: 80px;
-  display: flex; align-items: center; gap: 16px;
-  font-family: var(--font-mono); font-size: 0.6rem;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.4;
-}
-.hero__scroll-line { display: block; width: 40px; height: 1px; background: var(--ink-muted); opacity: 0.4; }
-
-/* ══════════════════════════════════════════
-   SECTION 1 — Intro: text left + photo right
-   (West & Co "Planning that feels...")
-══════════════════════════════════════════ */
-.s-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 640px;
-  border-top: 1px solid var(--border);
-}
-
-.s-intro__copy {
-  padding: 100px 80px 100px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.s-intro__heading {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 28px;
-}
-.s-intro__heading em {
-  font-style: italic;
-  color: var(--sage);
-}
-
-.s-intro__body {
-  font-size: 0.95rem;
-  line-height: 1.85;
-  color: var(--ink-muted);
-  max-width: 420px;
-  margin-bottom: 16px;
-}
-
-.s-intro__body:last-of-type { margin-bottom: 32px; }
-
-.s-intro__photo {
-  overflow: hidden;
-  background: var(--parchment);
-  min-height: 560px;
-}
-.s-intro__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-  filter: brightness(0.9) saturate(0.85) sepia(0.08);
-}
-
-/* ══════════════════════════════════════════
-   SECTION 2 — Services: photo | accordion | photo
-   (West & Co "Your trip, tailored")
-══════════════════════════════════════════ */
-.s-services {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  min-height: 700px;
-  border-top: 1px solid var(--border);
-  background: var(--cream);
-}
-
-.s-services__photo {
-  overflow: hidden;
-}
-.s-services__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.92) saturate(0.8) sepia(0.08);
-}
-
-.s-services__content {
-  padding: 100px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-
-.s-services__heading {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--ink);
-  letter-spacing: -0.015em;
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.s-services__sub {
-  font-size: 0.9rem;
-  line-height: 1.75;
-  color: var(--ink-muted);
-  text-align: center;
-  max-width: 340px;
-  margin: 0 auto 40px;
-}
-
-/* Accordion */
-.accordion { width: 100%; }
-
-.accordion__item {
-  border-top: 1px solid var(--border);
-}
-.accordion__item:last-child { border-bottom: 1px solid var(--border); }
-
-.accordion__trigger {
+.home-canvas {
   width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 0;
-  background: none; border: none; cursor: pointer;
-  text-align: left;
-}
-
-.accordion__num {
-  font-family: var(--font-mono);
-  font-size: 0.6rem; letter-spacing: 0.14em;
-  color: var(--sage); min-width: 24px;
-}
-
-.accordion__title {
-  flex: 1;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--ink);
-  font-weight: 400;
-}
-
-.accordion__arrow {
-  font-size: 0.75rem;
-  color: var(--ink-muted);
-  transition: transform 0.3s ease;
-  display: inline-block;
-}
-.accordion__arrow--open { transform: rotate(180deg); }
-
-.accordion__body {
-  overflow: hidden;
-}
-.accordion__body p {
-  font-size: 0.875rem;
-  line-height: 1.8;
-  color: var(--ink-muted);
-  padding: 0 0 20px 40px;
-}
-
-/* ══════════════════════════════════════════
-   SECTION 3 — Quote / Testimonial
-   (West & Co testimonials)
-══════════════════════════════════════════ */
-.s-quote {
-  background: #EDE6D8;
-  padding: 120px 40px;
-  text-align: center;
-  border-top: 1px solid rgba(42,31,20,0.08);
-}
-
-.s-quote__inner {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.s-quote__label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.6; margin-bottom: 32px;
-}
-
-.s-quote__text {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.45;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin: 0 0 28px;
-}
-
-.s-quote__cite {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  opacity: 0.65;
-  font-style: normal;
-}
-
-/* ══════════════════════════════════════════
-   SECTION 4 — Meet Jittika: floating card
-   (West & Co "Meet Taylor")
-══════════════════════════════════════════ */
-.s-about {
+  overflow-x: hidden;
   background: var(--canvas);
-  padding: 100px 80px;
-  border-top: 1px solid var(--border);
 }
 
-/* Floating card */
-.s-about__card {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 480px 1fr;
-  background: #EDE6D8;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 8px 48px rgba(42,31,20,0.08);
+/* ── 1. HERO ── */
+.h-hero {
+  height: 450vh; /* 300vh zoom + ~70vh freeze + 80vh fade */
 }
 
-.s-about__photo {
-  overflow: hidden;
-  min-height: 520px;
-}
-.s-about__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
+/* Sticky viewport — pins hero text while fixed scene plays */
+.h-hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
-.s-about__panel {
-  padding: 72px 72px 72px 64px;
+.h-hero-inner {
+  position: absolute;
+  z-index: 2;
+  bottom: 10vh;
+  left: 0;
+  right: 0;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.s-about__heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-}
-
-.s-about__body {
-  font-size: 0.9rem;
-  line-height: 1.85;
-  color: var(--ink-muted);
-  max-width: 380px;
-  margin-bottom: 36px;
-}
-
-/* ══════════════════════════════════════════
-   WORK GRID
-══════════════════════════════════════════ */
-.s-work {
-  padding: 100px 0;
-  border-top: 1px solid var(--border);
-}
-
-.s-work__inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 80px;
-}
-
-.s-work__head {
-  margin-bottom: 56px;
-}
-
-.s-work__title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  margin-top: 10px;
-}
-
-.s-work__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.project-tile {
-  background: var(--canvas);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
-}
-.project-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(42,31,20,0.1);
-}
-
-.project-tile__swatch {
-  height: 150px;
-  background: var(--c, var(--parchment));
-}
-
-.project-tile__body { padding: 20px 20px 24px; }
-
-.project-tile__top {
-  display: flex; justify-content: space-between;
-  align-items: center; margin-bottom: 10px;
-}
-
-.project-tile__year {
-  font-family: var(--font-mono); font-size: 0.58rem;
-  color: var(--ink-muted); opacity: 0.5;
-}
-
-.project-tile__name {
-  font-family: var(--font-display);
-  font-size: 1.25rem; font-weight: 400;
-  color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px;
-}
-
-.project-tile__sub {
-  font-size: 0.82rem; color: var(--ink-muted);
-  line-height: 1.5; margin-bottom: 14px;
-}
-
-/* ══════════════════════════════════════════
-   FOOTER — 3 column (West & Co footer)
-══════════════════════════════════════════ */
-.footer {
-  background: var(--canvas);
-  border-top: 1px solid var(--border);
-  padding: 60px 80px 32px;
-}
-
-.footer__cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--border);
-}
-
-.footer__col {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer__col--center {
   align-items: center;
-  text-align: center;
-  gap: 12px;
 }
 
-.footer__col--right {
-  align-items: flex-end;
-}
-
-.footer__col-head {
+.hero-tagline {
   font-family: var(--font-body);
   font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--ink);
-  margin-bottom: 4px;
-  font-weight: 400;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  max-width: none;
 }
 
-.footer__col-link {
+.hero-bio {
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--ink-muted);
-  text-decoration: none;
-  transition: color 0.2s;
+  font-size: 0.95rem;
+  color: var(--ink);
+  opacity: 0.6;
+  max-width: 420px;
+  line-height: 1.7;
+  text-align: center;
+  margin-bottom: 2rem;
 }
-.footer__col-link:hover { color: var(--ink); }
 
-.footer__logo {
+/* Button with Ripple */
+.monet-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
   font-family: var(--font-display);
-  font-size: 3rem; font-style: italic; font-weight: 400;
-  color: var(--ink); opacity: 0.8; line-height: 1;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--sage-deep);
+  position: relative;
+  transition: all 0.4s ease;
 }
 
-.footer__tagline {
-  font-family: var(--font-mono);
-  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.5;
+.monet-btn:hover {
+  color: var(--ink);
+  transform: translateY(-2px);
 }
 
-.footer__bottom {
+.btn-ripple {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  transition: transform 0.6s ease;
+}
+
+.monet-btn:hover .btn-ripple {
+  transform: scale(1.1);
+}
+
+/* ── 3. BRUSHSTROKE SERVICES ── */
+.h-services {
+  padding: 10vh 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  background: var(--canvas);
+}
+
+.section-title-center {
+  text-align: center;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  color: var(--sage-deep);
+  margin-bottom: 4rem;
+}
+
+.services-floating-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   align-items: center;
 }
 
-.footer__socials { display: flex; gap: 24px; }
-
-.footer__social {
-  font-family: var(--font-mono);
-  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--ink-muted); text-decoration: none; transition: color 0.2s;
-}
-.footer__social:hover { color: var(--ink); }
-
-.footer__fine {
-  font-family: var(--font-mono);
-  font-size: 0.58rem; letter-spacing: 0.08em;
-  color: var(--ink-muted); opacity: 0.45;
+.service-stroke {
+  position: relative;
+  padding: 1.5rem 4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero__left { padding: 120px 48px 80px; justify-content: flex-start; }
-  .hero__right { min-height: 50vw; padding-top: 40px; }
-  .s-intro { grid-template-columns: 1fr; }
-  .s-intro__copy { padding: 72px 48px; }
-  .s-intro__photo { min-height: 400px; }
-  .s-services { grid-template-columns: 1fr; }
-  .s-services__photo { display: none; }
-  .s-services__content { border: none; padding: 72px 48px; }
-  .s-about { padding: 80px 40px; }
-  .s-about__card { grid-template-columns: 1fr; }
-  .s-about__photo { min-height: 360px; }
-  .s-about__panel { padding: 56px 48px; }
-  .s-work__inner { padding: 0 48px; }
-  .s-work__grid { grid-template-columns: repeat(2, 1fr); }
-  .footer { padding: 48px 48px 28px; }
-  .footer__col--right { align-items: flex-start; }
+.stroke-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--ink);
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s;
 }
 
-@media (max-width: 700px) {
-  .s-intro__copy { padding: 56px 24px; }
-  .s-services__content { padding: 56px 24px; }
-  .s-about { padding: 60px 20px; }
-  .s-about__panel { padding: 40px 28px; }
-  .s-work__inner { padding: 0 24px; }
-  .s-work__grid { grid-template-columns: 1fr; }
-  .footer { padding: 40px 24px 24px; }
-  .footer__cols { grid-template-columns: 1fr; }
-  .footer__col--center { align-items: flex-start; text-align: left; }
-  .footer__col--right { align-items: flex-start; }
-  .footer__bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
-  .hero__left { padding: 100px 24px 60px; }
-  .hero__scroll-hint { left: 24px; }
+.stroke-icon {
+  font-size: 1.2rem;
+  color: var(--bloom);
+  opacity: 0.5;
+}
+
+.stroke-wash {
+  position: absolute;
+  inset: 0;
+  background: var(--sage-pale);
+  opacity: 0;
+  transform: scaleX(0.8);
+  transform-origin: center;
+  transition: all 0.4s var(--ease-out);
+  z-index: 1;
+  border-radius: 100px;
+  filter: blur(12px);
+}
+
+.service-stroke:hover .stroke-wash {
+  opacity: 1;
+  transform: scaleX(1.1);
+}
+
+.service-stroke:hover .stroke-title {
+  color: var(--sage-deep);
+}
+
+/* ── 5. MONET GRID ── */
+.h-work {
+  padding: 10vh 4rem;
+  position: relative;
+  z-index: 1;
+  background: var(--canvas);
+}
+
+.work-canvas {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.work-title {
+  margin-bottom: 4rem;
+  font-size: 2.5rem;
+}
+
+.monet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+}
+
+.monet-tile {
+  cursor: pointer;
+}
+
+.tile-wash-wrapper {
+  position: relative;
+  aspect-ratio: 1/1.2;
+  background: var(--cream);
+  padding: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.tile-wash {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(circle at 30% 30%, var(--c), transparent),
+              radial-gradient(circle at 70% 70%, var(--a), transparent);
+  opacity: 0.6;
+  filter: blur(24px);
+  transition: transform 0.6s ease;
+}
+
+.monet-tile:hover .tile-wash-wrapper {
+  transform: translateY(-8px);
+}
+
+.monet-tile:hover .tile-wash {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.tile-content-float {
+  position: relative;
+  z-index: 2;
+}
+
+.tile-title {
+  font-size: 1.75rem;
+  margin: 0.5rem 0;
+}
+
+.tile-type {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .monet-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-composition { flex-direction: column; text-align: center; }
+  .intro-photo-float { width: 80%; }
+  /* hero is already centered, nothing to override */
+}
+
+@media (max-width: 768px) {
+  .monet-grid { grid-template-columns: 1fr; }
+  .h-hero { padding: 6rem 2rem 4rem; }
 }

@@ -44,7 +44,6 @@ const generateScatterPositions = (count) => {
 const generateGridPositions = (count) => {
   const positions = []
   const cols = 3
-  // const rows = Math.ceil(count / cols)
   
   for (let i = 0; i < count; i++) {
     const col = i % cols
@@ -153,7 +152,7 @@ const StampCard = ({ project, position, onClick, index }) => {
               <defs>
                 <path id={`circle-${project.id}`} d="M 40,40 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"/>
               </defs>
-              <text fill="rgba(44,44,44,0.15)" fontSize="5" fontFamily="monospace" letterSpacing="1.5">
+              <text fill="rgba(42,31,20,0.25)" fontSize="6" fontFamily="var(--font-mono)" letterSpacing="1.5">
                 <textPath href={`#circle-${project.id}`}>
                   PHUKET • {year} • APPROVED •
                 </textPath>
