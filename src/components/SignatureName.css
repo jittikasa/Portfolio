@@ -1,0 +1,23 @@
+.sig-svg {
+  display: block;
+  color: #2F2F2F;
+  overflow: visible;
+}
+
+/* logo variant — in the header */
+.sig-logo {
+  height: clamp(2rem, 3.5vw, 2.8rem);
+  width: auto;
+}
+
+/* hero variant — large, on the page */
+.sig-hero {
+  height: clamp(5rem, 13vw, 10rem);
+  width: auto;
+}
+
+/* footer variant — medium, inside postcard */
+.sig-footer {
+  height: clamp(3rem, 5vw, 4rem);
+  width: auto;
+}

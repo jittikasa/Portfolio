@@ -1,160 +1,77 @@
+import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import './ProjectModal.css'
 
-export default function ProjectModal({ project, isOpen, onClose }) {
+export default function ProjectModal({ project, onClose }) {
+  // Prevent body scroll when modal is open
   useEffect(() => {
-    if (isOpen) {
+    if (project) {
       document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = 'unset'
     }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
-
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [onClose])
+    return () => { document.body.style.overflow = 'unset' }
+  }, [project])
 
   if (!project) return null
 
-  const { title, subtitle, description, type, year, tags, color, accentColor, links, images } = project
-  const hasImages = images && images.length > 0
-
   return (
     <AnimatePresence>
-      {isOpen && (
-        <div className="project-modal">
-          {/* Backdrop */}
-          <motion.div
-            className="project-modal__backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
+      <motion.div 
+        className="modal-backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div 
+          className="modal-panel"
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 40, scale: 0.96 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          onClick={(e) => e.stopPropagation()}
+          style={{ '--project-color': project.color }} // Pass color to CSS
+        >
+          <button className="modal-close" onClick={onClose}>×</button>
+          
+          <div className="modal-header">
+            <span className="modal-category">{project.type} · {project.year}</span>
+            <h2>{project.title}</h2>
+            <p className="modal-subtitle">{project.subtitle}</p>
+          </div>
 
-          {/* Modal */}
-          <motion.div
-            className="project-modal__container"
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          >
-            {/* Close button */}
-            <button
-              className="project-modal__close"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              ×
-            </button>
-
-            <div className="project-modal__content">
-              {/* Left: Image or stamp visual */}
-              {hasImages ? (
-                <div className="project-modal__visual project-modal__visual--image" style={{ backgroundColor: color }}>
-                  <img
-                    src={images[0]}
-                    alt={title}
-                    className="project-modal__cover-img"
-                  />
-                </div>
-              ) : (
-              <div className="project-modal__visual" style={{ backgroundColor: color }}>
-                {/* Perforated edges */}
-                <svg className="project-modal__perforations" viewBox="0 0 100 130" preserveAspectRatio="none">
-                  <defs>
-                    <mask id="modal-mask">
-                      <rect width="100" height="130" fill="white"/>
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <circle key={`t${i}`} cx={5 + i * 8.3} cy="3" r="3.5" fill="black"/>
-                      ))}
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <circle key={`b${i}`} cx={5 + i * 8.3} cy="127" r="3.5" fill="black"/>
-                      ))}
-                      {Array.from({ length: 15 }).map((_, i) => (
-                        <circle key={`l${i}`} cx="3" cy={6 + i * 8.3} r="3.5" fill="black"/>
-                      ))}
-                      {Array.from({ length: 15 }).map((_, i) => (
-                        <circle key={`r${i}`} cx="97" cy={6 + i * 8.3} r="3.5" fill="black"/>
-                      ))}
-                    </mask>
-                  </defs>
-                  <rect width="100" height="130" fill={color} mask="url(#modal-mask)"/>
-                </svg>
-
-                {/* Inner content */}
-                <div className="project-modal__stamp-inner">
-                  <div className="project-modal__stamp-header">
-                    <span>THAILAND</span>
-                    <span>{year}</span>
-                  </div>
-
-                  <div
-                    className="project-modal__stamp-artwork"
-                    style={{ backgroundColor: accentColor }}
-                  >
-                    <span>{title.charAt(0)}</span>
-                  </div>
-
-                  <div className="project-modal__stamp-denomination">
-                    {parseInt(year) - 2018}฿
-                  </div>
-                </div>
+          <div className="modal-content">
+            <div className="modal-description">
+              <p>{project.description}</p>
+              
+              <div className="modal-tags">
+                {project.tags.map(tag => (
+                  <span key={tag} className="tag">{tag}</span>
+                ))}
               </div>
-              )}
 
-              {/* Right: Info */}
-              <div className="project-modal__info">
-                <div className="project-modal__meta">
-                  <span className="project-modal__type">{type}</span>
-                  <span className="project-modal__year">{year}</span>
-                </div>
-
-                <h2 className="project-modal__title">{title}</h2>
-                <p className="project-modal__subtitle">{subtitle}</p>
-                
-                <p className="project-modal__description">{description}</p>
-
-                <div className="project-modal__tags">
-                  {tags.map((tag, i) => (
-                    <span key={tag} className="project-modal__tag">
-                      {i > 0 && <span className="project-modal__tag-sep">•</span>}
-                      {tag}
-                    </span>
+              {project.links && Object.keys(project.links).length > 0 && (
+                <div className="modal-links">
+                  {Object.entries(project.links).map(([key, url]) => (
+                    <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="modal-link">
+                      Visit {key} →
+                    </a>
                   ))}
                 </div>
-
-                <div className="project-modal__actions">
-                  {links.live && (
-                    <a href={links.live} className="project-modal__btn project-modal__btn--primary" target="_blank" rel="noopener noreferrer">
-                      View Live →
-                    </a>
-                  )}
-                  {links.appStore && (
-                    <a href={links.appStore} className="project-modal__btn project-modal__btn--primary" target="_blank" rel="noopener noreferrer">
-                      App Store →
-                    </a>
-                  )}
-                  {links.caseStudy && (
-                    <a href={links.caseStudy} className="project-modal__btn project-modal__btn--secondary">
-                      Case Study
-                    </a>
-                  )}
-                </div>
-              </div>
+              )}
             </div>
-          </motion.div>
-        </div>
-      )}
+            
+            <div className="modal-gallery">
+              {project.images && project.images.map((img, i) => (
+                <div key={i} className="gallery-item">
+                   <img src={img} alt={`${project.title} screenshot ${i+1}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
     </AnimatePresence>
   )
 }

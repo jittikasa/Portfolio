@@ -1,20 +1,29 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Home from './pages/Home'
-import CollectionPage from './pages/CollectionPage'
+import GrainOverlay from './components/GrainOverlay'
+import CustomCursor from './components/CustomCursor'
+import ScrollProgress from './components/ScrollProgress'
 import './App.css'
 
 function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <GrainOverlay />
+        <CustomCursor />
+        <ScrollProgress />
+        
         <Header />
+        
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/collection" element={<CollectionPage />} />
           </Routes>
         </main>
+        
+        <Footer />
       </div>
     </BrowserRouter>
   )

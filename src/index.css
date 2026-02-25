@@ -1,72 +1,143 @@
+/* ============================================
+   GLOBAL STYLES — Monet · Giverny Atelier
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  font-family: 'Cormorant Garamond', serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* ── Color Palette – Monet's Garden ── */
+  --canvas:       #F7F3EC;   /* warm primed canvas */
+  --cream:        #F2EDE3;   /* aged cream */
+  --parchment:    #E8E0CF;   /* aged parchment */
 
-  color-scheme: light;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Sage — primary accent (garden / lily pads) */
+  --sage:         #6B7C5A;
+  --sage-deep:    #3E5234;
+  --sage-hover:   #5A6A4A;
+  --sage-mist:    #A8B89A;
+  --sage-pale:    #E4EBDF;
 
-  /* Monet Palette (Water Lilies) */
-  --monet-water-deep: #2A403D; /* Deep pond green */
-  --monet-water: #4F736D;      /* Mid green */
-  --monet-mist: #B8C7C4;       /* Light blue-grey */
-  --monet-lily: #E8D5C0;       /* Pale cream/pink */
-  --monet-petal: #D8C8D8;      /* Soft lilac */
-  --monet-stem: #3E5234;       /* Dark stem green */
-  --monet-text: #F7F3EC;       /* Off-white for text on dark bg */
-  
-  --canvas: #F7F3EC;
-  --ink: #2A1F14;
-  --ink-muted: #6B5E52;
-  --border: rgba(255, 255, 255, 0.15); /* Light border for dark mode feel */
+  /* Water — Giverny pond */
+  --water:        #8BAABF;
+  --water-deep:   #5B7A96;
+  --water-mist:   #C5D8E8;
+
+  /* Bloom — warm botanicals */
+  --petal:        #C9A8A8;   /* dusty rose */
+  --bloom:        #B89870;   /* golden ochre */
+  --bloom-pale:   #EDE4D5;
+
+  /* Ink & neutrals */
+  --ink:          #2A1F14;   /* dark brown-black */
+  --ink-muted:    #7A6E62;
+  --border:       rgba(42, 31, 20, 0.1);
+  --border-strong: rgba(42, 31, 20, 0.22);
+
+  /* Legacy alias (keeps components working) */
+  --charcoal:     var(--ink);
+  --paper:        var(--cream);
+  --paper-dark:   var(--parchment);
+  --accent:       var(--sage);
+  --accent-hover: var(--sage-hover);
+
+  /* ── Typography ── */
+  --font-display: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  --font-hand:    'La Belle Aurore', cursive;
+
+  /* ── Spacing ── */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* ── Easing ── */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--monet-water-deep);
-  color: var(--monet-text);
-  overflow-x: hidden;
+  font-family: var(--font-body);
+  background: var(--canvas);
+  background-image: 
+    linear-gradient(90deg, rgba(42, 31, 20, 0.015) 1px, transparent 1px),
+    linear-gradient(rgba(42, 31, 20, 0.015) 1px, transparent 1px);
+  background-size: 20px 20px; /* Tiny weave */
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Typography Base ── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-display);
   font-weight: 400;
-  margin: 0;
+  line-height: 1.2;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.75rem, 5vw, 2.5rem); letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+
+p { max-width: 65ch; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
 }
 
-button {
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  padding: 0;
+::selection {
+  background: var(--sage);
+  color: var(--canvas);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--monet-water-deep);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--monet-water);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--monet-mist);
+/* ── Utilities ── */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.paint-filter {
-  filter: url(#paint-daub);
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* ── App shell ── */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app main {
+  flex: 1;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
