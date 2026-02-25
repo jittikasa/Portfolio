@@ -1,30 +1,50 @@
 /* ============================================
-   HOME — West & Co editorial layout
+   HOME — Monet Scene Layout
    ============================================ */
 
-.home { background: var(--canvas); }
+.home {
+  /* Allow background to show through */
+  background: transparent;
+  color: var(--monet-text);
+}
 
-/* ─── Shared utilities ─── */
+/* ─── Glass / Floating Utilities ─── */
+.glass-card, .glass-panel {
+  background: rgba(42, 64, 61, 0.4); /* Dark pond green tint */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.2);
+}
+
 .label {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--sage);
+  color: var(--monet-mist);
   margin-bottom: 18px;
 }
 
 .underline-link {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: var(--ink);
+  color: var(--monet-text);
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: rgba(42,31,20,0.35);
+  text-decoration-color: rgba(255,255,255,0.3);
   transition: text-decoration-color 0.2s;
 }
-.underline-link:hover { text-decoration-color: var(--ink); }
+.underline-link:hover { text-decoration-color: var(--monet-lily); }
 .underline-link--sm { font-size: 0.78rem; }
 
 .btn-cta {
@@ -32,27 +52,30 @@
   font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 500;
-  color: var(--canvas);
-  background: var(--water-deep);
+  color: #2A1F14;
+  background: var(--monet-lily);
   text-decoration: none;
   padding: 14px 32px;
-  border-radius: 3px;
+  border-radius: 50px; /* Softer shape */
   letter-spacing: 0.03em;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
   margin-top: 8px;
 }
-.btn-cta:hover { background: var(--water); }
+.btn-cta:hover {
+  background: #FFF;
+  transform: scale(1.02);
+}
 
 /* ══════════════════════════════════════════
-   HERO — split layout: text left, typewriter top-right
+   HERO
 ══════════════════════════════════════════ */
 .hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 0.8fr;
   min-height: 100vh;
-  background: var(--canvas);
-  border-bottom: 1px solid var(--border);
+  /* Removed solid bg and border */
   overflow: hidden;
+  align-items: center;
 }
 
 .hero__left {
@@ -61,69 +84,80 @@
   justify-content: center;
   padding: 120px 80px 80px;
   position: relative;
+  z-index: 10;
 }
 
 .hero__right {
   position: relative;
-  overflow: hidden;
-  background: var(--parchment);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: 60px;
+  padding-right: 40px;
+}
+
+.hero__visual {
+  /* Container for the image to apply extra effects */
+  position: relative;
+  transform: rotate(-2deg);
 }
 
 .hero__img {
-  width: 90%;
-  max-width: 560px;
+  width: 100%;
+  max-width: 480px;
   height: auto;
   display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 64px rgba(42,31,20,0.18));
+  /* Soft drop shadow instead of harsh one */
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+  opacity: 0.9;
+  mix-blend-mode: hard-light; /* Blend with water */
 }
 
 .hero__eyebrow {
   font-family: var(--font-mono);
   font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--ink-muted); display: block; margin-bottom: 24px; opacity: 0.6;
+  color: var(--monet-mist); display: block; margin-bottom: 24px; opacity: 0.8;
 }
+
 .hero__headline {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5.5vw, 6rem);
-  font-weight: 400; line-height: 1.05;
-  color: var(--ink); letter-spacing: -0.02em; margin-bottom: 40px;
+  font-size: clamp(3.5rem, 6vw, 7rem); /* Slightly larger */
+  font-weight: 300; /* Lighter weight */
+  line-height: 1;
+  color: var(--monet-lily);
+  letter-spacing: -0.03em; margin-bottom: 40px;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
 .hero__cta {
   display: inline-block;
   font-family: var(--font-mono); font-size: 0.72rem;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink); text-decoration: none;
-  padding-bottom: 6px; border-bottom: 1px solid rgba(42,31,20,0.35);
+  color: var(--monet-text); text-decoration: none;
+  padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.3);
   transition: border-color 0.25s;
 }
-.hero__cta:hover { border-color: var(--ink); }
-.hero__scroll-hint {
-  position: absolute; bottom: 40px; left: 80px;
-  display: flex; align-items: center; gap: 16px;
-  font-family: var(--font-mono); font-size: 0.6rem;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.4;
-}
-.hero__scroll-line { display: block; width: 40px; height: 1px; background: var(--ink-muted); opacity: 0.4; }
+.hero__cta:hover { border-color: var(--monet-lily); }
+
 
 /* ══════════════════════════════════════════
-   SECTION 1 — Intro: text left + photo right
-   (West & Co "Planning that feels...")
-══════════════════════════════════════════ */
+   SECTION 1 — Intro (Floating Card)
+══════════════════════════════════════ */
 .s-intro {
+  display: flex;
+  justify-content: center;
+  padding: 120px 80px;
+  /* No borders */
+}
+
+.s-intro .glass-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 640px;
-  border-top: 1px solid var(--border);
+  max-width: 1100px;
+  width: 100%;
 }
 
 .s-intro__copy {
-  padding: 100px 80px 100px 80px;
+  padding: 80px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -134,103 +168,92 @@
   font-size: clamp(2.4rem, 4vw, 3.8rem);
   font-weight: 400;
   line-height: 1.1;
-  color: var(--ink);
+  color: var(--monet-text);
   letter-spacing: -0.01em;
   margin-bottom: 28px;
 }
 .s-intro__heading em {
   font-style: italic;
-  color: var(--sage);
+  color: var(--monet-lily);
 }
 
 .s-intro__body {
-  font-size: 0.95rem;
-  line-height: 1.85;
-  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--monet-mist);
   max-width: 420px;
   margin-bottom: 16px;
 }
-
 .s-intro__body:last-of-type { margin-bottom: 32px; }
 
 .s-intro__photo {
   overflow: hidden;
-  background: var(--parchment);
-  min-height: 560px;
+  position: relative;
+  min-height: 500px;
 }
 .s-intro__img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center center;
-  display: block;
-  filter: brightness(0.9) saturate(0.85) sepia(0.08);
+  opacity: 0.9;
+  transition: transform 0.8s ease;
 }
+.s-intro .glass-card:hover .s-intro__img {
+  transform: scale(1.05);
+}
+
 
 /* ══════════════════════════════════════════
-   SECTION 2 — Services: photo | accordion | photo
-   (West & Co "Your trip, tailored")
-══════════════════════════════════════════ */
+   SECTION 2 — Services
+══════════════════════════════════════ */
 .s-services {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  min-height: 700px;
-  border-top: 1px solid var(--border);
-  background: var(--cream);
-}
-
-.s-services__photo {
-  overflow: hidden;
-}
-.s-services__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.92) saturate(0.8) sepia(0.08);
-}
-
-.s-services__content {
-  padding: 100px 60px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
+  padding: 80px 80px;
+  /* Removed grid/photos for cleaner floating panel look */
+}
+
+.s-services .glass-panel {
+  max-width: 800px;
+  width: 100%;
+  padding: 80px 60px;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  background: rgba(42, 64, 61, 0.6); /* Slightly more opaque */
 }
 
 .s-services__heading {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 300;
   line-height: 1.1;
-  color: var(--ink);
-  letter-spacing: -0.015em;
+  color: var(--monet-text);
   text-align: center;
   margin-bottom: 16px;
 }
 
 .s-services__sub {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.75;
-  color: var(--ink-muted);
+  color: var(--monet-mist);
   text-align: center;
-  max-width: 340px;
-  margin: 0 auto 40px;
+  max-width: 400px;
+  margin: 0 auto 50px;
 }
 
 /* Accordion */
 .accordion { width: 100%; }
 
 .accordion__item {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
-.accordion__item:last-child { border-bottom: 1px solid var(--border); }
+.accordion__item:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
 
 .accordion__trigger {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 18px 0;
+  padding: 24px 0;
   background: none; border: none; cursor: pointer;
   text-align: left;
 }
@@ -238,48 +261,43 @@
 .accordion__num {
   font-family: var(--font-mono);
   font-size: 0.6rem; letter-spacing: 0.14em;
-  color: var(--sage); min-width: 24px;
+  color: var(--monet-lily); min-width: 24px;
 }
 
 .accordion__title {
   flex: 1;
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--ink);
-  font-weight: 400;
+  font-size: 1.1rem; /* Larger */
+  color: var(--monet-text);
+  font-weight: 300;
 }
 
 .accordion__arrow {
   font-size: 0.75rem;
-  color: var(--ink-muted);
+  color: var(--monet-mist);
   transition: transform 0.3s ease;
-  display: inline-block;
 }
 .accordion__arrow--open { transform: rotate(180deg); }
 
-.accordion__body {
-  overflow: hidden;
-}
 .accordion__body p {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   line-height: 1.8;
-  color: var(--ink-muted);
-  padding: 0 0 20px 40px;
+  color: var(--monet-mist);
+  padding: 0 0 24px 40px;
 }
 
+
 /* ══════════════════════════════════════════
-   SECTION 3 — Quote / Testimonial
-   (West & Co testimonials)
+   SECTION 3 — Quote
 ══════════════════════════════════════════ */
 .s-quote {
-  background: #EDE6D8;
-  padding: 120px 40px;
+  padding: 160px 40px;
   text-align: center;
-  border-top: 1px solid rgba(42,31,20,0.08);
+  /* Transparent bg */
 }
 
 .s-quote__inner {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -287,64 +305,48 @@
   display: block;
   font-family: var(--font-mono);
   font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.6; margin-bottom: 32px;
+  color: var(--monet-mist); opacity: 0.6; margin-bottom: 32px;
 }
 
 .s-quote__text {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-style: italic;
-  font-weight: 400;
-  line-height: 1.45;
-  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--monet-lily);
   letter-spacing: -0.01em;
   margin: 0 0 28px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .s-quote__cite {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  opacity: 0.65;
+  color: var(--monet-mist);
+  opacity: 0.8;
   font-style: normal;
 }
 
+
 /* ══════════════════════════════════════════
-   SECTION 4 — Meet Jittika: floating card
-   (West & Co "Meet Taylor")
-══════════════════════════════════════════ */
+   SECTION 4 — Meet Jittika
+══════════════════════════════════════ */
 .s-about {
-  background: var(--canvas);
+  background: transparent;
   padding: 100px 80px;
-  border-top: 1px solid var(--border);
 }
 
-/* Floating card */
+/* Reuse glass-card styles from s-intro */
 .s-about__card {
-  max-width: 1100px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: 480px 1fr;
-  background: #EDE6D8;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 8px 48px rgba(42,31,20,0.08);
+  grid-template-columns: 400px 1fr;
 }
-
-.s-about__photo {
-  overflow: hidden;
-  min-height: 520px;
-}
-.s-about__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-}
+.s-about__photo { min-height: 480px; }
 
 .s-about__panel {
-  padding: 72px 72px 72px 64px;
+  padding: 72px 72px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -352,216 +354,157 @@
 
 .s-about__heading {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
   line-height: 1.1;
-  color: var(--ink);
-  letter-spacing: -0.01em;
+  color: var(--monet-text);
   margin-bottom: 24px;
   text-transform: uppercase;
 }
 
 .s-about__body {
-  font-size: 0.9rem;
-  line-height: 1.85;
-  color: var(--ink-muted);
-  max-width: 380px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--monet-mist);
+  max-width: 400px;
   margin-bottom: 36px;
 }
+
 
 /* ══════════════════════════════════════════
    WORK GRID
 ══════════════════════════════════════════ */
 .s-work {
   padding: 100px 0;
-  border-top: 1px solid var(--border);
+  border: none;
 }
 
 .s-work__inner {
-  max-width: 1280px;
+  max-width: 1400px; /* Wider */
   margin: 0 auto;
   padding: 0 80px;
-}
-
-.s-work__head {
-  margin-bottom: 56px;
 }
 
 .s-work__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: -0.02em;
+  font-weight: 300;
+  color: var(--monet-text);
   margin-top: 10px;
 }
 
 .s-work__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 30px; /* More space */
 }
 
 .project-tile {
-  background: var(--canvas);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  background: rgba(42, 64, 61, 0.4); /* Glass tile */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  /* Transition handled by framer-motion in JSX mostly */
 }
+
 .project-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(42,31,20,0.1);
+  background: rgba(42, 64, 61, 0.6);
+  border-color: rgba(255,255,255,0.2);
 }
 
 .project-tile__swatch {
-  height: 150px;
-  background: var(--c, var(--parchment));
+  height: 180px; /* Taller */
+  background: var(--c);
+  opacity: 0.8;
+  transition: opacity 0.3s;
 }
+.project-tile:hover .project-tile__swatch { opacity: 1; }
 
-.project-tile__body { padding: 20px 20px 24px; }
-
-.project-tile__top {
-  display: flex; justify-content: space-between;
-  align-items: center; margin-bottom: 10px;
-}
+.project-tile__body { padding: 24px; }
 
 .project-tile__year {
   font-family: var(--font-mono); font-size: 0.58rem;
-  color: var(--ink-muted); opacity: 0.5;
+  color: var(--monet-mist); opacity: 0.6;
 }
 
 .project-tile__name {
   font-family: var(--font-display);
-  font-size: 1.25rem; font-weight: 400;
-  color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px;
+  font-size: 1.35rem; font-weight: 400;
+  color: var(--monet-text); margin-bottom: 4px;
 }
 
 .project-tile__sub {
-  font-size: 0.82rem; color: var(--ink-muted);
-  line-height: 1.5; margin-bottom: 14px;
+  font-size: 0.85rem; color: var(--monet-mist);
+  line-height: 1.5; margin-bottom: 16px;
 }
 
+
 /* ══════════════════════════════════════════
-   FOOTER — 3 column (West & Co footer)
+   FOOTER
 ══════════════════════════════════════════ */
 .footer {
-  background: var(--canvas);
-  border-top: 1px solid var(--border);
-  padding: 60px 80px 32px;
+  background: rgba(0,0,0,0.2); /* Slightly darker bottom */
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 80px 80px 40px;
 }
 
 .footer__cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--border);
-}
-
-.footer__col {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer__col--center {
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-}
-
-.footer__col--right {
-  align-items: flex-end;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 60px;
 }
 
 .footer__col-head {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--ink);
-  margin-bottom: 4px;
-  font-weight: 400;
+  color: var(--monet-lily);
 }
 
 .footer__col-link {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--ink-muted);
-  text-decoration: none;
-  transition: color 0.2s;
+  color: var(--monet-mist);
 }
-.footer__col-link:hover { color: var(--ink); }
+.footer__col-link:hover { color: var(--monet-text); }
 
 .footer__logo {
-  font-family: var(--font-display);
-  font-size: 3rem; font-style: italic; font-weight: 400;
-  color: var(--ink); opacity: 0.8; line-height: 1;
+  color: var(--monet-text);
 }
 
 .footer__tagline {
-  font-family: var(--font-mono);
-  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink-muted); opacity: 0.5;
+  color: var(--monet-mist);
 }
-
-.footer__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer__socials { display: flex; gap: 24px; }
 
 .footer__social {
-  font-family: var(--font-mono);
-  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--ink-muted); text-decoration: none; transition: color 0.2s;
+  color: var(--monet-mist);
 }
-.footer__social:hover { color: var(--ink); }
+.footer__social:hover { color: var(--monet-text); }
 
 .footer__fine {
-  font-family: var(--font-mono);
-  font-size: 0.58rem; letter-spacing: 0.08em;
-  color: var(--ink-muted); opacity: 0.45;
+  color: var(--monet-mist); opacity: 0.3;
 }
+
 
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 1100px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero__left { padding: 120px 48px 80px; justify-content: flex-start; }
-  .hero__right { min-height: 50vw; padding-top: 40px; }
-  .s-intro { grid-template-columns: 1fr; }
-  .s-intro__copy { padding: 72px 48px; }
-  .s-intro__photo { min-height: 400px; }
-  .s-services { grid-template-columns: 1fr; }
-  .s-services__photo { display: none; }
-  .s-services__content { border: none; padding: 72px 48px; }
-  .s-about { padding: 80px 40px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero__left { padding: 120px 40px 60px; text-align: center; }
+  .hero__right { padding: 0 40px 60px; }
+  
+  .s-intro .glass-card { grid-template-columns: 1fr; }
+  .s-intro__photo { min-height: 360px; }
+  
   .s-about__card { grid-template-columns: 1fr; }
   .s-about__photo { min-height: 360px; }
-  .s-about__panel { padding: 56px 48px; }
-  .s-work__inner { padding: 0 48px; }
+  
   .s-work__grid { grid-template-columns: repeat(2, 1fr); }
-  .footer { padding: 48px 48px 28px; }
-  .footer__col--right { align-items: flex-start; }
 }
 
-@media (max-width: 700px) {
-  .s-intro__copy { padding: 56px 24px; }
-  .s-services__content { padding: 56px 24px; }
-  .s-about { padding: 60px 20px; }
-  .s-about__panel { padding: 40px 28px; }
-  .s-work__inner { padding: 0 24px; }
+@media (max-width: 600px) {
+  .hero__headline { font-size: 3.5rem; }
+  .s-intro, .s-services, .s-about, .s-work__inner { padding-left: 20px; padding-right: 20px; }
+  .glass-card, .glass-panel { padding: 40px 24px; }
+  .s-intro__copy, .s-about__panel { padding: 40px 24px; }
+  
+  .footer { padding: 60px 24px 32px; }
   .s-work__grid { grid-template-columns: 1fr; }
-  .footer { padding: 40px 24px 24px; }
-  .footer__cols { grid-template-columns: 1fr; }
-  .footer__col--center { align-items: flex-start; text-align: left; }
-  .footer__col--right { align-items: flex-start; }
-  .footer__bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
-  .hero__left { padding: 100px 24px 60px; }
-  .hero__scroll-hint { left: 24px; }
 }

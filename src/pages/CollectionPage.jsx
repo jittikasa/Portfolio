@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import ProjectModal from '../components/ProjectModal'
 import StampCollection from '../components/StampCollection'
+import MonetScene from '../components/monet/MonetScene'
 import './CollectionPage.css'
 
 export default function CollectionPage() {
@@ -10,6 +11,8 @@ export default function CollectionPage() {
 
   return (
     <div className="collection-page">
+      <MonetScene />
+      
       {/* Header */}
       <header className="collection-page__header">
         <Link to="/" className="collection-page__back">

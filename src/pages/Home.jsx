@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projects } from '../data/projects'
 import ProjectModal from '../components/ProjectModal'
+import MonetScene from '../components/monet/MonetScene'
 import './Home.css'
 
 const services = [
@@ -23,8 +24,8 @@ const services = [
 ]
 
 const fade = {
-  hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
+  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+  show:   { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } }
 }
 
 export default function Home() {
@@ -33,137 +34,119 @@ export default function Home() {
 
   return (
     <div className="home">
+      <MonetScene />
 
       {/* ══════════════════════════════════════
-          HERO — split: text left + typewriter top-right
+          HERO — Floating elements
       ══════════════════════════════════════ */}
       <section className="hero">
         <div className="hero__left">
           <motion.p className="hero__eyebrow"
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}>
+            transition={{ duration: 0.8, delay: 0.2 }}>
             Jittika S. · Phuket, Thailand
           </motion.p>
           <motion.h1 className="hero__headline"
-            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}>
+            initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1.2, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}>
             Where design &amp;<br />craft meet.
           </motion.h1>
           <motion.a href="#intro" className="hero__cta"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.65 }}>
+            transition={{ duration: 0.8, delay: 0.65 }}>
             See My Work
           </motion.a>
-          <div className="hero__scroll-hint">
-            <span>Scroll to explore</span>
-            <span className="hero__scroll-line" />
-          </div>
         </div>
         <motion.div className="hero__right"
-          initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
-          <img src="/typewriter.png" alt="Mint green typewriter" className="hero__img" />
+          initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.4, delay: 0.1, ease: "easeOut" }}>
+           {/* Replaced typewriter with something more abstract or keep it but blend it */}
+          <div className="hero__visual paint-filter">
+             <img src="/typewriter.png" alt="Mint green typewriter" className="hero__img" />
+          </div>
         </motion.div>
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 1 — Photo left + Text right
-          (West & Co "Planning that feels...")
+          SECTION 1 — Intro (Floating Card)
       ══════════════════════════════════════ */}
       <section className="s-intro" id="intro">
-        <motion.div className="s-intro__photo"
-          variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <img src="/typewriter-wide.png" alt="Typewriter overhead" className="s-intro__img" />
-        </motion.div>
-
-        <div className="s-intro__copy">
-          <motion.div variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <span className="label">Design Studio</span>
-            <h2 className="s-intro__heading">
-              Design that feels<br />
-              <em>as intentional</em><br />
-              as it looks.
-            </h2>
-            <p className="s-intro__body">
-              Jittika S. is a product designer and maker based in Phuket, Thailand — specialising in
-              digital products, brand identities, and editorial design. Every project is approached
-              with the same obsession: make it feel inevitable.
-            </p>
-            <p className="s-intro__body">
-              I believe great design isn't just about where you look — it's about how it makes
-              you feel every step of the way.
-            </p>
-            <a href="#work" className="underline-link">View My Work</a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          SECTION 2 — Photo | Services accordion | Photo
-          (West & Co "Your trip, tailored to perfection")
-      ══════════════════════════════════════ */}
-      <section className="s-services" id="work">
-        {/* Left photo */}
-        <motion.div className="s-services__photo s-services__photo--left"
-          variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <img src="/typewriter-wide.png" alt="" className="s-services__img" />
-        </motion.div>
-
-        {/* Centre content */}
-        <motion.div className="s-services__content"
-          variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <h2 className="s-services__heading">
-            Your work,<br />crafted to<br />perfection.
-          </h2>
-          <p className="s-services__sub">
-            Every project is unique. I offer a range of services that can be tailored
-            to your exact needs and vision:
-          </p>
-
-          <div className="accordion">
-            {services.map((s, i) => (
-              <div key={s.num} className="accordion__item">
-                <button
-                  className="accordion__trigger"
-                  onClick={() => setOpenIdx(openIdx === i ? null : i)}
-                  aria-expanded={openIdx === i}
-                >
-                  <span className="accordion__num">{s.num}</span>
-                  <span className="accordion__title">{s.title}</span>
-                  <span className={`accordion__arrow ${openIdx === i ? 'accordion__arrow--open' : ''}`}>↓</span>
-                </button>
-                <AnimatePresence>
-                  {openIdx === i && (
-                    <motion.div
-                      className="accordion__body"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <p>{s.body}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+        <motion.div className="glass-card"
+           variants={fade} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-10%" }}>
+          <div className="s-intro__photo paint-filter">
+            <img src="/typewriter-wide.png" alt="Typewriter overhead" className="s-intro__img" />
           </div>
 
-          <a href="mailto:hello@jittika.com" className="underline-link" style={{ marginTop: '32px', display: 'inline-block' }}>
-            Start a Project
-          </a>
-        </motion.div>
-
-        {/* Right photo */}
-        <motion.div className="s-services__photo s-services__photo--right"
-          variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <img src="/typewriter-grid.png" alt="" className="s-services__img" />
+          <div className="s-intro__copy">
+              <span className="label">Design Studio</span>
+              <h2 className="s-intro__heading">
+                Design that feels<br />
+                <em>as intentional</em><br />
+                as it looks.
+              </h2>
+              <p className="s-intro__body">
+                Jittika S. is a product designer and maker based in Phuket, Thailand — specialising in
+                digital products, brand identities, and editorial design. Every project is approached
+                with the same obsession: make it feel inevitable.
+              </p>
+              <a href="#work" className="underline-link">View My Work</a>
+          </div>
         </motion.div>
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 3 — Quote / Testimonial
-          (West & Co testimonial carousel)
+          SECTION 2 — Services (Floating Glass Panel)
+      ══════════════════════════════════════ */}
+      <section className="s-services" id="work">
+        <motion.div className="glass-panel"
+           variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <div className="s-services__content">
+            <h2 className="s-services__heading">
+              Your work,<br />crafted to<br />perfection.
+            </h2>
+            <p className="s-services__sub">
+              Every project is unique. I offer a range of services that can be tailored
+              to your exact needs and vision:
+            </p>
+
+            <div className="accordion">
+              {services.map((s, i) => (
+                <div key={s.num} className="accordion__item">
+                  <button
+                    className="accordion__trigger"
+                    onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                    aria-expanded={openIdx === i}
+                  >
+                    <span className="accordion__num">{s.num}</span>
+                    <span className="accordion__title">{s.title}</span>
+                    <span className={`accordion__arrow ${openIdx === i ? 'accordion__arrow--open' : ''}`}>↓</span>
+                  </button>
+                  <AnimatePresence>
+                    {openIdx === i && (
+                      <motion.div
+                        className="accordion__body"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <p>{s.body}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+
+            <a href="mailto:hello@jittika.com" className="btn-cta" style={{ marginTop: '32px' }}>
+              Start a Project
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          SECTION 3 — Quote (Transparent)
       ══════════════════════════════════════ */}
       <section className="s-quote">
         <motion.div className="s-quote__inner"
@@ -177,13 +160,12 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          SECTION 4 — "Meet Jittika" photo + panel
-          (West & Co "Meet Taylor")
+          SECTION 4 — Meet Jittika (Floating Card)
       ══════════════════════════════════════ */}
       <section className="s-about" id="about">
-        <motion.div className="s-about__card"
+        <motion.div className="glass-card s-about__card"
           variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <div className="s-about__photo">
+          <div className="s-about__photo paint-filter">
             <img src="/about.png" alt="Jittika S." className="s-about__img" />
           </div>
           <div className="s-about__panel">
@@ -205,7 +187,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          WORK GRID — portfolio projects
+          WORK GRID — Floating Lilies
       ══════════════════════════════════════ */}
       <section className="s-work" id="projects">
         <div className="s-work__inner">
@@ -226,7 +208,8 @@ export default function Home() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                transition={{ delay: (i % 4) * 0.08 }}
+                transition={{ delay: (i % 4) * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
               >
                 <div className="project-tile__swatch" />
                 <div className="project-tile__body">
@@ -245,7 +228,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════
-          FOOTER — 3 column
+          FOOTER
       ══════════════════════════════════════ */}
       <footer className="footer">
         <div className="footer__cols">
