@@ -1,125 +1,125 @@
-// Portfolio projects — each represented as a stamp
+// Portfolio projects
 // Palette: Monet Giverny — sage, water, petal, bloom, canvas
 
 export const projects = [
   {
     id: 'shellist',
     title: 'Shellist',
-    subtitle: 'Minimal habit tracking',
-    description: 'A beautifully minimal iOS app for tracking daily habits. Designed with simplicity in mind, Shellist helps users build better routines without overwhelming them with features.',
-    type: 'app',
+    subtitle: 'Habit tracking, beautifully done',
+    description: 'A minimal iOS app for building better habits. Shellist uses a pearl chain visualization to make your progress feel tangible and satisfying — each completion adds to your growing chain. Features a vision board, analytics heatmap, widget support, and full privacy with on-device storage.',
+    type: 'iOS App',
     year: '2024',
     tags: ['iOS', 'Product Design', 'SwiftUI'],
-    color: '#D9E4D2',       // sage pale
-    accentColor: '#3E5234', // sage deep
+    color: '#D9E4D2',
+    accentColor: '#3E5234',
     rotation: -2,
     featured: true,
-    links: { appStore: '#', caseStudy: '#' },
-    images: []
+    links: { appStore: 'https://apps.apple.com/us/app/shellist/id6755242144' },
+    images: ['/shellist-screens.webp', '/shellist-screens-2.webp', '/shellist-icon.png']
   },
   {
     id: 'polamoment',
     title: 'PolaMoment',
-    subtitle: 'Vintage instant camera',
-    description: 'A nostalgic camera app that brings the charm of Polaroid photography to iOS. Features realistic film simulations, development timers, and a beautiful vintage interface.',
-    type: 'app',
-    year: '2023',
+    subtitle: 'Vintage instant camera for iPhone',
+    description: 'Brings the charm of instant Polaroid photography to iOS. Point, shoot, and watch your photo develop with authentic film simulations, vintage filters, and classic Polaroid frames. Built natively for iOS with support for the latest camera features.',
+    type: 'iOS App',
+    year: '2024',
     tags: ['iOS', 'Photography', 'UI Design'],
-    color: '#C5D8E8',       // water mist
-    accentColor: '#5B7A96', // water deep
+    color: '#C5D8E8',
+    accentColor: '#5B7A96',
     rotation: 1.5,
     featured: true,
-    links: { appStore: '#', caseStudy: '#' },
-    images: []
+    links: {},
+    images: ['/pola-image-1.jpeg', '/pola-image-2.jpeg', '/pola-icon.png']
   },
   {
     id: 'atelier-website',
     title: 'Atelier Lumière',
     subtitle: 'Photography studio website',
-    description: 'A sophisticated website for a high-end photography studio. Features immersive galleries, smooth transitions, and an editorial layout that lets the work speak for itself.',
-    type: 'website',
+    description: 'A sophisticated website for a high-end photography studio. Features immersive galleries, smooth scroll transitions, and an editorial layout that lets the work speak for itself.',
+    type: 'Website',
     year: '2024',
     tags: ['Web Design', 'Development', 'GSAP'],
-    color: '#EDE4D5',       // bloom pale
-    accentColor: '#2A1F14', // ink
+    color: '#EDE4D5',
+    accentColor: '#2A1F14',
     rotation: -1,
     featured: false,
-    links: { live: '#', caseStudy: '#' },
+    links: {},
     images: []
   },
   {
     id: 'botanica-brand',
     title: 'Botanica',
-    subtitle: 'Organic skincare brand',
-    description: 'Complete brand identity for an organic skincare line. Includes logo design, packaging, typography system, and brand guidelines.',
-    type: 'design',
+    subtitle: 'Organic skincare brand identity',
+    description: 'Complete brand identity for an organic skincare line — logo, typography system, packaging, and brand guidelines. Rooted in a natural, minimal aesthetic that feels clean and considered.',
+    type: 'Branding',
     year: '2024',
     tags: ['Branding', 'Packaging', 'Print'],
-    color: '#A8B89A',       // sage mist
-    accentColor: '#3E5234', // sage deep
+    color: '#A8B89A',
+    accentColor: '#3E5234',
     rotation: 2.5,
     featured: false,
-    links: { caseStudy: '#' },
+    links: {},
     images: []
   },
   {
     id: 'nomad-travel',
     title: 'Nomad',
     subtitle: 'Travel planning platform',
-    description: 'A comprehensive travel planning web application. Users can discover destinations, create itineraries, and collaborate with fellow travelers.',
-    type: 'website',
+    description: 'A web application for building and sharing travel itineraries. Focused on making trip planning feel as good as the trip itself — clean UI, collaborative features, and destination discovery built in.',
+    type: 'Web App',
     year: '2023',
     tags: ['Web App', 'UX Design', 'React'],
-    color: '#8BAABF',       // water
-    accentColor: '#3E5234', // sage deep
+    color: '#8BAABF',
+    accentColor: '#3E5234',
     rotation: -3,
     featured: false,
-    links: { live: '#', caseStudy: '#' },
+    links: {},
     images: []
   },
   {
     id: 'muse-editorial',
     title: 'Muse Magazine',
     subtitle: 'Editorial design system',
-    description: 'Art direction and editorial design for an independent arts and culture magazine. Created a flexible design system for print and digital editions.',
-    type: 'design',
+    description: 'Art direction and editorial design for an independent arts and culture magazine. A flexible system that works across print and digital — generous white space, expressive typography, and a restrained colour palette.',
+    type: 'Editorial',
     year: '2023',
     tags: ['Editorial', 'Typography', 'Print'],
-    color: '#E8D5C0',       // petal/bloom warm
-    accentColor: '#7A4F28', // warm brown
+    color: '#E8D5C0',
+    accentColor: '#7A4F28',
     rotation: 1,
     featured: false,
-    links: { caseStudy: '#' },
+    links: {},
     images: []
   },
   {
     id: 'harmony-music',
     title: 'Harmony',
-    subtitle: 'Music streaming app',
-    description: 'Conceptual design for a music streaming application focused on discovery and social listening. Features innovative interaction patterns and a bold visual identity.',
-    type: 'app',
+    subtitle: 'Music streaming concept',
+    description: 'A conceptual redesign of music streaming for discovery and social listening. Built around the idea that finding new music should feel like a shared experience — not an algorithm.',
+    type: 'Concept',
     year: '2023',
     tags: ['UI/UX', 'Mobile', 'Concept'],
-    color: '#D8C8D8',       // dusty lavender
-    accentColor: '#5A3F6B', // deep violet
+    color: '#D8C8D8',
+    accentColor: '#5A3F6B',
     rotation: -2.5,
     featured: false,
-    links: { caseStudy: '#', prototype: '#' },
+    links: {},
     images: []
   },
   {
     id: 'kinfolk-cafe',
     title: 'Kinfolk Café',
-    subtitle: 'Restaurant website & branding',
-    description: "Brand identity and website for a specialty coffee shop. Warm, welcoming aesthetic that reflects the café's community-focused values.",
-    type: 'website',
+    subtitle: 'Restaurant branding & website',
+    description: "Brand identity and website for a specialty coffee shop. Warm and welcoming — a visual identity that reflects the café's community-first values, from logo to menu design to digital presence.",
+    type: 'Branding',
     year: '2024',
     tags: ['Branding', 'Web Design', 'Development'],
-    color: '#E8E0CF',       // parchment
-    accentColor: '#7A5A28', // golden amber
+    color: '#E8E0CF',
+    accentColor: '#7A5A28',
     rotation: 2,
     featured: false,
-    links: { live: '#', caseStudy: '#' },
+    links: {},
     images: []
   }
 ]

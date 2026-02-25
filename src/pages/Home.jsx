@@ -184,7 +184,7 @@ export default function Home() {
         <motion.div className="s-about__card"
           variants={fade} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <div className="s-about__photo">
-            <img src="/typewriter-grid.png" alt="Typewriter from all angles" className="s-about__img" />
+            <img src="/about.png" alt="Jittika S." className="s-about__img" />
           </div>
           <div className="s-about__panel">
             <span className="label">About</span>
@@ -269,11 +269,9 @@ export default function Home() {
         </div>
         <div className="footer__bottom">
           <div className="footer__socials">
-            <a href="#" className="footer__social">Instagram</a>
-            <a href="#" className="footer__social">Dribbble</a>
-            <a href="#" className="footer__social">LinkedIn</a>
+            <a href="mailto:hello@jittika.com" className="footer__social">hello@jittika.com</a>
           </div>
-          <p className="footer__fine">© 2024 Jittika Suriyapakorn · All rights reserved</p>
+          <p className="footer__fine">© 2026 Jittika Suriyapakorn · All rights reserved</p>
         </div>
       </footer>
 

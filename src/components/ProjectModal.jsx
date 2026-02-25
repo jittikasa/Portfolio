@@ -24,7 +24,8 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
   if (!project) return null
 
-  const { title, subtitle, description, type, year, tags, color, accentColor, links } = project
+  const { title, subtitle, description, type, year, tags, color, accentColor, links, images } = project
+  const hasImages = images && images.length > 0
 
   return (
     <AnimatePresence>
@@ -38,7 +39,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          
+
           {/* Modal */}
           <motion.div
             className="project-modal__container"
@@ -48,7 +49,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           >
             {/* Close button */}
-            <button 
+            <button
               className="project-modal__close"
               onClick={onClose}
               aria-label="Close"
@@ -57,7 +58,16 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             </button>
 
             <div className="project-modal__content">
-              {/* Left: Stamp visual */}
+              {/* Left: Image or stamp visual */}
+              {hasImages ? (
+                <div className="project-modal__visual project-modal__visual--image" style={{ backgroundColor: color }}>
+                  <img
+                    src={images[0]}
+                    alt={title}
+                    className="project-modal__cover-img"
+                  />
+                </div>
+              ) : (
               <div className="project-modal__visual" style={{ backgroundColor: color }}>
                 {/* Perforated edges */}
                 <svg className="project-modal__perforations" viewBox="0 0 100 130" preserveAspectRatio="none">
@@ -88,7 +98,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                     <span>{year}</span>
                   </div>
 
-                  <div 
+                  <div
                     className="project-modal__stamp-artwork"
                     style={{ backgroundColor: accentColor }}
                   >
@@ -100,6 +110,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                   </div>
                 </div>
               </div>
+              )}
 
               {/* Right: Info */}
               <div className="project-modal__info">
