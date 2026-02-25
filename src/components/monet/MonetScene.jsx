@@ -1,195 +1,232 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import './MonetScene.css'
+import { useRef, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Cloud, Stars } from '@react-three/drei'
+import * as THREE from 'three'
 
-// Monet Palette: Woman with a Parasol
-const PALETTE = {
-  sky: ['#909fd4', '#aab8e8', '#cdd6f5', '#eef2fb'],
-  grass: ['#8BC34A', '#226d3e', '#558b2f', '#aed581', '#33691e'],
-  flowers: ['#FFC72C', '#FF8C00', '#FDD835', '#FFF176', '#E6EE9C'],
-  shadows: ['#B081C6', '#7E57C2', '#5E35B1'],
-  clouds: ['#f0e4e4', '#ffffff', '#e0e0e0'],
-  dress: ['#f0e4e4', '#e8eaf6', '#c5cae9'],
+// --- SHADERS ---
+const MonetShader = {
+  uniforms: {
+    uTime: { value: 0 },
+    uResolution: { value: new THREE.Vector2() },
+    uColor1: { value: new THREE.Color('#909fd4') }, // Sky Deep
+    uColor2: { value: new THREE.Color('#eef2fb') }, // Sky Light
+    uColor3: { value: new THREE.Color('#8BC34A') }, // Grass
+    uColor4: { value: new THREE.Color('#FFC72C') }, // Yellow Flowers
+    uColor5: { value: new THREE.Color('#B081C6') }, // Shadow/Detail
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform float uTime;
+    uniform vec2 uResolution;
+    uniform vec3 uColor1;
+    uniform vec3 uColor2;
+    uniform vec3 uColor3;
+    uniform vec3 uColor4;
+    uniform vec3 uColor5;
+    varying vec2 vUv;
+
+    // Simplex Noise (Ashima Arts)
+    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+    float snoise(vec2 v) {
+      const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
+                          0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
+                         -0.577350269189626,  // -1.0 + 2.0 * C.x
+                          0.024390243902439); // 1.0 / 41.0
+      vec2 i  = floor(v + dot(v, C.yy) );
+      vec2 x0 = v -   i + dot(i, C.xx);
+      vec2 i1;
+      i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod289(i); // Avoid truncation effects in permutation
+      vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+            + i.x + vec3(0.0, i1.x, 1.0 ));
+      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+      m = m*m ;
+      m = m*m ;
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+
+    // FBM (Fractal Brownian Motion)
+    float fbm(vec2 st) {
+      float value = 0.0;
+      float amplitude = 0.5;
+      float frequency = 0.0;
+      for (int i = 0; i < 5; i++) {
+        value += amplitude * snoise(st);
+        st *= 2.0;
+        amplitude *= 0.5;
+      }
+      return value;
+    }
+
+    // Paint Stroke Distortion
+    float paintStroke(vec2 uv, float scale, float time) {
+        float n = fbm(uv * scale + vec2(time * 0.1, time * 0.05));
+        return smoothstep(0.4, 0.6, n);
+    }
+
+    void main() {
+      vec2 uv = vUv;
+      float time = uTime * 0.2;
+
+      // Brush Texture (High frequency noise)
+      float brush = fbm(uv * 10.0 + time * 0.1);
+      
+      // Composition: Sky (Top) vs Grass (Bottom)
+      // Soft transition around y=0.3
+      float horizon = smoothstep(0.3, 0.4, uv.y + fbm(uv * 2.0) * 0.1);
+      
+      // Sky Colors
+      vec3 skyColor = mix(uColor1, uColor2, uv.y + brush * 0.1);
+      // Add clouds (white dabs)
+      float clouds = smoothstep(0.4, 0.7, fbm(uv * 4.0 + vec2(time * 0.05, 0.0)));
+      skyColor = mix(skyColor, vec3(1.0), clouds * 0.6); // Soft white clouds
+
+      // Grass Colors
+      vec3 grassBase = mix(uColor3, uColor5, brush); // Green mix
+      // Add Yellow Flowers (High freq dabs)
+      float flowers = step(0.65, fbm(uv * 25.0)); // Small dabs
+      vec3 grassColor = mix(grassBase, uColor4, flowers);
+      
+      // Combine Sky/Grass
+      // Invert Y because UV 0,0 is usually bottom-left in ShaderMaterial but plane geometry maps differently
+      // Let's assume standard UV: 0,0 bottom-left
+      float mask = smoothstep(0.4, 0.42, uv.y + fbm(uv * 3.0 + time * 0.1) * 0.1); // Wavy horizon
+      
+      // Actually, Monet's painting has sky TOP, grass BOTTOM.
+      // If UV.y 0 is bottom, then mask -> 1 at top (sky), 0 at bottom (grass).
+      
+      vec3 finalColor = mix(grassColor, skyColor, mask);
+      
+      // Vignette / Canvas Grain
+      float grain = fract(sin(dot(uv.xy ,vec2(12.9898,78.233))) * 43758.5453);
+      finalColor += grain * 0.04;
+
+      gl_FragColor = vec4(finalColor, 1.0);
+    }
+  `
 }
 
-export default function MonetScene() {
-  const canvasRef = useRef(null)
+const Background = () => {
+  const mesh = useRef()
+  const uniforms = useMemo(() => ({
+    uTime: { value: 0 },
+    uColor1: { value: new THREE.Color('#7896C4') }, // Sky Deep
+    uColor2: { value: new THREE.Color('#DCE6F5') }, // Sky Light
+    uColor3: { value: new THREE.Color('#6DA34D') }, // Grass Deep
+    uColor4: { value: new THREE.Color('#FFD54F') }, // Flowers
+    uColor5: { value: new THREE.Color('#4A6F38') }, // Shadow
+  }), [])
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    let animationFrameId
-    let w, h
-
-    // Helper: Random range
-    const random = (min, max) => Math.random() * (max - min) + min
-    const randomColor = (colors) => colors[Math.floor(Math.random() * colors.length)]
-
-    // Helper: Draw a brush stroke
-    const drawStroke = (x, y, length, angle, color, width) => {
-      ctx.beginPath()
-      ctx.strokeStyle = color
-      ctx.lineWidth = width
-      ctx.lineCap = 'round'
-      ctx.moveTo(x, y)
-      ctx.lineTo(x + Math.cos(angle) * length, y + Math.sin(angle) * length)
-      ctx.stroke()
-    }
-
-    // Helper: Draw a dab (for flowers/clouds)
-    const drawDab = (x, y, radius, color) => {
-      ctx.beginPath()
-      ctx.fillStyle = color
-      ctx.arc(x, y, radius, 0, Math.PI * 2)
-      ctx.fill()
-    }
-
-    const init = () => {
-      w = canvas.width = window.innerWidth
-      h = canvas.height = window.innerHeight
-      
-      // Initial Paint
-      paintScene()
-    }
-
-    const paintScene = () => {
-      // 1. Sky Background
-      const gradient = ctx.createLinearGradient(0, 0, 0, h)
-      gradient.addColorStop(0, '#909fd4')
-      gradient.addColorStop(0.6, '#cdd6f5')
-      gradient.addColorStop(1, '#eef2fb')
-      ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, w, h)
-
-      // 2. Clouds (Upper Half) - Whispy strokes
-      for (let i = 0; i < 400; i++) {
-        const x = random(0, w)
-        const y = random(0, h * 0.5)
-        const length = random(20, 60)
-        const angle = random(-0.2, 0.2)
-        const width = random(10, 30)
-        const color = randomColor(PALETTE.clouds)
-        ctx.globalAlpha = random(0.3, 0.6)
-        drawStroke(x, y, length, angle, color, width)
-      }
-
-      // 3. Grassy Hill (Lower Half) - Diagonal strokes
-      // Hill shape: curved from bottom left to mid right
-      const hillFunction = (x) => h - (Math.sin(x * 0.002) * 100 + x * 0.1 + h * 0.2)
-
-      for (let i = 0; i < 2000; i++) {
-        const x = random(0, w)
-        const baseY = hillFunction(x)
-        const y = random(baseY - 50, h) // Start from hill top downwards
-        
-        const length = random(15, 40)
-        const angle = random(-Math.PI / 2 - 0.5, -Math.PI / 2 + 0.5) // Upwardsish
-        const width = random(2, 6)
-        
-        // Shadow color near bottom/left, bright near top
-        let color = randomColor(PALETTE.grass)
-        if (y > h - 100) color = randomColor(PALETTE.shadows) // Deep shadows
-        
-        ctx.globalAlpha = random(0.6, 0.9)
-        drawStroke(x, y, length, angle, color, width)
-      }
-
-      // 4. Flowers (Scattered in grass) - Dabs
-      for (let i = 0; i < 300; i++) {
-        const x = random(0, w)
-        const baseY = hillFunction(x)
-        const y = random(baseY, h)
-        
-        const radius = random(2, 6)
-        const color = randomColor(PALETTE.flowers)
-        
-        ctx.globalAlpha = random(0.7, 1)
-        drawDab(x, y, radius, color)
-      }
-
-      // 5. "Woman with a Parasol" (Abstract Silhouette)
-      // Position her on the hill, slightly left
-      const figureX = w * 0.3
-      const figureY = hillFunction(figureX) - 20
-      
-      drawFigure(figureX, figureY)
-    }
-
-    const drawFigure = (x, y) => {
-      // Dress (White/Blue strokes)
-      for (let i = 0; i < 150; i++) {
-        const dx = random(-30, 40)
-        const dy = random(-100, 0)
-        const length = random(10, 30)
-        const angle = Math.PI / 2 + random(-0.3, 0.3) // Vertical downwards
-        const color = randomColor(PALETTE.dress)
-        
-        // Wind blowing dress to the right
-        const windX = dx + (dy * -0.2) 
-        
-        ctx.globalAlpha = random(0.5, 0.9)
-        drawStroke(x + windX, y + dy, length, angle, color, random(4, 10))
-      }
-
-      // Parasol (Green/Shadows)
-      const parasolY = y - 110
-      for (let i = 0; i < 100; i++) {
-        const px = random(-50, 50)
-        const py = random(-20, 10)
-        const color = randomColor(PALETTE.grass) // Green underside
-        
-        // Oval shape check
-        if ((px*px)/2500 + (py*py)/400 <= 1) {
-             drawDab(x + px, parasolY + py, random(4, 8), color)
-        }
-      }
-      // Parasol Top (Lighter)
-       for (let i = 0; i < 100; i++) {
-        const px = random(-50, 50)
-        const py = random(-30, 0)
-        const color = '#aed581' 
-         if ((px*px)/2500 + (py*py)/900 <= 1) {
-             drawDab(x + px, parasolY + py - 5, random(4, 8), color)
-        }
-      }
-    }
-
-    // Animation Loop (Wind effect)
-    let t = 0
-    const animate = () => {
-      t += 0.05
-      // Ideally we redraw only moving parts, but for "Impressionism", 
-      // static is okay. Let's add moving clouds/grass layers if performance allows.
-      // For now, static painting is better than "just gradient".
-      // We can add a "wind" overlay.
-      
-      // Wind particles (white lines)
-      if (Math.random() > 0.8) {
-         const x = random(0, w)
-         const y = random(0, h)
-         ctx.globalAlpha = 0.3
-         drawStroke(x, y, 50, 0.2, '#fff', 1)
-      }
-      
-      animationFrameId = requestAnimationFrame(animate)
-    }
-    
-    // Resize handler
-    window.addEventListener('resize', init)
-    
-    init()
-    animate()
-
-    return () => {
-      window.removeEventListener('resize', init)
-      cancelAnimationFrame(animationFrameId)
-    }
-  }, [])
+  useFrame((state) => {
+    const { clock } = state
+    mesh.current.material.uniforms.uTime.value = clock.getElapsedTime()
+  })
 
   return (
+    <mesh ref={mesh} scale={[20, 10, 1]} position={[0, 0, -5]}>
+      <planeGeometry args={[1, 1, 32, 32]} />
+      <shaderMaterial
+        attach="material"
+        args={[MonetShader]}
+        uniforms={uniforms}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  )
+}
+
+// Particle System: Floating "Pollen" / "Petals"
+const Particles = () => {
+  const count = 300
+  const mesh = useRef()
+  
+  const dummy = useMemo(() => new THREE.Object3D(), [])
+  const particles = useMemo(() => {
+    const temp = []
+    for (let i = 0; i < count; i++) {
+      const t = Math.random() * 100
+      const factor = 20 + Math.random() * 100
+      const speed = 0.01 + Math.random() / 200
+      const xFactor = -50 + Math.random() * 100
+      const yFactor = -50 + Math.random() * 100
+      const zFactor = -50 + Math.random() * 100
+      temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 })
+    }
+    return temp
+  }, [count])
+
+  useFrame((state) => {
+    particles.forEach((particle, i) => {
+      let { t, factor, speed, xFactor, yFactor, zFactor } = particle
+      t = particle.t += speed / 2
+      const a = Math.cos(t) + Math.sin(t * 1) / 10
+      const b = Math.sin(t) + Math.cos(t * 2) / 10
+      const s = Math.cos(t)
+      
+      // Update position
+      dummy.position.set(
+        (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
+        (particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
+        (particle.my / 10) * b + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
+      )
+      dummy.scale.set(s, s, s)
+      dummy.rotation.set(s * 5, s * 5, s * 5)
+      dummy.updateMatrix()
+      
+      mesh.current.setMatrixAt(i, dummy.matrix)
+    })
+    mesh.current.instanceMatrix.needsUpdate = true
+  })
+
+  return (
+    <instancedMesh ref={mesh} args={[null, null, count]}>
+      <dodecahedronGeometry args={[0.08, 0]} /> {/* Small geometric shapes as pollen */}
+      <meshPhongMaterial color="#FFD54F" emissive="#FFD54F" emissiveIntensity={0.5} />
+    </instancedMesh>
+  )
+}
+
+// Main Scene Component
+export default function MonetScene() {
+  return (
     <div className="monet-scene">
-      <canvas ref={canvasRef} className="monet-canvas" />
-      <div className="monet-texture-overlay" />
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+        {/* Environment Lighting */}
+        <ambientLight intensity={0.8} />
+        <pointLight position={[10, 10, 10]} intensity={1.5} color="#FFD54F" />
+        
+        {/* Background Shader (The Painting) */}
+        <Background />
+
+        {/* 3D Elements */}
+        <Particles />
+        
+        {/* 3D Clouds for depth */}
+        <Cloud opacity={0.5} speed={0.4} width={10} depth={1.5} segments={20} position={[0, 2, -3]} color="#ffffff" />
+        <Cloud opacity={0.3} speed={0.2} width={10} depth={1.5} segments={20} position={[4, 1, -4]} color="#eef2fb" />
+
+        {/* Fog for atmospheric depth */}
+        <fog attach="fog" args={['#909fd4', 5, 20]} />
+      </Canvas>
     </div>
   )
 }
