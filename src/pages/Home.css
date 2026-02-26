@@ -22,7 +22,7 @@
 .h-hero-inner {
   position: absolute;
   z-index: 2;
-  bottom: 14vh;
+  bottom: 29vh;
   left: 0;
   right: 0;
   text-align: center;
@@ -56,6 +56,7 @@
 .hero-bio {
   font-family: var(--font-body);
   font-size: 0.95rem;
+  font-weight: 400;
   color: var(--ink);
   opacity: 0.6;
   max-width: 420px;
