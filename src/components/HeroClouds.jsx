@@ -74,7 +74,7 @@ function PaintFilter() {
 }
 
 /* Each cloud is an SVG with overlapping ellipses + painterly filter */
-function Cloud({ className, style, variant = 'a', filter = 'cloud-paint' }) {
+export function Cloud({ className, style, variant = 'a', filter = 'cloud-paint' }) {
   const shapes = {
     a: (
       <>
@@ -161,6 +161,9 @@ export default function HeroClouds() {
   const c18x = drift(3.0, -35);   const c18o = fade(2.5)
   const c19x = drift(1.4, 150);   const c19o = fade(1.1)
   const c20x = drift(1.7, 120);   const c20o = fade(1.3)
+  const c21x = drift(1.5, 115);   const c21o = fade(1.2)  // top-right fill
+  const c22x = drift(1.3, -95);   const c22o = fade(1.0)  // near 'Work' nav
+  const c23x = drift(1.8, 80);    const c23o = fade(1.4)  // top-right low
 
   return (
     <div className="hero-clouds" aria-hidden="true">
@@ -180,12 +183,28 @@ export default function HeroClouds() {
 
       <motion.div className="cloud-solo" style={{ x: c2x, opacity: c2o }}>
         <Cloud className="sz-lg" variant="a" filter="cloud-paint"
-               style={{ top: '-2%', left: '82%' }} />
+               style={{ top: '-2%', left: '80%' }} />
       </motion.div>
 
       <motion.div className="cloud-solo" style={{ x: c17x, opacity: c17o }}>
         <Cloud className="sz-xs" variant="b" filter="cloud-paint"
                style={{ top: '1%', left: '58%' }} />
+      </motion.div>
+
+      {/* Top-right fill — near 'Work' nav */}
+      <motion.div className="cloud-solo" style={{ x: c21x, opacity: c21o }}>
+        <Cloud className="sz-sm" variant="b" filter="cloud-paint"
+               style={{ top: '0%', left: '68%' }} />
+      </motion.div>
+
+      <motion.div className="cloud-solo" style={{ x: c22x, opacity: c22o }}>
+        <Cloud className="sz-sm" variant="c" filter="cloud-paint-soft"
+               style={{ top: '-1%', left: '85%' }} />
+      </motion.div>
+
+      <motion.div className="cloud-solo" style={{ x: c23x, opacity: c23o }}>
+        <Cloud className="sz-xs" variant="a" filter="cloud-paint-soft"
+               style={{ top: '10%', left: '76%' }} />
       </motion.div>
 
       {/* Row 2 — offset, no center */}
@@ -212,7 +231,7 @@ export default function HeroClouds() {
 
       <motion.div className="cloud-solo" style={{ x: c8x, opacity: c8o }}>
         <Cloud className="sz-sm" variant="d" filter="cloud-paint-soft"
-               style={{ top: '18%', left: '85%' }} />
+               style={{ top: '22%', left: '80%' }} />
       </motion.div>
 
       {/* Row 4 — wispy, far apart */}
@@ -259,7 +278,7 @@ export default function HeroClouds() {
 
       <motion.div className="cloud-solo" style={{ x: c18x, opacity: c18o }}>
         <Cloud className="sz-xs" variant="b" filter="cloud-paint-wispy"
-               style={{ top: '15%', left: '92%' }} />
+               style={{ top: '27%', left: '91%' }} />
       </motion.div>
 
       <motion.div className="cloud-solo" style={{ x: c6x, opacity: c6o }}>
@@ -270,12 +289,12 @@ export default function HeroClouds() {
       {/* Extra top-right clouds */}
       <motion.div className="cloud-solo" style={{ x: c19x, opacity: c19o }}>
         <Cloud className="sz-md" variant="b" filter="cloud-paint"
-               style={{ top: '-4%', left: '92%' }} />
+               style={{ top: '7%', left: '89%' }} />
       </motion.div>
 
       <motion.div className="cloud-solo" style={{ x: c20x, opacity: c20o }}>
         <Cloud className="sz-sm" variant="a" filter="cloud-paint"
-               style={{ top: '6%', left: '96%' }} />
+               style={{ top: '16%', left: '93%' }} />
       </motion.div>
 
     </div>

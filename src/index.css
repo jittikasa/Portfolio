@@ -18,32 +18,33 @@
 
 :root {
   /* ── Color Palette – Monet's Garden ── */
-  --canvas:       #F7F3EC;   /* warm primed canvas */
+  --canvas:       #E8E2D4;   /* sand — matched to beach painting */
   --cream:        #F2EDE3;   /* aged cream */
   --parchment:    #E8E0CF;   /* aged parchment */
 
-  /* Sage — primary accent (garden / lily pads) */
-  --sage:         #6B7C5A;
-  --sage-deep:    #3E5234;
-  --sage-hover:   #5A6A4A;
-  --sage-mist:    #A8B89A;
-  --sage-pale:    #E4EBDF;
+  /* Brand olive family — all derived from #69663D */
+  --brand:        #69663D;   /* primary brand — olive */
+  --sage:         #7A7850;   /* brand lightened */
+  --sage-deep:    #4E4C2A;   /* brand darkened */
+  --sage-hover:   #69663D;   /* hover = brand itself */
+  --sage-mist:    #B0AE8A;   /* brand pale-mid */
+  --sage-pale:    #E0DFCE;   /* brand very pale */
 
-  /* Water — Giverny pond */
+  /* Water — Giverny pond (independent from brand) */
   --water:        #8BAABF;
   --water-deep:   #5B7A96;
   --water-mist:   #C5D8E8;
 
   /* Bloom — warm botanicals */
   --petal:        #C9A8A8;   /* dusty rose */
-  --bloom:        #B89870;   /* golden ochre */
-  --bloom-pale:   #EDE4D5;
+  --bloom:        #8A8760;   /* medium olive accent */
+  --bloom-pale:   #E0DFCE;   /* same as sage-pale */
 
   /* Ink & neutrals */
-  --ink:          #2A1F14;   /* dark brown-black */
-  --ink-muted:    #7A6E62;
-  --border:       rgba(42, 31, 20, 0.1);
-  --border-strong: rgba(42, 31, 20, 0.22);
+  --ink:          #37351E;   /* deep olive-black — brand darkest */
+  --ink-muted:    #6B6940;   /* muted olive */
+  --border:       rgba(55, 53, 30, 0.1);
+  --border-strong: rgba(55, 53, 30, 0.22);
 
   /* Legacy alias (keeps components working) */
   --charcoal:     var(--ink);
@@ -55,6 +56,7 @@
   /* ── Typography ── */
   --font-display: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
   --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:    'Poppins', sans-serif;
   --font-mono:    'IBM Plex Mono', 'SF Mono', Consolas, monospace;
   --font-hand:    'La Belle Aurore', cursive;
 
@@ -101,7 +103,17 @@ h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -0.02em; }
 h2 { font-size: clamp(1.75rem, 5vw, 2.5rem); letter-spacing: -0.01em; }
 h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
 
-p { max-width: 65ch; }
+p {
+  max-width: 65ch;
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+h1.decorative {
+  font-family: 'Shorelines Script', cursive;
+}
 
 a { color: inherit; text-decoration: none; }
 

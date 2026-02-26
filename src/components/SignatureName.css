@@ -6,18 +6,12 @@
 
 /* logo variant — in the header */
 .sig-logo {
-  height: 48px;
-  width: auto;
-}
-
-/* hero variant — large, on the page */
-.sig-hero {
-  height: clamp(5rem, 13vw, 10rem);
+  height: 34px;
   width: auto;
 }
 
 /* footer variant — medium, inside postcard */
 .sig-footer {
-  height: clamp(3rem, 5vw, 4rem);
+  height: 34px;
   width: auto;
 }

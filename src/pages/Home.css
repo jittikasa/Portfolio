@@ -5,7 +5,6 @@
 .home-canvas {
   width: 100%;
   overflow-x: hidden;
-  background: var(--canvas);
 }
 
 /* ── 1. HERO ── */
@@ -45,7 +44,7 @@
 
 .hero-tagline {
   font-family: 'Shorelines Script', cursive;
-  font-size: 2.6rem;
+  font-size: 2rem;
   letter-spacing: 0.04em;
   text-transform: none;
   color: var(--ink);
@@ -104,20 +103,35 @@
   justify-content: center;
   position: relative;
   z-index: 1;
-  background: var(--canvas);
+  background: transparent;
 }
 
-/* Soft fade from hero/beach into services */
 .h-services::before {
   content: '';
   position: absolute;
-  top: -12vh;
-  left: 0;
-  right: 0;
-  height: 12vh;
-  background: linear-gradient(to bottom, transparent, var(--canvas));
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, var(--canvas) 22vh);
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
+}
+
+.services-clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+  /* Sky-pocket gradients — cream clouds need a blue-grey base to be visible */
+  background:
+    radial-gradient(ellipse 62% 58% at 3% 42%,  rgba(139, 170, 191, 0.38) 0%, transparent 65%),
+    radial-gradient(ellipse 52% 44% at 80% 30%, rgba(139, 170, 191, 0.32) 0%, transparent 58%),
+    radial-gradient(ellipse 40% 32% at 58% 72%, rgba(139, 170, 191, 0.22) 0%, transparent 52%),
+    radial-gradient(ellipse 35% 30% at 98% 22%, rgba(139, 170, 191, 0.28) 0%, transparent 55%);
+}
+
+.services-layers {
+  position: relative;
+  z-index: 1;
 }
 
 .section-title-center {
@@ -142,8 +156,17 @@
   padding: 1.5rem 4rem;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 420px;
+}
+
+.stroke-header {
+  display: flex;
   align-items: center;
   gap: 1.5rem;
+  width: 100%;
 }
 
 .stroke-title {
@@ -153,12 +176,41 @@
   position: relative;
   z-index: 2;
   transition: color 0.3s;
+  flex: 1;
 }
 
 .stroke-icon {
   font-size: 1.2rem;
   color: var(--bloom);
   opacity: 0.5;
+}
+
+.stroke-toggle {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+  opacity: 0.5;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s;
+}
+
+.service-stroke.active .stroke-toggle {
+  opacity: 1;
+  color: var(--brand);
+}
+
+.stroke-description {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+  opacity: 0.6;
+  line-height: 1.7;
+  max-width: 480px;
+  padding: 0.75rem 0 0.5rem 2.7rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
 .stroke-wash {
@@ -188,7 +240,6 @@
   padding: 10vh 4rem;
   position: relative;
   z-index: 1;
-  background: var(--canvas);
 }
 
 .work-canvas {

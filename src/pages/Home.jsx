@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { projects } from '../data/projects'
 import ProjectModal from '../components/ProjectModal'
 import HeroScene from '../components/HeroScene'
 import SignatureName from '../components/SignatureName'
+import { Cloud } from '../components/HeroClouds'
 import './Home.css'
 
 const fade = {
@@ -27,9 +28,21 @@ export default function Home() {
   const [activeService, setActiveService] = useState(0)
 
   const services = [
-    { title: "Product Design", icon: "◈" },
-    { title: "Brand Identity", icon: "✧" },
-    { title: "Web Development", icon: "◌" }
+    {
+      title: "Product Design",
+      icon: "◈",
+      description: "From iOS apps to digital platforms — I design experiences that are easy to use and hard to forget. Strategy, UX, and UI as one continuous thought."
+    },
+    {
+      title: "Brand Identity",
+      icon: "✧",
+      description: "Visual systems that give brands a distinct voice. Logo, typography, colour, and every touchpoint that carries meaning — built to last."
+    },
+    {
+      title: "Web Development",
+      icon: "◌",
+      description: "Hand-built in React. Fast, accessible, and faithful to the design — because a great idea deserves to be executed properly."
+    }
   ]
 
   return (
@@ -51,27 +64,29 @@ export default function Home() {
 
             <motion.p
               className="hero-bio"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 0.6, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 5.2 }}
             >
-              Designer and maker based in Phuket, Thailand. I build website, iOS apps, craft brand identities, and design digital experiences — with an eye for detail and a soft spot for things that feel considered.
+              I build websites, iOS apps, brand identities — and anything that deserves to feel considered.
             </motion.p>
 
-            <motion.div
-              className="hero-cta"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-            >
-              <a href="#projects" className="monet-btn">See My Work</a>
-            </motion.div>
           </div>
         </div>
       </section>
 
 {/* ── 3. BRUSHSTROKE SERVICES ── */}
       <section className="h-services" id="work">
+        {/* Ambient clouds floating in/around the section */}
+        <div className="services-clouds" aria-hidden="true">
+          <Cloud className="sz-md" variant="c" filter="cloud-paint-soft"  style={{ top: '-4%',  left: '-8%'  }} />
+          <Cloud className="sz-sm" variant="a" filter="cloud-paint-wispy" style={{ top: '5%',   left: '72%'  }} />
+          <Cloud className="sz-xs" variant="b" filter="cloud-paint-wispy" style={{ top: '30%',  left: '-2%'  }} />
+          <Cloud className="sz-sm" variant="d" filter="cloud-paint-soft"  style={{ top: '55%',  left: '80%'  }} />
+          <Cloud className="sz-xs" variant="c" filter="cloud-paint-wispy" style={{ top: '70%',  left: '10%'  }} />
+          <Cloud className="sz-xs" variant="a" filter="cloud-paint-wispy" style={{ top: '85%',  left: '60%'  }} />
+          <Cloud className="sz-xs" variant="d" filter="cloud-paint"      style={{ top: '-2%',  left: '88%'  }} />
+        </div>
         <div className="services-layers">
           <motion.h2 
             className="section-title-center"
@@ -87,13 +102,29 @@ export default function Home() {
               <motion.div
                 key={i}
                 className={`service-stroke ${activeService === i ? 'active' : ''}`}
-                onMouseEnter={() => setActiveService(i)}
+                onClick={() => setActiveService(activeService === i ? null : i)}
                 initial="hidden"
                 whileInView="show"
                 variants={fade}
               >
-                <span className="stroke-icon">{s.icon}</span>
-                <span className="stroke-title">{s.title}</span>
+                <div className="stroke-header">
+                  <span className="stroke-icon">{s.icon}</span>
+                  <span className="stroke-title">{s.title}</span>
+                  <span className="stroke-toggle">{activeService === i ? '−' : '+'}</span>
+                </div>
+                <AnimatePresence>
+                  {activeService === i && (
+                    <motion.p
+                      className="stroke-description"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {s.description}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
                 <div className="stroke-wash"></div>
               </motion.div>
             ))}
@@ -101,8 +132,8 @@ export default function Home() {
         </div>
       </section>
 
-{/* ── 5. FLOATING PORTFOLIO ── */}
-      <section className="h-work" id="projects">
+{/* ── 5. FLOATING PORTFOLIO ── hidden until more projects ready */}
+      <section className="h-work" id="projects" style={{ display: 'none' }}>
         <div className="work-canvas">
           <motion.h2 variants={mist} initial="hidden" whileInView="show" className="work-title">Selected Works</motion.h2>
           
