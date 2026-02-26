@@ -68,7 +68,7 @@ export default function Home() {
               animate={{ opacity: 0.6, y: 0 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 5.2 }}
             >
-              I build websites, iOS apps, brand identities — and anything that deserves to feel considered.
+              Most design solves the brief. The kind I care about also shapes how people feel inside it. Websites, iOS apps, brand identities — made to hold up to the people who'll actually live there.
             </motion.p>
 
           </div>
