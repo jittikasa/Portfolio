@@ -4,12 +4,11 @@
 
 .home-canvas {
   width: 100%;
-  overflow-x: hidden;
 }
 
 /* ── 1. HERO ── */
 .h-hero {
-  height: 450vh; /* 300vh zoom + ~70vh freeze + 80vh fade */
+  height: 380vh;
 }
 
 /* Sticky viewport — pins hero text while fixed scene plays */
@@ -17,18 +16,20 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow: visible;
 }
 
 .h-hero-inner {
   position: absolute;
   z-index: 2;
-  bottom: 29vh;
+  top: 36vh;
   left: 0;
   right: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.2rem;
 }
 
 .hero-signature {
@@ -40,6 +41,26 @@
 .hero-signature .sig-svg {
   width: 100%;
   height: auto;
+}
+
+
+.hero-status {
+  position: absolute;
+  bottom: 2.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  opacity: 0.45;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.status-dot {
+  color: var(--brand);
+  opacity: 0.8;
 }
 
 .hero-tagline {
@@ -97,9 +118,10 @@
   transform: scale(1.1);
 }
 
+
 /* ── 3. BRUSHSTROKE SERVICES ── */
 .h-services {
-  padding: 10vh 0;
+  padding: 20vh 0 10vh;
   display: flex;
   justify-content: center;
   position: relative;

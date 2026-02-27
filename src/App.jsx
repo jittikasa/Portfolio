@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import GrainOverlay from './components/GrainOverlay'
 import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
+import BackToTop from './components/BackToTop'
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         </main>
         
         <Footer />
+        <BackToTop />
       </div>
     </BrowserRouter>
   )

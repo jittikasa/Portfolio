@@ -31,17 +31,17 @@ export default function Home() {
     {
       title: "Product Design",
       icon: "◈",
-      description: "From iOS apps to digital platforms — I design experiences that are easy to use and hard to forget. Strategy, UX, and UI as one continuous thought."
+      description: "UX, UI, and strategy for digital products. Turning messy problems into interfaces that feel obvious — from early concepts to polished screens ready to build."
     },
     {
-      title: "Brand Identity",
-      icon: "✧",
-      description: "Visual systems that give brands a distinct voice. Logo, typography, colour, and every touchpoint that carries meaning — built to last."
+      title: "App Development",
+      icon: "◎",
+      description: "iOS apps designed and built end to end. Native, considered, and faithful to how people actually use their phones."
     },
     {
       title: "Web Development",
       icon: "◌",
-      description: "Hand-built in React. Fast, accessible, and faithful to the design — because a great idea deserves to be executed properly."
+      description: "Hand-built in React or WordPress — custom themes, plugins, and everything in between. Fast, accessible, and faithful to the design."
     }
   ]
 
@@ -52,6 +52,15 @@ export default function Home() {
       <section className="h-hero">
         <div className="h-hero-sticky">
           <HeroScene />
+          <motion.div
+            className="hero-status"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 4.0 }}
+          >
+            Phuket, TH&nbsp;&nbsp;|&nbsp;&nbsp;<span className="status-dot">●</span> Open to projects
+          </motion.div>
+
           <div className="h-hero-inner">
             <motion.p
               className="hero-tagline"
@@ -64,14 +73,14 @@ export default function Home() {
 
             <motion.p
               className="hero-bio"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 0.6, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 5.2 }}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 0.55, y: 0 }}
+              transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1], delay: 4.8 }}
             >
-              Most design solves the brief. The kind I care about also shapes how people feel inside it. Websites, iOS apps, brand identities — made to hold up to the people who'll actually live there.
+              Not a studio. Just someone who can't stop making things — websites, apps, brand work, and paintings on free afternoons. This is where I keep some of them. Full-time in digital marketing, making things and designing on the side.
             </motion.p>
-
           </div>
+
         </div>
       </section>
 

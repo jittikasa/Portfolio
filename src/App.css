@@ -7,3 +7,25 @@
 main {
   flex: 1;
 }
+
+.back-to-top {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 100;
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.3s;
+  padding: 0;
+  writing-mode: vertical-rl;
+}
+
+.back-to-top:hover {
+  opacity: 0.9;
+}
