@@ -53,14 +53,14 @@
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   color: var(--ink);
-  opacity: 0.45;
+  opacity: 1;
   white-space: nowrap;
   z-index: 2;
 }
 
 .status-dot {
   color: var(--brand);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .hero-tagline {
@@ -69,7 +69,7 @@
   letter-spacing: 0.04em;
   text-transform: none;
   color: var(--ink);
-  opacity: 0.7;
+  opacity: 1;
   margin-bottom: 1.5rem;
   max-width: none;
 }
@@ -78,8 +78,8 @@
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 400;
-  color: var(--ink);
-  opacity: 0.6;
+  color: var(--charcoal);
+  opacity: 1;
   max-width: 420px;
   line-height: 1.7;
   text-align: center;
@@ -121,7 +121,7 @@
 
 /* ── 3. BRUSHSTROKE SERVICES ── */
 .h-services {
-  padding: 20vh 0 10vh;
+  padding: 20vh 0 200px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -212,7 +212,7 @@
   font-family: var(--font-mono);
   font-size: 1.2rem;
   color: var(--ink-muted);
-  opacity: 0.5;
+  opacity: 1;
   position: relative;
   z-index: 2;
   transition: opacity 0.3s;
@@ -227,7 +227,7 @@
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--ink);
-  opacity: 0.6;
+  opacity: 1;
   line-height: 1.7;
   max-width: 480px;
   padding: 0.75rem 0 0.5rem 2.7rem;
@@ -329,6 +329,7 @@
 .tile-type {
   font-size: 0.7rem;
   color: var(--ink-muted);
+  opacity: 1;
 }
 
 /* ── RESPONSIVE ── */

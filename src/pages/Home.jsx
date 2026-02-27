@@ -56,7 +56,7 @@ export default function Home() {
             className="hero-status"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 4.0 }}
+            transition={{ duration: 1.2, delay: 1.0 }}
           >
             Phuket, TH&nbsp;&nbsp;|&nbsp;&nbsp;<span className="status-dot">●</span> Open to projects
           </motion.div>
@@ -65,20 +65,45 @@ export default function Home() {
             <motion.p
               className="hero-tagline"
               initial={{ clipPath: 'inset(-20% 100% -20% -5%)', opacity: 0 }}
-              animate={{ clipPath: 'inset(-20% -5% -20% -5%)', opacity: 0.7 }}
-              transition={{ duration: 2.0, delay: 3.2, ease: [0.4, 0, 0.2, 1] }}
+              animate={{ clipPath: 'inset(-20% -5% -20% -5%)', opacity: 1 }}
+              transition={{ duration: 2.0, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
             >
               Designer &amp; maker
             </motion.p>
 
-            <motion.p
+            <motion.div
               className="hero-bio"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 0.55, y: 0 }}
-              transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1], delay: 4.8 }}
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.4,
+                    delayChildren: 0.8
+                  }
+                }
+              }}
             >
-              Not a studio. Just someone who can't stop making things — websites, apps, brand work, and paintings on free afternoons. This is where I keep some of them. Full-time in digital marketing, making things and designing on the side.
-            </motion.p>
+              {[
+                "Hi I'm Jittika. Just someone who can't stop making things —",
+                "websites, apps, brand work, and paintings on free afternoons.",
+                "This is where I keep some of them. Full-time in digital",
+                "marketing, making things and designing on the side."
+              ].map((line, idx) => (
+                <motion.span
+                  key={idx}
+                  style={{ display: 'block' }}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: { opacity: 1, transition: { duration: 2.0, ease: "easeOut" } }
+                  }}
+                >
+                  {line}
+                </motion.span>
+              ))}
+            </motion.div>
           </div>
 
         </div>

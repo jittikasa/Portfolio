@@ -1,12 +1,12 @@
 .sig-svg {
   display: block;
-  color: #2F2F2F;
+  color: currentColor;
   overflow: visible;
 }
 
 /* logo variant — in the header */
 .sig-logo {
-  height: 34px;
+  height: 36px;
   width: auto;
 }
 

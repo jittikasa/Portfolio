@@ -100,7 +100,6 @@ export function Cloud({ className, style, variant = 'a', filter = 'cloud-paint' 
         <ellipse cx="90"  cy="70" rx="65" ry="38" fill="rgba(248,243,236,0.6)" />
         <ellipse cx="45"  cy="78" rx="40" ry="28" fill="rgba(232,225,218,0.5)" />
         <ellipse cx="140" cy="75" rx="48" ry="30" fill="rgba(240,235,226,0.55)" />
-        <ellipse cx="95"  cy="60" rx="35" ry="22" fill="rgba(218,212,222,0.3)" />
       </>
     ),
     d: (
