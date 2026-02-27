@@ -58,6 +58,16 @@ export default function Header() {
 
   const ElasticLink = ({ label, id }) => {
     const letters = label.split('')
+    const isContactPage = id === 'contact'
+    if (isContactPage) {
+      return (
+        <Link to="/contact" className="nav-link-elastic" style={{ '--total': letters.length }}>
+          {letters.map((char, i) => (
+            <span key={i} style={{ '--index': i + 1 }}>{char}</span>
+          ))}
+        </Link>
+      )
+    }
     return (
       <a href={`#${id}`} onClick={(e) => handleNavClick(e, id)} className="nav-link-elastic" style={{ '--total': letters.length }}>
         {letters.map((char, i) => (
