@@ -148,16 +148,15 @@
   pointer-events: none;
   opacity: 0.6;
 }
-
 .pc-stamp {
-  width: 98px;
+  width: 162px;
   height: auto;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  filter: drop-shadow(2px 3px 6px rgba(0,0,0,0.12));
+  filter: drop-shadow(4px 6px 12px rgba(55, 53, 30, 0.15));
   transform: rotate(3deg);
   z-index: 2;
 }
@@ -167,6 +166,7 @@
   height: auto;
   display: block;
 }
+
 /* Address Lines */
 .pc-address-lines {
   display: flex;
@@ -174,9 +174,9 @@
   margin-top: auto;
 }
 
-.pc-address-line, .pc-to-line {
-  height: 2.4rem;
-  border-bottom: 1px solid rgba(55, 53, 30, 0.05);
+.pc-address-line {
+  height: 2.8rem;
+  border-bottom: 1px solid rgba(55, 53, 30, 0.12);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -184,10 +184,11 @@
 
 .pc-to {
   font-family: 'Caveat', cursive;
-  font-size: 1.4rem;
-  color: var(--ink-muted);
+  font-size: 1.6rem;
+  color: var(--ink);
+  opacity: 1;
+  min-width: 2.5rem;
 }
-
 .pc-link-item {
   display: flex;
   align-items: center;
