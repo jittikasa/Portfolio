@@ -99,16 +99,16 @@
 
 .pc-text {
   font-family: 'Caveat', cursive;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   line-height: 2.4rem;
-  color: var(--ink);
+  color: rgba(55, 53, 30, 0.8);
   opacity: 1;
   position: relative;
   z-index: 1;
   text-transform: none;
   font-weight: 500;
   transform: rotate(-1.2deg);
-  margin-top: -0.4rem;
+  margin-top: -0.5rem;
 }
 
 .pc-sig {
