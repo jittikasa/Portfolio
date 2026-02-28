@@ -19,6 +19,7 @@ export default function Footer() {
       <div className="footer-ragged-edge" aria-hidden="true" />
 
       <div className="pc-wrap">
+
         {/* Floating postcard with subtle tilt */}
         <motion.div 
           className="pc-card"
@@ -30,8 +31,7 @@ export default function Footer() {
           }}
           style={{ transformStyle: "preserve-3d" }}
         >
-          <div className="pc-texture" aria-hidden="true"></div>
-          
+
           <div className="pc-topbar">
             <span className="pc-label">POST CARD</span>
             <span className="pc-airmail">✈ AIR MAIL</span>
@@ -56,25 +56,13 @@ export default function Footer() {
             {/* Right — address side */}
             <div className="pc-address">
               <div className="pc-stamp-area">
-                <div className="pc-postmark" aria-hidden="true">
-                  <svg width="120" height="120" viewBox="0 0 120 120">
-                    <circle cx="60" cy="60" r="58" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                    <circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" strokeWidth="1" />
-                    <text x="50%" y="35%" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="currentColor">PHUKET</text>
-                    <text x="50%" y="55%" textAnchor="middle" fontSize="10" fontFamily="monospace" fontWeight="bold" fill="currentColor">28.02.26</text>
-                    <text x="50%" y="75%" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="currentColor">THAILAND</text>
-                  </svg>
-                </div>
-
+                <svg className="cancellation-lines" width="100" height="40" viewBox="0 0 100 40" fill="none" stroke="currentColor">
+                  <path d="M0 5C20 5 30 15 50 15C70 15 80 5 100 5" strokeWidth="0.5" opacity="0.3"/>
+                  <path d="M0 15C20 15 30 25 50 25C70 25 80 15 100 15" strokeWidth="0.5" opacity="0.3"/>
+                  <path d="M0 25C20 25 30 35 50 35C70 35 80 25 100 25" strokeWidth="0.5" opacity="0.3"/>
+                </svg>
                 <div className="pc-stamp" aria-hidden="true">
-                  <div className="pc-stamp-inner">
-                    <div className="pc-stamp-img">
-                      <img src="/beach.jpg" alt="Stamp" />
-                    </div>
-                    <div className="pc-stamp-value">40</div>
-                    <div className="pc-stamp-country">THAILAND</div>
-                  </div>
-                  <div className="pc-stamp-edge"></div>
+                  <span>JS</span>
                 </div>
               </div>
               
@@ -82,6 +70,7 @@ export default function Footer() {
                 <div className="pc-to-line">
                   <span className="pc-to">To: </span>
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     <button 
                       className={`pc-copy-btn ${copied ? 'copied' : ''}`}
                       onClick={copyEmail}
@@ -93,11 +82,13 @@ export default function Footer() {
                 </div>
                 <div className="pc-address-line">
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     <a href="https://linkedin.com/in/jittikas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
                 </div>
                 <div className="pc-address-line">
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <Link to="/support">App Support</Link>
                   </div>
                 </div>
