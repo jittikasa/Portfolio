@@ -42,8 +42,7 @@ export default function Footer() {
             {/* Left — message + ruled lines */}
             <div className="pc-message">
               <p className="pc-text typewriter">
-                Available for projects,<br />
-                collaborations &<br />
+                Available for projects, collaborations &<br />
                 good conversations.
               </p>
               <div className="pc-sig">
