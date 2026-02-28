@@ -7,7 +7,7 @@ export default function HeroScene() {
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800
 
   // Zoom completes at 250vh — spring makes it feel organic, not mechanical
-  const rawScale     = useTransform(scrollY, [0, vh * 2.5], [2, 1])
+  const rawScale     = useTransform(scrollY, [0, vh * 2.5], [1.7, 1])
   const scale        = useSpring(rawScale, { stiffness: 60, damping: 20 })
 
   // Freeze: 250–240vh, then fade out 240–280vh (50vh empty gap before atelier)
