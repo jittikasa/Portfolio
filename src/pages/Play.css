@@ -1,5 +1,5 @@
 /* ============================================
-   PLAY PAGE — Moleskine Binder
+   PLAY PAGE — Open Notebook
    ============================================ */
 
 .play-canvas {
@@ -10,23 +10,11 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
-  padding: 5.5rem 2.5rem 1.5rem 2rem;
-}
-
-.play-bg-text {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 2rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: var(--ink-muted);
-  opacity: 0.35;
+  padding: 5.5rem 2.5rem 3.5rem 2rem;
 }
 
 /* ──────────────────────────────────────────
    Binder Shell
-   container: overflow visible — tabs protrude
-   pages:     overflow hidden  — clips pages
    ────────────────────────────────────────── */
 .binder-container {
   width: 100%;
@@ -39,129 +27,113 @@
 .binder-pages {
   width: 100%;
   height: 100%;
-  background: #F8F5EF;
-  border-radius: 5px;
-  border: 1px solid rgba(55, 53, 30, 0.28);
-  overflow: hidden;
   position: relative;
-  box-shadow:
-    0 2px 0 rgba(55,53,30,0.06),
-    0 8px 20px rgba(55, 53, 30, 0.10),
-    0 28px 60px rgba(55, 53, 30, 0.16),
-    0 1px 3px rgba(55, 53, 30, 0.12);
 }
 
 .binder-frame {
   display: flex;
   height: 100%;
   position: relative;
+  border-radius: 3px;
+  box-shadow:
+    /* Page stack — slight side spread, heavier on bottom */
+    0 1px 0 0 #f0ece4,
+    0 2px 0 0.5px #ede9e1,
+    0 3px 0 1px #eae6de,
+    0 4px 0 1.5px #e6e2da,
+    0 5px 0 2px #e1ddd5,
+    /* Bottom page edge band — the visible book thickness */
+    0 6px 0 2px #ddd9d1,
+    /* Ambient book shadow */
+    0 2px 4px rgba(0,0,0,0.05),
+    0 10px 24px rgba(0,0,0,0.08),
+    0 28px 56px rgba(0,0,0,0.06);
 }
 
 /* ──────────────────────────────────────────
-   Page Base
+   Pages
    ────────────────────────────────────────── */
 .binder-page {
+  flex: 1;
   height: 100%;
-  padding: 3.5rem 3.5rem;
+  padding: 3.5rem;
   position: relative;
   overflow: hidden;
-  background-color: #F8F5EF;
-  /* Subtle perspective for page-turn animation */
-  perspective: 1200px;
 }
 
-.binder-page--left  { flex: 0 0 44%; }
-.binder-page--right { flex: 1; }
-
-/* ──────────────────────────────────────────
-   Left Page — ruled notebook paper
-   ────────────────────────────────────────── */
+/* Left page — ruled paper, scrollable */
 .binder-page--left {
-  background-color: #F9F8F3;
+  background-color: #F9F8F4;
   background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 18%),
-    linear-gradient(rgba(155, 140, 100, 0.08) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 30px;
-  padding-left: 6rem;
-  /* Binding shadow — page curves toward spine */
-  box-shadow: inset -22px 0 32px rgba(55, 53, 30, 0.07);
+    linear-gradient(rgba(155, 140, 100, 0.06) 1px, transparent 1px);
+  background-size: 100% 30px;
+  padding-left: 3.5rem;
+  border-radius: 3px 0 0 3px;
+  border: 1px solid rgba(55, 53, 30, 0.13);
+  border-right: none;
+  box-shadow: inset -10px 0 20px -10px rgba(0,0,0,0.12);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
-/* Red margin line */
-.binder-page--left::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 4.8rem;
-  width: 1px;
-  background: rgba(185, 70, 55, 0.13);
-  pointer-events: none;
+.binder-page--left::-webkit-scrollbar {
+  display: none;
 }
 
-/* ──────────────────────────────────────────
-   Right Page — dot grid paper
-   ────────────────────────────────────────── */
+
+/* Right page — dot grid */
 .binder-page--right {
-  background-color: #F8F6F0;
+  background-color: #F9F8F4;
   background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 16%),
-    linear-gradient(180deg, transparent 82%, rgba(120,110,75,0.02) 100%),
-    radial-gradient(circle, rgba(120, 110, 75, 0.22) 0.9px, transparent 0.9px);
-  background-size: 100% 100%, 100% 100%, 22px 22px;
+    linear-gradient(rgba(155, 140, 100, 0.06) 1px, transparent 1px);
+  background-size: 100% 30px;
   padding: 0;
   position: relative;
   overflow: hidden;
-  /* Binding shadow — page curves toward spine */
-  box-shadow: inset 28px 0 40px rgba(55, 53, 30, 0.09);
+  border-radius: 0 3px 3px 0;
+  border: 1px solid rgba(55, 53, 30, 0.13);
+  border-left: none;
+  /* Gutter shadow — page curves toward the fold */
+  box-shadow: inset 10px 0 20px -10px rgba(0,0,0,0.12);
 }
 
-/* Soft project-colour bloom */
-.binder-page--right::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 78% 68% at 55% 52%,
-    var(--project-color, transparent) 0%,
-    transparent 70%
-  );
-  opacity: 0.18;
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* ──────────────────────────────────────────
-   Hole Punches — enhanced rim depth
+   Center Gutter — the V-fold
+   4 layers: inset shadows (on pages above) +
+   gradient overlay + center crease + light catch
    ────────────────────────────────────────── */
-.binder-holes {
+.binder-gutter {
   position: absolute;
   top: 0;
-  left: 1.5rem;
   bottom: 0;
-  width: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 2rem 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  z-index: 20;
   pointer-events: none;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(0,0,0,0.04) 25%,
+    rgba(0,0,0,0.09) 48%,
+    rgba(0,0,0,0.09) 52%,
+    rgba(0,0,0,0.04) 75%,
+    transparent 100%
+  );
 }
 
-.hole {
-  width: 16px;
-  height: 16px;
-  background: var(--canvas);
-  border-radius: 50%;
-  box-shadow:
-    /* Inner rim — all four directions for depth */
-    inset 0 2px 4px rgba(0,0,0,0.24),
-    inset 0 -1.5px 3px rgba(0,0,0,0.16),
-    inset 2px 0 3px rgba(0,0,0,0.14),
-    inset -2px 0 2px rgba(0,0,0,0.09),
-    /* Outer edge ring + tiny drop */
-    0 0 0 1px rgba(55, 53, 30, 0.13),
-    0 1px 2px rgba(0,0,0,0.09);
+/* Center crease line */
+.binder-gutter::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.12);
 }
+
 
 /* ──────────────────────────────────────────
    Left Page Content
@@ -171,6 +143,8 @@
   flex-direction: column;
   height: 100%;
   padding-bottom: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .binder-header {
@@ -230,57 +204,111 @@
   border: 1px solid rgba(55, 53, 30, 0.1);
 }
 
-.binder-links {
+/* ──────────────────────────────────────────
+   Content Sections (Features, Details)
+   ────────────────────────────────────────── */
+.binder-section {
+  margin-bottom: 1.8rem;
+}
+
+.binder-section-title {
+  font-size: 0.58rem;
+  color: var(--ink-muted);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(55, 53, 30, 0.06);
+}
+
+.binder-features {
+  list-style: none;
+  padding: 0;
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.binder-link {
-  font-size: 0.72rem;
-  color: var(--sage-deep);
-  font-weight: 400;
-  border-bottom: 1px solid var(--sage-mist);
-  padding-bottom: 2px;
-  transition: border-color 0.2s ease;
+.binder-features li {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink);
+  opacity: 0.8;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
 }
 
-.binder-link:hover {
-  border-color: var(--sage-deep);
+.binder-features li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--sage);
+  font-weight: 700;
+}
+
+.binder-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.binder-detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.binder-detail-label {
+  font-size: 0.55rem;
+  color: var(--ink-muted);
+  opacity: 0.55;
+  text-transform: capitalize;
+  flex-shrink: 0;
+  min-width: 4.5rem;
+}
+
+.binder-detail-value {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--ink);
+  opacity: 0.75;
 }
 
 /* ──────────────────────────────────────────
-   Spine
+   App Store Button
    ────────────────────────────────────────── */
-.binder-spine {
-  width: 14px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 5;
-  background: linear-gradient(90deg,
-    rgba(55,53,30,0.16) 0%,
-    rgba(235,231,220,0.96) 28%,
-    rgba(242,239,230,1) 42%,
-    rgba(242,239,230,1) 58%,
-    rgba(235,231,220,0.96) 72%,
-    rgba(55,53,30,0.16) 100%
-  );
-  box-shadow:
-    inset 2px 0 8px rgba(55,53,30,0.10),
-    inset -2px 0 8px rgba(55,53,30,0.10);
+.binder-app-store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--ink);
+  color: #F9F8F4;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.binder-spine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: rgba(55,53,30,0.08);
+.binder-app-store-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.binder-app-store-btn svg {
+  flex-shrink: 0;
 }
 
 /* ──────────────────────────────────────────
    Right Page Visuals
+   ────────────────────────────────────────── */
+/* ──────────────────────────────────────────
+   Right Page — Single Hero Image
    ────────────────────────────────────────── */
 .binder-visual-container {
   position: absolute;
@@ -288,131 +316,25 @@
   z-index: 1;
 }
 
-/* Handwritten journal label — top-right, behind photos */
-.binder-visual-container::before {
-  content: 'Vol. 2024';
-  position: absolute;
-  top: 2.8rem;
-  right: 4rem;
-  font-family: var(--font-hand);
-  font-size: 1.05rem;
-  color: rgba(122, 120, 80, 0.42);
-  transform: rotate(-2.5deg);
-  pointer-events: none;
-  z-index: 0;
-  letter-spacing: 0.06em;
-}
-
-/* Subtle edge vignette — draws eye toward photos */
-.binder-visual-container::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 84% 88% at 44% 50%,
-    transparent 0%,
-    rgba(0,0,0,0.006) 60%,
-    rgba(0,0,0,0.022) 100%
-  );
-  pointer-events: none;
-  z-index: 4;
-}
-
-.scrapbook-gallery {
-  position: relative;
+.binder-image-wrap {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-/* Primary photo — left-of-center, dominant anchor */
-.scrapbook-item--primary {
-  position: absolute;
-  top: 54%;
-  left: 38%;
-  transform: translate(-50%, -50%);
-  width: 56%;
-  max-width: 300px;
-  z-index: 3;
-}
-
-/* Secondary photo — upper-right, smaller, creates eye path */
-.scrapbook-item--secondary {
-  position: absolute;
-  top: 13%;
-  right: 9%;
-  width: 34%;
-  max-width: 185px;
-  z-index: 2;
-}
-
-/* Polaroid frame — warm aged paper */
-.scrapbook-inner {
-  position: relative;
-  background: #FEFBF7;
-  padding: 7px 7px 28px;
-  border: 1px solid rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgba(0,0,0,0.09);
-  box-shadow:
-    0 2px 4px rgba(0,0,0,0.06),
-    0 6px 18px rgba(0,0,0,0.10),
-    0 14px 36px rgba(0,0,0,0.07);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.scrapbook-inner:hover {
-  box-shadow:
-    0 4px 8px rgba(0,0,0,0.08),
-    0 10px 28px rgba(0,0,0,0.14),
-    0 20px 50px rgba(0,0,0,0.10);
-}
-
-.scrapbook-inner img {
-  width: 100%;
+.binder-hero-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
 }
 
-/* Scotch tape — wrinkled, translucent, warm amber */
-.tape {
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 58px;
-  height: 14px;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,0.015) 0px,
-      transparent 1.5px,
-      transparent 3px
-    ),
-    linear-gradient(90deg,
-      rgba(245,235,205,0.28) 0%,
-      rgba(250,242,218,0.54) 22%,
-      rgba(252,244,222,0.56) 78%,
-      rgba(245,235,205,0.28) 100%
-    );
-  border-left: 1px solid rgba(210, 195, 160, 0.26);
-  border-right: 1px solid rgba(210, 195, 160, 0.26);
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.07),
-    inset -0.5px 0 0.5px rgba(0,0,0,0.04);
-  transform-origin: center top;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Tape swings on photo hover */
-.scrapbook-inner:hover .tape {
-  transform: translateX(-50%) rotate(6deg);
-}
-
 /* ──────────────────────────────────────────
-   Tabs — outside binder-pages, protrude past cover
+   Tabs
    ────────────────────────────────────────── */
-
-/* Subtle hint animation: tabs nudge left once on load to signal interactivity */
 @keyframes tabHint {
   0%   { transform: translateX(0); }
   40%  { transform: translateX(-4px); }
@@ -420,38 +342,35 @@
   100% { transform: translateX(0); }
 }
 
-/* Outer: handles absolute positioning only */
 .binder-tabs {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: -14px;
+  top: 2rem;
+  right: -40px;
   z-index: 20;
 }
 
-/* Inner: flex layout + entrance animation target */
 .binder-tabs-inner {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .binder-tab {
   position: relative;
-  background: #EAE6DC;
-  border: 1px solid rgba(55,53,30,0.20);
-  border-right: 1px solid rgba(55,53,30,0.14);
-  padding: 1.6rem 0.5rem;
+  background: #EBE7DD;
+  border: 1px solid rgba(55,53,30,0.13);
+  border-left: none;
+  padding: 2rem 0.6rem;
   cursor: pointer;
-  transition: background 0.2s ease, width 0.22s ease;
+  transition: background 0.2s ease, width 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
-  border-radius: 3px 2px 2px 3px;
+  border-radius: 0 4px 4px 0;
   box-shadow:
-    2px 0 6px rgba(55,53,30,0.08),
-    -1px 0 4px rgba(55,53,30,0.04);
+    2px 1px 4px rgba(55,53,30,0.06),
+    0 1px 0 0 #e1ddd5;
 }
 
 .binder-tab .tab-label {
@@ -469,17 +388,16 @@
 }
 
 .binder-tab.is-active {
-  background: #F8F5EF;
+  background: #F9F8F4;
   width: 38px;
-  border-color: rgba(55,53,30,0.24);
+  border-color: rgba(55,53,30,0.16);
+  border-left: none;
   box-shadow:
-    3px 0 10px rgba(55,53,30,0.13),
-    -2px 0 6px rgba(55,53,30,0.05);
-  /* Nudge hint — fires once after entrance animation settles */
+    2px 1px 6px rgba(55,53,30,0.08),
+    0 1px 0 0 #e1ddd5;
   animation: tabHint 0.7s ease-out 1.4s 1;
 }
 
-/* Project colour accent bar */
 .binder-tab.is-active::before {
   content: '';
   position: absolute;
@@ -502,7 +420,7 @@
    Responsive
    ────────────────────────────────────────── */
 @media (max-width: 1100px) {
-  .binder-page--left { padding: 3rem 2.5rem 3rem 5.5rem; }
+  .binder-page--left { padding: 3rem 2.5rem; }
 }
 
 @media (max-width: 900px) {
@@ -512,15 +430,23 @@
     min-height: 100vh;
     overflow-y: auto;
   }
-  .binder-pages {
-    height: auto;
-    min-height: 80vh;
-  }
   .binder-frame { flex-direction: column; }
-  .binder-spine { display: none; }
+  .binder-gutter { display: none; }
   .binder-page { height: auto; min-height: 55vh; }
-  .binder-page--left { padding-left: 4rem; }
-  .binder-page--right { min-height: 55vw; }
+  .binder-page--left {
+    padding: 2.5rem;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid rgba(55, 53, 30, 0.13);
+    border-bottom: none;
+    box-shadow: none;
+  }
+  .binder-page--right {
+    min-height: 55vw;
+    border-radius: 0 0 3px 3px;
+    border: 1px solid rgba(55, 53, 30, 0.13);
+    border-top: none;
+    box-shadow: none;
+  }
   .binder-visual-container { position: relative; inset: auto; height: 55vw; }
   .scrapbook-gallery { height: 100%; }
   .binder-tabs { position: fixed; top: 30%; right: 0; z-index: 100; transform: none; }
