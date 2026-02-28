@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { projects } from '../data/projects'
-import ProjectModal from '../components/ProjectModal'
 import HeroScene from '../components/HeroScene'
 import SignatureName from '../components/SignatureName'
 import { Cloud } from '../components/HeroClouds'
@@ -17,14 +15,7 @@ const mist = {
   show: { opacity: 1, transition: { duration: 1.0, ease: "easeOut" } }
 }
 
-
-const staggerContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } }
-}
-
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState(null)
   const [activeService, setActiveService] = useState(null)
 
   const services = [
@@ -173,41 +164,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-{/* ── 5. FLOATING PORTFOLIO ── hidden until more projects ready */}
-      <section className="h-work" id="projects" style={{ display: 'none' }}>
-        <div className="work-canvas">
-          <motion.h2 variants={mist} initial="hidden" whileInView="show" className="work-title">Selected Works</motion.h2>
-          
-          <div className="monet-grid">
-            {projects.map((p) => (
-              <motion.div 
-                key={p.id}
-                className="monet-tile"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fade}
-                onClick={() => setSelectedProject(p)}
-              >
-                <div className="tile-wash-wrapper">
-                  <div className="tile-wash" style={{ '--c': p.color, '--a': p.accentColor }}></div>
-                  <div className="tile-content-float">
-                    <span className="tile-year mono">{p.year}</span>
-                    <h3 className="tile-title">{p.title}</h3>
-                    <p className="tile-type mono">{p.type}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ProjectModal 
-        project={selectedProject} 
-        onClose={() => setSelectedProject(null)} 
-      />
 
     </div>
   )

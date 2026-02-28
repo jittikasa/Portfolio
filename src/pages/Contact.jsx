@@ -136,12 +136,12 @@ export default function Contact() {
               required
               disabled={status === 'sending' || status === 'success'}
             >
-              <option value="" disabled>Choose a topic</option>
+              <option value="" disabled>Select an inquiry</option>
               <option value="Product Design">Product Design</option>
-              <option value="App Development">App Development</option>
+              <option value="Client Project">Client Project</option>
               <option value="Web Development">Web Development</option>
               <option value="Collaboration">Collaboration</option>
-              <option value="Just saying hi">Just saying hi</option>
+              <option value="General Business Inquiry">General Business Inquiry</option>
             </select>
           </div>
 
@@ -151,7 +151,7 @@ export default function Contact() {
               id="message"
               name="message"
               className="form-input form-textarea"
-              placeholder="Tell me about your project, idea, or just say hello..."
+              placeholder="Tell me about the project, scope, timeline, or what you need help building..."
               rows={6}
               value={form.message}
               onChange={handleChange}
@@ -196,7 +196,7 @@ export default function Contact() {
         {/* Side note */}
         <motion.div className="contact-aside" variants={fade}>
           <p className="contact-aside-text">
-            Or reach me directly at{' '}
+            For direct business inquiries, email{' '}
             <a href="mailto:hello@jittika.com" className="contact-email-link">
               hello@jittika.com
             </a>
