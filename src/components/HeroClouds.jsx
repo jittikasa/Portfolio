@@ -136,33 +136,33 @@ export default function HeroClouds() {
 
   // Each cloud gets its own horizontal drift direction & speed
   // Negative = fly left, positive = fly right
-  const drift = (range, px) => useTransform(scrollY, [0, vh * range], [0, px], { clamp: true })
-  const fade  = (range)     => useTransform(scrollY, [0, vh * range], [1, 0], { clamp: true })
+  const useDrift = (range, px) => useTransform(scrollY, [0, vh * range], [0, px], { clamp: true })
+  const useFade  = (range)     => useTransform(scrollY, [0, vh * range], [1, 0], { clamp: true })
 
   // 18 clouds — scattered naturally across top 30%
-  const c1x  = drift(1.3, -180);  const c1o  = fade(1.0)
-  const c2x  = drift(1.5, 160);   const c2o  = fade(1.2)
-  const c3x  = drift(1.4, -140);  const c3o  = fade(1.1)
-  const c4x  = drift(1.6, 120);   const c4o  = fade(1.3)
-  const c5x  = drift(1.8, -100);  const c5o  = fade(1.5)
-  const c6x  = drift(2.0, 110);   const c6o  = fade(1.6)
-  const c7x  = drift(2.2, -80);   const c7o  = fade(1.8)
-  const c8x  = drift(2.0, 90);    const c8o  = fade(1.7)
-  const c9x  = drift(2.5, -60);   const c9o  = fade(2.0)
-  const c10x = drift(1.5, -150);  const c10o = fade(1.2)
-  const c11x = drift(1.7, 130);   const c11o = fade(1.4)
-  const c12x = drift(2.3, -70);   const c12o = fade(1.9)
-  const c13x = drift(1.9, 100);   const c13o = fade(1.5)
-  const c14x = drift(2.6, -50);   const c14o = fade(2.1)
-  const c15x = drift(2.1, 85);    const c15o = fade(1.7)
-  const c16x = drift(2.8, -45);   const c16o = fade(2.3)
-  const c17x = drift(1.6, 140);   const c17o = fade(1.3)
-  const c18x = drift(3.0, -35);   const c18o = fade(2.5)
-  const c19x = drift(1.4, 150);   const c19o = fade(1.1)
-  const c20x = drift(1.7, 120);   const c20o = fade(1.3)
-  const c21x = drift(1.5, 115);   const c21o = fade(1.2)  // top-right fill
-  const c22x = drift(1.3, -95);   const c22o = fade(1.0)  // near 'Work' nav
-  const c23x = drift(1.8, 80);    const c23o = fade(1.4)  // top-right low
+  const c1x  = useDrift(1.3, -180);  const c1o  = useFade(1.0)
+  const c2x  = useDrift(1.5, 160);   const c2o  = useFade(1.2)
+  const c3x  = useDrift(1.4, -140);  const c3o  = useFade(1.1)
+  const c4x  = useDrift(1.6, 120);   const c4o  = useFade(1.3)
+  const c5x  = useDrift(1.8, -100);  const c5o  = useFade(1.5)
+  const c6x  = useDrift(2.0, 110);   const c6o  = useFade(1.6)
+  const c7x  = useDrift(2.2, -80);   const c7o  = useFade(1.8)
+  const c8x  = useDrift(2.0, 90);    const c8o  = useFade(1.7)
+  const c9x  = useDrift(2.5, -60);   const c9o  = useFade(2.0)
+  const c10x = useDrift(1.5, -150);  const c10o = useFade(1.2)
+  const c11x = useDrift(1.7, 130);   const c11o = useFade(1.4)
+  const c12x = useDrift(2.3, -70);   const c12o = useFade(1.9)
+  const c13x = useDrift(1.9, 100);   const c13o = useFade(1.5)
+  const c14x = useDrift(2.6, -50);   const c14o = useFade(2.1)
+  const c15x = useDrift(2.1, 85);    const c15o = useFade(1.7)
+  const c16x = useDrift(2.8, -45);   const c16o = useFade(2.3)
+  const c17x = useDrift(1.6, 140);   const c17o = useFade(1.3)
+  const c18x = useDrift(3.0, -35);   const c18o = useFade(2.5)
+  const c19x = useDrift(1.4, 150);   const c19o = useFade(1.1)
+  const c20x = useDrift(1.7, 120);   const c20o = useFade(1.3)
+  const c21x = useDrift(1.5, 115);   const c21o = useFade(1.2)  // top-right fill
+  const c22x = useDrift(1.3, -95);   const c22o = useFade(1.0)  // near 'Work' nav
+  const c23x = useDrift(1.8, 80);    const c23o = useFade(1.4)  // top-right low
 
   return (
     <div className="hero-clouds" aria-hidden="true">

@@ -19,6 +19,27 @@ function HeaderPaintFilter() {
   )
 }
 
+const ElasticLink = ({ label, id, onClick }) => {
+  const letters = label.split('')
+  const isRoutePage = id === 'contact' || id === 'play'
+  if (isRoutePage) {
+    return (
+      <Link to={`/${id}`} className="nav-link-elastic" style={{ '--total': letters.length }}>
+        {letters.map((char, i) => (
+          <span key={i} style={{ '--index': i + 1 }}>{char}</span>
+        ))}
+      </Link>
+    )
+  }
+  return (
+    <a href={`#${id}`} onClick={(e) => onClick(e, id)} className="nav-link-elastic" style={{ '--total': letters.length }}>
+      {letters.map((char, i) => (
+        <span key={i} style={{ '--index': i + 1 }}>{char}</span>
+      ))}
+    </a>
+  )
+}
+
 export default function Header() {
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
@@ -50,33 +71,6 @@ export default function Header() {
     }
   }
 
-  const navItems = [
-    { label: 'Work', id: 'work' },
-    { label: 'Play', id: 'play' },
-    { label: 'Contact', id: 'contact' }
-  ]
-
-  const ElasticLink = ({ label, id }) => {
-    const letters = label.split('')
-    const isRoutePage = id === 'contact' || id === 'play'
-    if (isRoutePage) {
-      return (
-        <Link to={`/${id}`} className="nav-link-elastic" style={{ '--total': letters.length }}>
-          {letters.map((char, i) => (
-            <span key={i} style={{ '--index': i + 1 }}>{char}</span>
-          ))}
-        </Link>
-      )
-    }
-    return (
-      <a href={`#${id}`} onClick={(e) => handleNavClick(e, id)} className="nav-link-elastic" style={{ '--total': letters.length }}>
-        {letters.map((char, i) => (
-          <span key={i} style={{ '--index': i + 1 }}>{char}</span>
-        ))}
-      </a>
-    )
-  }
-
   return (
     <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
       <HeaderPaintFilter />
@@ -101,11 +95,11 @@ export default function Header() {
         </div>
 
         <nav className="nav">
-          <ElasticLink label="Work" id="work" />
+          <ElasticLink label="Work" id="work" onClick={handleNavClick} />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Play" id="play" />
+          <ElasticLink label="Play" id="play" onClick={handleNavClick} />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Contact" id="contact" />
+          <ElasticLink label="Contact" id="contact" onClick={handleNavClick} />
         </nav>
       </div>
     </header>

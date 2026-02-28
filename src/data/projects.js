@@ -18,12 +18,11 @@ export const projects = [
     links: { appStore: 'https://apps.apple.com/us/app/shellist/id6755242144' },
     images: ['/shellist-screens.webp', '/shellist-screens-2.webp', '/shellist-icon.png'],
     features: [
-      'Vision boards with personal photos',
+      'Vision boards that link to your habits',
       'Daily, weekly & monthly tracking views',
       'Pearl chain streak visualization',
       'Lunar & pearl home screen widgets',
       'iCloud sync across all devices',
-      'Category organization for life areas',
       'Swipe gestures for quick completion',
       'Calendar view showing progress'
     ],
