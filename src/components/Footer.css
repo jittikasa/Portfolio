@@ -142,15 +142,16 @@
 
 .cancellation-lines {
   position: absolute;
-  right: 50px;
-  top: -5px;
+  right: 40px;
+  top: 5px;
   color: var(--ink);
   pointer-events: none;
-  opacity: 0.75;
-  z-index: 3; /* Places it over the stamp */
-  mix-blend-mode: multiply; /* Realistic ink blending */
-  transform: rotate(-6deg);
+  opacity: 0.35;
+  z-index: 3;
+  mix-blend-mode: multiply;
+  transform: rotate(-4deg);
 }
+
 .pc-stamp {
   width: 162px;
   height: auto;
@@ -190,7 +191,7 @@
   font-size: 1.6rem;
   color: var(--ink);
   opacity: 1;
-  min-width: 2.5rem;
+  margin-right: 0.2rem;
 }
 .pc-link-item {
   display: flex;

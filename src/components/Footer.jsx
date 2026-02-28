@@ -56,14 +56,12 @@ export default function Footer() {
             {/* Right — address side */}
             <div className="pc-address">
               <div className="pc-stamp-area">
-                <svg className="cancellation-lines" width="200" height="100" viewBox="0 0 200 100" fill="none" stroke="currentColor">
-                  <g strokeWidth="1.5" opacity="0.8">
-                    <path d="M0 20 Q 25 5, 50 20 T 100 20 T 150 20 T 200 20" />
-                    <path d="M0 32 Q 25 17, 50 32 T 100 32 T 150 32 T 200 32" />
-                    <path d="M0 44 Q 25 29, 50 44 T 100 44 T 150 44 T 200 44" />
-                    <path d="M0 56 Q 25 41, 50 56 T 100 56 T 150 56 T 200 56" />
-                    <path d="M0 68 Q 25 53, 50 68 T 100 68 T 150 68 T 200 68" />
-                    <path d="M0 80 Q 25 65, 50 80 T 100 80 T 150 80 T 200 80" />
+                <svg className="cancellation-lines" width="200" height="80" viewBox="0 0 200 80" fill="none" stroke="currentColor">
+                  <g strokeWidth="0.8" opacity="0.4">
+                    <path d="M0 20 Q 25 10, 50 20 T 100 20 T 150 20 T 200 20" />
+                    <path d="M0 35 Q 25 25, 50 35 T 100 35 T 150 35 T 200 35" />
+                    <path d="M0 50 Q 25 40, 50 50 T 100 50 T 150 50 T 200 50" />
+                    <path d="M0 65 Q 25 55, 50 65 T 100 65 T 150 65 T 200 65" />
                   </g>
                 </svg>
                 <div className="pc-stamp" aria-hidden="true">
@@ -75,6 +73,7 @@ export default function Footer() {
                 <div className="pc-address-line">
                   <span className="pc-to">To: </span>
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     <button 
                       className={`pc-copy-btn ${copied ? 'copied' : ''}`}
                       onClick={copyEmail}
@@ -86,11 +85,13 @@ export default function Footer() {
                 </div>
                 <div className="pc-address-line">
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     <a href="https://linkedin.com/in/jittikas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
                 </div>
                 <div className="pc-address-line">
                   <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <Link to="/support">App Support</Link>
                   </div>
                 </div>
