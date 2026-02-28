@@ -6,7 +6,7 @@
   justify-content: center;
   padding: 10rem 2rem 6rem;
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .contact-clouds {
@@ -16,10 +16,10 @@
   overflow: visible;
   z-index: 0;
   background:
-    radial-gradient(ellipse 62% 58% at 3% 42%,  rgba(139, 170, 191, 0.38) 0%, transparent 65%),
-    radial-gradient(ellipse 52% 44% at 80% 30%, rgba(139, 170, 191, 0.32) 0%, transparent 58%),
-    radial-gradient(ellipse 40% 32% at 58% 72%, rgba(139, 170, 191, 0.22) 0%, transparent 52%),
-    radial-gradient(ellipse 35% 30% at 98% 22%, rgba(139, 170, 191, 0.28) 0%, transparent 55%);
+    radial-gradient(ellipse 70% 65% at 3% 42%,  rgba(139, 170, 191, 0.58) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 52% at 80% 30%, rgba(139, 170, 191, 0.50) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 40% at 58% 72%, rgba(139, 170, 191, 0.38) 0%, transparent 52%),
+    radial-gradient(ellipse 45% 38% at 98% 22%, rgba(139, 170, 191, 0.45) 0%, transparent 55%);
 }
 
 .contact-inner {
