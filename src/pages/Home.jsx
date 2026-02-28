@@ -25,7 +25,7 @@ const staggerContainer = {
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null)
-  const [activeService, setActiveService] = useState(0)
+  const [activeService, setActiveService] = useState(null)
 
   const services = [
     {
@@ -36,7 +36,7 @@ export default function Home() {
     {
       title: "App Development",
       icon: "◎",
-      description: "iOS apps designed and built end to end. Native, considered, and faithful to how people actually use their phones."
+      description: "iOS apps I build mostly for the fun of it — because an idea won't leave me alone until I see it exist. Native Swift, obsessively tweaked, and made for how people actually use their phones."
     },
     {
       title: "Web Development",
@@ -146,17 +146,25 @@ export default function Home() {
                   <span className="stroke-title">{s.title}</span>
                   <span className="stroke-toggle">{activeService === i ? '−' : '+'}</span>
                 </div>
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {activeService === i && (
-                    <motion.p
-                      className="stroke-description"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    <motion.div
+                      style={{ overflow: 'hidden' }}
+                      initial={{ height: 0 }}
+                      animate={{ height: 'auto' }}
+                      exit={{ height: 0 }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {s.description}
-                    </motion.p>
+                      <motion.p
+                        className="stroke-description"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeOut', delay: 0.18 }}
+                      >
+                        {s.description}
+                      </motion.p>
+                    </motion.div>
                   )}
                 </AnimatePresence>
                 <div className="stroke-wash"></div>

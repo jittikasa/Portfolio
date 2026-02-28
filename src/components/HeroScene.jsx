@@ -10,8 +10,8 @@ export default function HeroScene() {
   const rawScale     = useTransform(scrollY, [0, vh * 2.5], [2, 1])
   const scale        = useSpring(rawScale, { stiffness: 60, damping: 20 })
 
-  // Freeze: 250–270vh, then fade out 270–340vh
-  const sceneOpacity = useTransform(scrollY, [vh * 2.7, vh * 3.4], [1, 0])
+  // Freeze: 250–240vh, then fade out 240–280vh (50vh empty gap before atelier)
+  const sceneOpacity = useTransform(scrollY, [vh * 2.4, vh * 2.8], [1, 0])
 
   return (
     <motion.div className="hero-scene" style={{ opacity: sceneOpacity }}>

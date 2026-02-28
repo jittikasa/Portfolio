@@ -10,7 +10,7 @@ import './HeroClouds.css'
 */
 
 /* SVG filter that gives clouds an oil-paint / impressionist texture */
-function PaintFilter() {
+export function PaintFilter() {
   return (
     <svg width="0" height="0" style={{ position: 'absolute' }}>
       <defs>
