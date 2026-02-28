@@ -21,7 +21,7 @@ function HeaderPaintFilter() {
 
 const ElasticLink = ({ label, id, onClick }) => {
   const letters = label.split('')
-  const isRoutePage = id === 'contact' || id === 'play' || id === 'support' || id === 'work'
+  const isRoutePage = id === 'contact' || id === 'play' || id === 'support'
   if (isRoutePage) {
     return (
       <Link to={`/${id}`} className="nav-link-elastic" style={{ '--total': letters.length }}>
