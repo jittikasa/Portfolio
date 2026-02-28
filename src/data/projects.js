@@ -15,7 +15,10 @@ export const projects = [
     accentColor: '#3E5234',
     rotation: -2,
     featured: true,
-    links: { appStore: 'https://apps.apple.com/us/app/shellist/id6755242144' },
+    links: { 
+      appStore: 'https://apps.apple.com/us/app/shellist/id6755242144',
+      support: '/support'
+    },
     images: ['/shellist-screens.webp', '/shellist-screens-2.webp', '/shellist-icon.png'],
     features: [
       'Vision boards that link to your habits',
@@ -45,7 +48,7 @@ export const projects = [
     accentColor: '#5B7A96',
     rotation: 1.5,
     featured: true,
-    links: {},
+    links: { support: '/support' },
     images: ['/pola-image-1.jpeg', '/pola-image-2.jpeg', '/pola-icon.png'],
     features: [
       'Authentic film development animation',
@@ -59,6 +62,38 @@ export const projects = [
       price: 'Coming soon',
       platform: 'iOS 17+'
     }
+  },
+  {
+    category: 'work',
+    id: 'dinipetty',
+    title: 'Dini Petty',
+    subtitle: 'Archive & licensing platform for a Canadian television icon',
+    type: 'Web Platform',
+    year: '2024',
+    role: 'Full-Stack Developer',
+    tags: ['WordPress', 'WooCommerce', 'PHP', 'REST API', 'Custom Plugins'],
+    color: '#37351E',
+    accentColor: '#8BAABF',
+    featured: true,
+    links: { live: 'https://dinipetty.com' },
+    images: [],
+    overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The system turns WooCommerce products into searchable archive entries with a quote-based licensing workflow — no traditional e-commerce checkout, no payment gateway.',
+    systemOverview: {
+      title: '3-Plugin Architecture',
+      plugins: [
+        { name: 'Dini Petty Archives', description: 'Core plugin — registers WooCommerce metadata, powers REST API endpoints, admin tools, cache control.' },
+        { name: 'Dini Petty Search', description: 'Frontend search experience — filterable archive via shortcode with pagination, sorting, year/topic filters.' },
+        { name: 'Dini Petty Quotes', description: 'WooCommerce-native licensing workflow — quote requests through cart/checkout without standard payment.' }
+      ]
+    },
+    whatWasBuilt: [
+      'Custom WooCommerce data model with _dinipetty_* metadata fields',
+      'REST API endpoints for archive listings, year filters, guest autocomplete',
+      'Shortcode-driven frontend archive search experience',
+      'Quote request system integrated into WooCommerce orders & statuses',
+      'Admin dashboards for cache control, search defaults, quote handling',
+      'Simplified architecture with WooCommerce products as single source of truth'
+    ]
   },
 ]
 

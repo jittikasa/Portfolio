@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Play from './pages/Play'
+import Work from './pages/Work'
 import Support from './pages/Support'
 import GrainOverlay from './components/GrainOverlay'
 import CustomCursor from './components/CustomCursor'
@@ -32,6 +33,7 @@ function AppShell() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/play" element={<Play />} />
+          <Route path="/work" element={<Work />} />
           <Route path="/support" element={<Support />} />
         </Routes>
       </main>

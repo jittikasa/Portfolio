@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './ProjectModal.css'
 
 export default function ProjectModal({ project, onClose }) {
@@ -53,11 +54,21 @@ export default function ProjectModal({ project, onClose }) {
 
               {project.links && Object.keys(project.links).length > 0 && (
                 <div className="modal-links">
-                  {Object.entries(project.links).map(([key, url]) => (
-                    <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="modal-link">
-                      Visit {key} →
-                    </a>
-                  ))}
+                  {Object.entries(project.links).map(([key, url]) => {
+                    const isInternal = url.startsWith('/')
+                    if (isInternal) {
+                      return (
+                        <Link key={key} to={url} className="modal-link" onClick={onClose}>
+                          Visit {key} →
+                        </Link>
+                      )
+                    }
+                    return (
+                      <a key={key} href={url} target="_blank" rel="noopener noreferrer" className="modal-link">
+                        Visit {key} →
+                      </a>
+                    )
+                  })}
                 </div>
               )}
             </div>

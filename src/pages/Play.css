@@ -156,12 +156,40 @@
   margin-bottom: 2rem;
 }
 
+.binder-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.1rem;
+}
+
 .binder-eyebrow {
   font-size: 0.62rem;
   color: var(--ink-muted);
   display: block;
-  margin-bottom: 1.1rem;
-  opacity: 0.55;
+  opacity: 1;
+}
+
+.binder-support-pill {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--sage-deep);
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--sage-deep);
+  transition: all 0.2s ease;
+  opacity: 1;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.binder-support-pill:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .binder-title {
@@ -446,6 +474,40 @@
 }
 
 /* ──────────────────────────────────────────
+   Meta Under Binder
+   ────────────────────────────────────────── */
+.binder-under-meta {
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 2rem;
+  height: 12rem; /* Matches the margin-top of the next section to be exactly in the middle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  margin-bottom: -12rem; /* Offset to keep the previews position correct */
+}
+
+.binder-under-link {
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 1;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid var(--sage-deep);
+  padding-bottom: 0.35rem;
+}
+
+.binder-under-link:hover {
+  color: var(--sage-deep);
+  border-bottom-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+/* ──────────────────────────────────────────
    Responsive
    ────────────────────────────────────────── */
 @media (max-width: 1100px) {
@@ -503,6 +565,12 @@
     letter-spacing: 0.14em;
   }
   .binder-visual-container::before { display: none; }
+
+  .binder-under-meta {
+    height: 8rem;
+    margin-bottom: -8rem;
+    padding-top: 2rem;
+  }
 }
 
 /* ──────────────────────────────────────────
@@ -622,9 +690,9 @@
 
 .cta-detail-label {
   font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
   color: var(--ink) !important;
   text-align: right;
   opacity: 1 !important;
@@ -632,18 +700,41 @@
 
 .cta-detail-value {
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.01em;
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.4rem);
   line-height: 1.4;
-  color: rgba(55, 53, 30, 0.76);
+  color: var(--ink);
   text-align: left;
+  opacity: 1;
 }
 
 .cta-actions {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.cta-support-link {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid var(--sage-deep);
+  padding-bottom: 0.1rem;
+}
+
+.cta-support-link:hover {
+  color: var(--sage-deep);
+  border-bottom-color: var(--ink);
 }
 
 .cta-atelier-button {

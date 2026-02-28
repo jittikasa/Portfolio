@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import SignatureName from './SignatureName'
 import './Footer.css'
 
@@ -85,7 +86,12 @@ export default function Footer() {
                     <a href="https://linkedin.com/in/jittikas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
                 </div>
-                <div className="pc-address-line"></div>
+                <div className="pc-address-line">
+                  <div className="pc-link-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <Link to="/support">App Support</Link>
+                  </div>
+                </div>
               </div>
             </div>
 

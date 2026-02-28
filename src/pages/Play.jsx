@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { getProjectsByCategory } from '../data/projects'
 import { PaintFilter, Cloud } from '../components/HeroClouds'
 import './Play.css'
@@ -39,7 +40,9 @@ export default function Play() {
                   exit="exit"
                 >
                   <div className="binder-header">
-                    <span className="binder-eyebrow mono">{activeIndex + 1} / {projects.length}</span>
+                    <div className="binder-header-top">
+                      <span className="binder-eyebrow mono">{activeIndex + 1} / {projects.length}</span>
+                    </div>
                     <h1 className="binder-title">{active.title}</h1>
                     <p className="binder-subtitle serif-italic">{active.subtitle}</p>
                   </div>
@@ -124,6 +127,19 @@ export default function Play() {
 
       </div>
 
+      {active.links && active.links.support && (
+        <motion.div 
+          className="binder-under-meta"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <Link to={active.links.support} className="binder-under-link mono">
+            {active.title} Support &amp; FAQ →
+          </Link>
+        </motion.div>
+      )}
+
       {/* Full Preview Section — appears below the binder */}
       <div className="play-previews">
         <div className="preview-container">
@@ -151,7 +167,7 @@ export default function Play() {
               </div>
 
               {/* CTA Section */}
-              {active.links && active.links.appStore && (
+              {active.links && (active.links.appStore || active.links.support) && (
                 <motion.div 
                   className="play-cta-section"
                   initial={{ opacity: 0 }}
@@ -178,7 +194,7 @@ export default function Play() {
                       </div>
                       
                       <div className="cta-atelier-body">
-                        <p className="cta-atelier-text">Join others using {active.title} to turn daily habits into a visual journey.</p>
+                        <p className="cta-atelier-text">{active.subtitle}. Explore the experience today.</p>
                         
                         {active.details && (
                           <div className="cta-atelier-details">
@@ -192,10 +208,18 @@ export default function Play() {
                         )}
 
                         <div className="cta-actions">
-                          <a href={active.links.appStore} target="_blank" rel="noopener noreferrer" className="cta-atelier-button">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                            <span>Download on the App Store</span>
-                          </a>
+                          {active.links.appStore && (
+                            <a href={active.links.appStore} target="_blank" rel="noopener noreferrer" className="cta-atelier-button">
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                              <span>Download on the App Store</span>
+                            </a>
+                          )}
+
+                          {active.links.support && (
+                            <Link to={active.links.support} className="cta-support-link mono">
+                              Need help? Visit Support →
+                            </Link>
+                          )}
                         </div>
                       </div>
                       <div className="stroke-wash"></div>
