@@ -62,7 +62,7 @@ export default function Footer() {
                   <path d="M0 25C20 25 30 35 50 35C70 35 80 25 100 25" strokeWidth="0.5" opacity="0.3"/>
                 </svg>
                 <div className="pc-stamp" aria-hidden="true">
-                  <span>JS</span>
+                  <img src="/JS-Stamp.png" alt="Stamp" className="pc-stamp-img" />
                 </div>
               </div>
               
