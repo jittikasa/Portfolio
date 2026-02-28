@@ -1,0 +1,528 @@
+/* ============================================
+   PLAY PAGE — Moleskine Binder
+   ============================================ */
+
+.play-canvas {
+  height: 100vh;
+  background: var(--canvas);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 5.5rem 2.5rem 1.5rem 2rem;
+}
+
+.play-bg-text {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  opacity: 0.35;
+}
+
+/* ──────────────────────────────────────────
+   Binder Shell
+   container: overflow visible — tabs protrude
+   pages:     overflow hidden  — clips pages
+   ────────────────────────────────────────── */
+.binder-container {
+  width: 100%;
+  max-width: 1300px;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.binder-pages {
+  width: 100%;
+  height: 100%;
+  background: #F8F5EF;
+  border-radius: 5px;
+  border: 1px solid rgba(55, 53, 30, 0.28);
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 2px 0 rgba(55,53,30,0.06),
+    0 8px 20px rgba(55, 53, 30, 0.10),
+    0 28px 60px rgba(55, 53, 30, 0.16),
+    0 1px 3px rgba(55, 53, 30, 0.12);
+}
+
+.binder-frame {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+/* ──────────────────────────────────────────
+   Page Base
+   ────────────────────────────────────────── */
+.binder-page {
+  height: 100%;
+  padding: 3.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #F8F5EF;
+  /* Subtle perspective for page-turn animation */
+  perspective: 1200px;
+}
+
+.binder-page--left  { flex: 0 0 44%; }
+.binder-page--right { flex: 1; }
+
+/* ──────────────────────────────────────────
+   Left Page — ruled notebook paper
+   ────────────────────────────────────────── */
+.binder-page--left {
+  background-color: #F9F8F3;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 18%),
+    linear-gradient(rgba(155, 140, 100, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 30px;
+  padding-left: 6rem;
+  /* Binding shadow — page curves toward spine */
+  box-shadow: inset -22px 0 32px rgba(55, 53, 30, 0.07);
+}
+
+/* Red margin line */
+.binder-page--left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4.8rem;
+  width: 1px;
+  background: rgba(185, 70, 55, 0.13);
+  pointer-events: none;
+}
+
+/* ──────────────────────────────────────────
+   Right Page — dot grid paper
+   ────────────────────────────────────────── */
+.binder-page--right {
+  background-color: #F8F6F0;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 16%),
+    linear-gradient(180deg, transparent 82%, rgba(120,110,75,0.02) 100%),
+    radial-gradient(circle, rgba(120, 110, 75, 0.22) 0.9px, transparent 0.9px);
+  background-size: 100% 100%, 100% 100%, 22px 22px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  /* Binding shadow — page curves toward spine */
+  box-shadow: inset 28px 0 40px rgba(55, 53, 30, 0.09);
+}
+
+/* Soft project-colour bloom */
+.binder-page--right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 78% 68% at 55% 52%,
+    var(--project-color, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ──────────────────────────────────────────
+   Hole Punches — enhanced rim depth
+   ────────────────────────────────────────── */
+.binder-holes {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  bottom: 0;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2rem 0;
+  pointer-events: none;
+}
+
+.hole {
+  width: 16px;
+  height: 16px;
+  background: var(--canvas);
+  border-radius: 50%;
+  box-shadow:
+    /* Inner rim — all four directions for depth */
+    inset 0 2px 4px rgba(0,0,0,0.24),
+    inset 0 -1.5px 3px rgba(0,0,0,0.16),
+    inset 2px 0 3px rgba(0,0,0,0.14),
+    inset -2px 0 2px rgba(0,0,0,0.09),
+    /* Outer edge ring + tiny drop */
+    0 0 0 1px rgba(55, 53, 30, 0.13),
+    0 1px 2px rgba(0,0,0,0.09);
+}
+
+/* ──────────────────────────────────────────
+   Left Page Content
+   ────────────────────────────────────────── */
+.binder-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 3rem;
+}
+
+.binder-header {
+  margin-bottom: 2rem;
+}
+
+.binder-eyebrow {
+  font-size: 0.62rem;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: 1.1rem;
+  opacity: 0.55;
+}
+
+.binder-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.55rem;
+}
+
+.binder-subtitle {
+  font-size: 1.1rem;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+.binder-body {
+  margin-bottom: 2rem;
+}
+
+.binder-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  max-width: 40ch;
+  margin-bottom: 2rem;
+}
+
+.binder-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  font-size: 0.6rem;
+  background: rgba(55, 53, 30, 0.04);
+  padding: 5px 12px;
+  border-radius: 2px;
+  color: var(--ink-muted);
+  border: 1px solid rgba(55, 53, 30, 0.1);
+}
+
+.binder-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.binder-link {
+  font-size: 0.72rem;
+  color: var(--sage-deep);
+  font-weight: 400;
+  border-bottom: 1px solid var(--sage-mist);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.binder-link:hover {
+  border-color: var(--sage-deep);
+}
+
+/* ──────────────────────────────────────────
+   Spine
+   ────────────────────────────────────────── */
+.binder-spine {
+  width: 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+  background: linear-gradient(90deg,
+    rgba(55,53,30,0.16) 0%,
+    rgba(235,231,220,0.96) 28%,
+    rgba(242,239,230,1) 42%,
+    rgba(242,239,230,1) 58%,
+    rgba(235,231,220,0.96) 72%,
+    rgba(55,53,30,0.16) 100%
+  );
+  box-shadow:
+    inset 2px 0 8px rgba(55,53,30,0.10),
+    inset -2px 0 8px rgba(55,53,30,0.10);
+}
+
+.binder-spine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(55,53,30,0.08);
+}
+
+/* ──────────────────────────────────────────
+   Right Page Visuals
+   ────────────────────────────────────────── */
+.binder-visual-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Handwritten journal label — top-right, behind photos */
+.binder-visual-container::before {
+  content: 'Vol. 2024';
+  position: absolute;
+  top: 2.8rem;
+  right: 4rem;
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  color: rgba(122, 120, 80, 0.42);
+  transform: rotate(-2.5deg);
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 0.06em;
+}
+
+/* Subtle edge vignette — draws eye toward photos */
+.binder-visual-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 84% 88% at 44% 50%,
+    transparent 0%,
+    rgba(0,0,0,0.006) 60%,
+    rgba(0,0,0,0.022) 100%
+  );
+  pointer-events: none;
+  z-index: 4;
+}
+
+.scrapbook-gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Primary photo — left-of-center, dominant anchor */
+.scrapbook-item--primary {
+  position: absolute;
+  top: 54%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  width: 56%;
+  max-width: 300px;
+  z-index: 3;
+}
+
+/* Secondary photo — upper-right, smaller, creates eye path */
+.scrapbook-item--secondary {
+  position: absolute;
+  top: 13%;
+  right: 9%;
+  width: 34%;
+  max-width: 185px;
+  z-index: 2;
+}
+
+/* Polaroid frame — warm aged paper */
+.scrapbook-inner {
+  position: relative;
+  background: #FEFBF7;
+  padding: 7px 7px 28px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.09);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.06),
+    0 6px 18px rgba(0,0,0,0.10),
+    0 14px 36px rgba(0,0,0,0.07);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.scrapbook-inner:hover {
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.08),
+    0 10px 28px rgba(0,0,0,0.14),
+    0 20px 50px rgba(0,0,0,0.10);
+}
+
+.scrapbook-inner img {
+  width: 100%;
+  display: block;
+}
+
+/* Scotch tape — wrinkled, translucent, warm amber */
+.tape {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 14px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.015) 0px,
+      transparent 1.5px,
+      transparent 3px
+    ),
+    linear-gradient(90deg,
+      rgba(245,235,205,0.28) 0%,
+      rgba(250,242,218,0.54) 22%,
+      rgba(252,244,222,0.56) 78%,
+      rgba(245,235,205,0.28) 100%
+    );
+  border-left: 1px solid rgba(210, 195, 160, 0.26);
+  border-right: 1px solid rgba(210, 195, 160, 0.26);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.07),
+    inset -0.5px 0 0.5px rgba(0,0,0,0.04);
+  transform-origin: center top;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Tape swings on photo hover */
+.scrapbook-inner:hover .tape {
+  transform: translateX(-50%) rotate(6deg);
+}
+
+/* ──────────────────────────────────────────
+   Tabs — outside binder-pages, protrude past cover
+   ────────────────────────────────────────── */
+
+/* Subtle hint animation: tabs nudge left once on load to signal interactivity */
+@keyframes tabHint {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(-4px); }
+  70%  { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+/* Outer: handles absolute positioning only */
+.binder-tabs {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -14px;
+  z-index: 20;
+}
+
+/* Inner: flex layout + entrance animation target */
+.binder-tabs-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.binder-tab {
+  position: relative;
+  background: #EAE6DC;
+  border: 1px solid rgba(55,53,30,0.20);
+  border-right: 1px solid rgba(55,53,30,0.14);
+  padding: 1.6rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, width 0.22s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  border-radius: 3px 2px 2px 3px;
+  box-shadow:
+    2px 0 6px rgba(55,53,30,0.08),
+    -1px 0 4px rgba(55,53,30,0.04);
+}
+
+.binder-tab .tab-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.53rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.binder-tab:hover {
+  background: #F2EFE6;
+}
+
+.binder-tab.is-active {
+  background: #F8F5EF;
+  width: 38px;
+  border-color: rgba(55,53,30,0.24);
+  box-shadow:
+    3px 0 10px rgba(55,53,30,0.13),
+    -2px 0 6px rgba(55,53,30,0.05);
+  /* Nudge hint — fires once after entrance animation settles */
+  animation: tabHint 0.7s ease-out 1.4s 1;
+}
+
+/* Project colour accent bar */
+.binder-tab.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 22px;
+  background: var(--tab-color, var(--sage));
+  border-radius: 0 2px 2px 0;
+  opacity: 0.9;
+}
+
+.binder-tab.is-active .tab-label {
+  color: var(--sage-deep);
+  font-weight: 600;
+}
+
+/* ──────────────────────────────────────────
+   Responsive
+   ────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .binder-page--left { padding: 3rem 2.5rem 3rem 5.5rem; }
+}
+
+@media (max-width: 900px) {
+  .play-canvas {
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .binder-pages {
+    height: auto;
+    min-height: 80vh;
+  }
+  .binder-frame { flex-direction: column; }
+  .binder-spine { display: none; }
+  .binder-page { height: auto; min-height: 55vh; }
+  .binder-page--left { padding-left: 4rem; }
+  .binder-page--right { min-height: 55vw; }
+  .binder-visual-container { position: relative; inset: auto; height: 55vw; }
+  .scrapbook-gallery { height: 100%; }
+  .binder-tabs { position: fixed; top: 30%; right: 0; z-index: 100; transform: none; }
+  .binder-visual-container::before { display: none; }
+}
