@@ -150,14 +150,14 @@
 }
 
 .pc-stamp {
-  width: 65px;
+  width: 98px;
   height: auto;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+  filter: drop-shadow(2px 3px 6px rgba(0,0,0,0.12));
   transform: rotate(3deg);
   z-index: 2;
 }
