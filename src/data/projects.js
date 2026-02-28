@@ -63,8 +63,10 @@ export const projects = [
       platform: 'iOS 17+'
     }
   },
+  // ── Work: Dev + Design (full case studies) ──
   {
     category: 'work',
+    subcategory: 'dev',
     id: 'dinipetty',
     title: 'Dini Petty',
     subtitle: 'Archive & licensing platform for a Canadian television icon',
@@ -95,9 +97,133 @@ export const projects = [
       'Simplified architecture with WooCommerce products as single source of truth'
     ]
   },
+  {
+    category: 'work',
+    subcategory: 'dev',
+    id: 'baanimjai',
+    title: 'Baan Imjai',
+    subtitle: 'Property listing platform for a Phuket real estate agency',
+    type: 'Web Platform',
+    year: '2024',
+    role: 'Developer & Designer',
+    tags: ['WordPress', 'PHP', 'Custom Theme', 'Property Listings'],
+    color: '#2C3E2D',
+    accentColor: '#8BA899',
+    featured: true,
+    links: {},
+    images: [],
+    overview: '',
+    systemOverview: null,
+    whatWasBuilt: []
+  },
+  {
+    category: 'work',
+    subcategory: 'dev',
+    id: 'anodard',
+    title: 'Anodard',
+    subtitle: 'Digital presence for a Thai hospitality brand',
+    type: 'Website',
+    year: '2023',
+    role: 'Developer & Designer',
+    tags: ['WordPress', 'PHP', 'Custom Theme', 'WooCommerce'],
+    color: '#3D2E2E',
+    accentColor: '#C9A8A8',
+    featured: true,
+    links: {},
+    images: [],
+    overview: '',
+    systemOverview: null,
+    whatWasBuilt: []
+  },
+  // ── Work: Design Only (grouped on /work/design) ──
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'elyana',
+    title: 'Elyana',
+    subtitle: 'Brand identity & web design',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UI/UX'],
+    color: '#4A3F35',
+    accentColor: '#C5D8E8',
+    images: []
+  },
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'baanazalea',
+    title: 'Baan Azalea',
+    subtitle: 'Property website design for a Phuket villa development',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UI/UX'],
+    color: '#2E3D3E',
+    accentColor: '#8BAABF',
+    images: []
+  },
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'phuketprime',
+    title: 'Phuket Prime',
+    subtitle: 'UX design for a premium property platform',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UX Research', 'UI/UX'],
+    color: '#1E2A37',
+    accentColor: '#8BAABF',
+    images: []
+  },
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'phuketrent',
+    title: 'Phuket.rent',
+    subtitle: 'UX design for a rental property marketplace',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UX Research', 'UI/UX'],
+    color: '#2A3728',
+    accentColor: '#A4BDB3',
+    images: []
+  },
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'kudohotel',
+    title: 'KUDO Hotel & Beach Club',
+    subtitle: 'Website design for a Phuket beachfront resort',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UI/UX'],
+    color: '#37351E',
+    accentColor: '#C9A8A8',
+    images: []
+  },
+  {
+    category: 'work',
+    subcategory: 'design',
+    id: 'propertylawphuket',
+    title: 'Property Law Phuket',
+    subtitle: 'Website design for a legal services firm',
+    type: 'Web Design',
+    year: '2024',
+    role: 'Designer',
+    tags: ['Figma', 'UI/UX'],
+    color: '#2E2E3D',
+    accentColor: '#8BAABF',
+    images: []
+  },
 ]
 
 export const getProjectById = (id) => projects.find(p => p.id === id)
 export const getProjectsByType = (type) => projects.filter(p => p.type === type)
 export const getFeaturedProjects = () => projects.filter(p => p.featured)
 export const getProjectsByCategory = (category) => projects.filter(p => p.category === category)
+export const getWorkProjects = (subcategory) => projects.filter(p => p.category === 'work' && p.subcategory === subcategory)

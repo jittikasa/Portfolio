@@ -1,14 +1,25 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { getProjectsByCategory } from '../data/projects'
+import { PaintFilter, Cloud } from '../components/HeroClouds'
 import './Work.css'
+
+const fade = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
+}
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } }
+}
 
 function useFadeUp() {
   const ref = useRef(null)
-
   useEffect(() => {
     const el = ref.current
     if (!el) return
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -16,152 +27,101 @@ function useFadeUp() {
           observer.unobserve(el)
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
-
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
-
   return ref
 }
 
-function FadeUp({ children, className = '', stagger = false }) {
+function ProjectCard({ project, index }) {
   const ref = useFadeUp()
-  return (
-    <div ref={ref} className={`${stagger ? 'fade-up-stagger' : 'fade-up'} ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-function CaseStudyCard({ project, index }) {
   const number = String(index + 1).padStart(2, '0')
+  const isDev = project.subcategory === 'dev'
+  const linkTo = isDev ? `/work/${project.id}` : '/work/design'
 
   return (
-    <article className="case-study">
-      <hr className="case-study-divider" />
-
-      {/* Header */}
-      <FadeUp>
-        <header className="case-study-header">
-          <span className="case-study-number mono">{number}</span>
-          <h2 className="case-study-title">{project.title}</h2>
-          <p className="case-study-subtitle">{project.subtitle}</p>
-          <div className="case-study-meta-row">
-            <span>{project.year}</span>
-            <span className="case-study-meta-divider">/</span>
-            <span>{project.role}</span>
-            <span className="case-study-meta-divider">/</span>
-            <span>{project.type}</span>
-          </div>
-        </header>
-      </FadeUp>
-
-      {/* Tags */}
-      <FadeUp>
-        <div className="case-study-tags">
-          {project.tags.map((tag, i) => (
-            <span key={tag}>
-              <span className="case-study-tag">{tag}</span>
-              {i < project.tags.length - 1 && (
-                <span className="case-study-tag-divider">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-              )}
-            </span>
-          ))}
-        </div>
-      </FadeUp>
-
-      <hr className="case-study-divider" />
-
-      {/* Body — 2 column */}
-      <div className="case-study-body">
-        <FadeUp>
-          <div className="case-study-overview">
-            <p>{project.overview}</p>
-            {project.links?.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="case-study-visit"
-              >
-                Visit Site →
-              </a>
-            )}
-          </div>
-        </FadeUp>
-
-        <div className="case-study-sidebar">
-          {project.systemOverview && (
-            <FadeUp>
-              <div className="case-study-sidebar-section">
-                <span className="case-study-sidebar-label mono">{project.systemOverview.title}</span>
-                {project.systemOverview.plugins.map((plugin) => (
-                  <div key={plugin.name} className="case-study-plugin">
-                    <h4 className="case-study-plugin-name">{plugin.name}</h4>
-                    <p className="case-study-plugin-desc">{plugin.description}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-          )}
-
-          {project.whatWasBuilt && (
-            <FadeUp>
-              <div className="case-study-sidebar-section">
-                <span className="case-study-sidebar-label mono">What Was Built</span>
-                <ul className="case-study-built-list">
-                  {project.whatWasBuilt.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </FadeUp>
-          )}
-        </div>
+    <Link
+      to={linkTo}
+      className="work-card"
+      ref={ref}
+      style={{
+        '--accent': project.accentColor,
+        '--card-color': project.color,
+        '--delay': `${index * 0.1}s`
+      }}
+    >
+      <div className="work-card-image">
+        {project.images?.[0]
+          ? <img src={project.images[0]} alt={project.title} />
+          : <>
+              <div className="work-card-wash" aria-hidden="true" />
+              <span className="work-card-number mono">{number}</span>
+            </>
+        }
       </div>
-
-      {/* Gallery placeholders */}
-      <FadeUp>
-        <div className="case-study-gallery">
-          <div className="case-study-gallery-grid case-study-gallery-full">
-            <div className="case-study-gallery-item case-study-gallery-item--hero">
-              Image
-            </div>
-          </div>
-          <div className="case-study-gallery-grid case-study-gallery-pair" style={{ marginTop: 2 }}>
-            <div className="case-study-gallery-item case-study-gallery-item--pair">
-              Image
-            </div>
-            <div className="case-study-gallery-item case-study-gallery-item--pair">
-              Image
-            </div>
-          </div>
-        </div>
-      </FadeUp>
-    </article>
+      <div className="work-card-info">
+        <span className="work-card-type mono">{project.type}</span>
+        <h2 className="work-card-title">{project.title}</h2>
+        <p className="work-card-subtitle serif-italic">{project.subtitle}</p>
+      </div>
+    </Link>
   )
 }
 
 export default function Work() {
-  const projects = getProjectsByCategory('work')
+  const allWork = getProjectsByCategory('work')
+  const devProjects = allWork.filter(p => p.subcategory === 'dev')
+  const designProjects = allWork.filter(p => p.subcategory === 'design')
 
   return (
-    <div className="work-page">
-      {/* Hero */}
-      <section className="work-hero">
-        <h1 className="work-hero-title">Selected Work</h1>
-        <hr className="work-hero-rule" />
-        <p className="work-hero-count mono">
-          {String(projects.length).padStart(2, '0')} Project{projects.length !== 1 ? 's' : ''}
-        </p>
-      </section>
+    <div className="work-canvas">
+      <div className="work-clouds" aria-hidden="true">
+        <PaintFilter />
+        <Cloud className="sz-md" variant="c" filter="cloud-paint-soft"  style={{ top: '-4%',  left: '-8%'  }} />
+        <Cloud className="sz-sm" variant="a" filter="cloud-paint-wispy" style={{ top: '5%',   left: '72%'  }} />
+        <Cloud className="sz-xs" variant="b" filter="cloud-paint-wispy" style={{ top: '30%',  left: '-2%'  }} />
+        <Cloud className="sz-sm" variant="d" filter="cloud-paint-soft"  style={{ top: '55%',  left: '80%'  }} />
+        <Cloud className="sz-xs" variant="c" filter="cloud-paint-wispy" style={{ top: '70%',  left: '10%'  }} />
+        <Cloud className="sz-xs" variant="a" filter="cloud-paint-wispy" style={{ top: '85%',  left: '60%'  }} />
+      </div>
 
-      {/* Case Studies */}
-      {projects.map((project, i) => (
-        <CaseStudyCard key={project.id} project={project} index={i} />
-      ))}
+      <motion.div
+        className="work-inner"
+        initial="hidden"
+        animate="show"
+        variants={stagger}
+      >
+        {/* Hero — matches contact/support pattern */}
+        <motion.div className="work-header" variants={fade}>
+          <p className="work-eyebrow mono">Selected Work</p>
+          <h1 className="work-title">Development, design<br /><em>& everything between.</em></h1>
+          <p className="work-sub">
+            Client projects, freelance builds, and design work — from full-stack platforms to Figma prototypes.
+          </p>
+        </motion.div>
+
+        {/* Dev + Design — full case studies */}
+        <motion.section className="work-grid-section" variants={fade}>
+          <span className="work-section-label mono">Development & Design</span>
+          <div className="work-grid">
+            {devProjects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} />
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Design only */}
+        <motion.section className="work-grid-section" variants={fade}>
+          <span className="work-section-label mono">Design</span>
+          <div className="work-grid work-grid--design">
+            {designProjects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={devProjects.length + i} />
+            ))}
+          </div>
+        </motion.section>
+      </motion.div>
     </div>
   )
 }

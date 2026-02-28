@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Play from './pages/Play'
 import Work from './pages/Work'
+import WorkCaseStudy from './pages/WorkCaseStudy'
+import WorkDesign from './pages/WorkDesign'
 import Support from './pages/Support'
 import GrainOverlay from './components/GrainOverlay'
 import CustomCursor from './components/CustomCursor'
@@ -34,6 +36,8 @@ function AppShell() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/play" element={<Play />} />
           <Route path="/work" element={<Work />} />
+          <Route path="/work/design" element={<WorkDesign />} />
+          <Route path="/work/:id" element={<WorkCaseStudy />} />
           <Route path="/support" element={<Support />} />
         </Routes>
       </main>

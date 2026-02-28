@@ -87,7 +87,7 @@
 }
 
 .nav-link-elastic {
-  --h: .12em; 
+  --h: .12em;
   display: flex;
   gap: 0.15ch;
   font-family: var(--font-mono);
@@ -101,6 +101,11 @@
   transition: --_s 1.5s var(--easing);
   position: relative;
   padding-block: 0.5em;
+  outline: none;
+}
+
+.nav-link-elastic:focus-visible {
+  outline: none;
 }
 
 .nav-link-elastic:hover {
