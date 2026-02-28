@@ -56,10 +56,15 @@ export default function Footer() {
             {/* Right — address side */}
             <div className="pc-address">
               <div className="pc-stamp-area">
-                <svg className="cancellation-lines" width="100" height="40" viewBox="0 0 100 40" fill="none" stroke="currentColor">
-                  <path d="M0 5C20 5 30 15 50 15C70 15 80 5 100 5" strokeWidth="0.5" opacity="0.3"/>
-                  <path d="M0 15C20 15 30 25 50 25C70 25 80 15 100 15" strokeWidth="0.5" opacity="0.3"/>
-                  <path d="M0 25C20 25 30 35 50 35C70 35 80 25 100 25" strokeWidth="0.5" opacity="0.3"/>
+                <svg className="cancellation-lines" width="200" height="100" viewBox="0 0 200 100" fill="none" stroke="currentColor">
+                  <g strokeWidth="1.5" opacity="0.8">
+                    <path d="M0 20 Q 25 5, 50 20 T 100 20 T 150 20 T 200 20" />
+                    <path d="M0 32 Q 25 17, 50 32 T 100 32 T 150 32 T 200 32" />
+                    <path d="M0 44 Q 25 29, 50 44 T 100 44 T 150 44 T 200 44" />
+                    <path d="M0 56 Q 25 41, 50 56 T 100 56 T 150 56 T 200 56" />
+                    <path d="M0 68 Q 25 53, 50 68 T 100 68 T 150 68 T 200 68" />
+                    <path d="M0 80 Q 25 65, 50 80 T 100 80 T 150 80 T 200 80" />
+                  </g>
                 </svg>
                 <div className="pc-stamp" aria-hidden="true">
                   <img src="/JS-Stamp.png" alt="Stamp" className="pc-stamp-img" />
