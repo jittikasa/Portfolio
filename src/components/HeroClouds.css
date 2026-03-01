@@ -8,9 +8,18 @@
   left: 0;
   right: 0;
   height: 45vh;
-  z-index: 1;
   pointer-events: none;
   overflow: visible;
+}
+
+/* Lower clouds sit BELOW the bird */
+.hero-clouds-lower {
+  z-index: 1;
+}
+
+/* Upper clouds sit ABOVE the bird */
+.hero-clouds-upper {
+  z-index: 3;
 }
 
 /* ── Individual cloud wrapper ── */

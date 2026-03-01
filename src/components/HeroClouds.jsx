@@ -6,7 +6,7 @@ import './HeroClouds.css'
   - feTurbulence for painterly brush-stroke texture
   - Warm palette: cream, lavender, soft rose (matching the beach painting)
   - Organic blob shapes via multiple ellipses
-  - 3 depth layers with parallax scroll
+  - Split into Upper/Lower layers so the bird can fly between them
 */
 
 /* SVG filter that gives clouds an oil-paint / impressionist texture */
@@ -130,50 +130,37 @@ export function Cloud({ className, style, variant = 'a', filter = 'cloud-paint' 
   )
 }
 
-export default function HeroClouds() {
+/* Shared scroll helpers */
+function useCloudScroll() {
   const { scrollY } = useScroll()
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800
-
-  // Each cloud gets its own horizontal drift direction & speed
-  // Negative = fly left, positive = fly right
   const useDrift = (range, px) => useTransform(scrollY, [0, vh * range], [0, px], { clamp: true })
   const useFade  = (range)     => useTransform(scrollY, [0, vh * range], [1, 0], { clamp: true })
+  return { useDrift, useFade }
+}
 
-  // 18 clouds — scattered naturally across top 30%
+/*
+  Upper clouds (z-index 3) — heavy clouds that sit ABOVE the bird
+  Row 1: c1, c2, c17, c21, c22, c23
+  Row 2: c10, c4
+*/
+export function CloudsUpper() {
+  const { useDrift, useFade } = useCloudScroll()
+
+  // Row 1
   const c1x  = useDrift(1.3, -180);  const c1o  = useFade(1.0)
   const c2x  = useDrift(1.5, 160);   const c2o  = useFade(1.2)
-  const c3x  = useDrift(1.4, -140);  const c3o  = useFade(1.1)
-  const c4x  = useDrift(1.6, 120);   const c4o  = useFade(1.3)
-  const c5x  = useDrift(1.8, -100);  const c5o  = useFade(1.5)
-  const c6x  = useDrift(2.0, 110);   const c6o  = useFade(1.6)
-  const c7x  = useDrift(2.2, -80);   const c7o  = useFade(1.8)
-  const c8x  = useDrift(2.0, 90);    const c8o  = useFade(1.7)
-  const c9x  = useDrift(2.5, -60);   const c9o  = useFade(2.0)
-  const c10x = useDrift(1.5, -150);  const c10o = useFade(1.2)
-  const c11x = useDrift(1.7, 130);   const c11o = useFade(1.4)
-  const c12x = useDrift(2.3, -70);   const c12o = useFade(1.9)
-  const c13x = useDrift(1.9, 100);   const c13o = useFade(1.5)
-  const c14x = useDrift(2.6, -50);   const c14o = useFade(2.1)
-  const c15x = useDrift(2.1, 85);    const c15o = useFade(1.7)
-  const c16x = useDrift(2.8, -45);   const c16o = useFade(2.3)
   const c17x = useDrift(1.6, 140);   const c17o = useFade(1.3)
-  const c18x = useDrift(3.0, -35);   const c18o = useFade(2.5)
-  const c19x = useDrift(1.4, 150);   const c19o = useFade(1.1)
-  const c20x = useDrift(1.7, 120);   const c20o = useFade(1.3)
-  const c21x = useDrift(1.5, 115);   const c21o = useFade(1.2)  // top-right fill
-  const c22x = useDrift(1.3, -95);   const c22o = useFade(1.0)  // near 'Work' nav
-  const c23x = useDrift(1.8, 80);    const c23o = useFade(1.4)  // top-right low
+  const c21x = useDrift(1.5, 115);   const c21o = useFade(1.2)
+  const c22x = useDrift(1.3, -95);   const c22o = useFade(1.0)
+  const c23x = useDrift(1.8, 80);    const c23o = useFade(1.4)
+
+  // Row 2
+  const c10x = useDrift(1.5, -150);  const c10o = useFade(1.2)
+  const c4x  = useDrift(1.6, 120);   const c4o  = useFade(1.3)
 
   return (
-    <div className="hero-clouds" aria-hidden="true">
-      <PaintFilter />
-
-      {/*
-        Spread layout — staggered checkerboard pattern
-        On a 1440px screen: lg=620px(~43%), md=460px(~32%), sm=320px(~22%), xs=200px(~14%)
-        Only 3-4 clouds per row, offset so no vertical stacking
-      */}
-
+    <div className="hero-clouds hero-clouds-upper" aria-hidden="true">
       {/* Row 1 — top, heavy on edges, clear center */}
       <motion.div className="cloud-solo" style={{ x: c1x, opacity: c1o }}>
         <Cloud className="sz-lg" variant="d" filter="cloud-paint"
@@ -190,7 +177,6 @@ export default function HeroClouds() {
                style={{ top: '1%', left: '58%' }} />
       </motion.div>
 
-      {/* Top-right fill — near 'Work' nav */}
       <motion.div className="cloud-solo" style={{ x: c21x, opacity: c21o }}>
         <Cloud className="sz-sm" variant="b" filter="cloud-paint"
                style={{ top: '0%', left: '68%' }} />
@@ -216,6 +202,40 @@ export default function HeroClouds() {
         <Cloud className="sz-md" variant="a" filter="cloud-paint-soft"
                style={{ top: '8%', left: '68%' }} />
       </motion.div>
+    </div>
+  )
+}
+
+/*
+  Lower clouds (z-index 1) — wisps that sit BELOW the bird
+  Row 3: c9, c5, c8
+  Row 4: c12, c7, c13, c16, c3, c11, c14, c15, c18, c6, c19, c20
+*/
+export function CloudsLower() {
+  const { useDrift, useFade } = useCloudScroll()
+
+  // Row 3
+  const c9x  = useDrift(2.5, -60);   const c9o  = useFade(2.0)
+  const c5x  = useDrift(1.8, -100);  const c5o  = useFade(1.5)
+  const c8x  = useDrift(2.0, 90);    const c8o  = useFade(1.7)
+
+  // Row 4
+  const c12x = useDrift(2.3, -70);   const c12o = useFade(1.9)
+  const c7x  = useDrift(2.2, -80);   const c7o  = useFade(1.8)
+  const c13x = useDrift(1.9, 100);   const c13o = useFade(1.5)
+  const c16x = useDrift(2.8, -45);   const c16o = useFade(2.3)
+  const c3x  = useDrift(1.4, -140);  const c3o  = useFade(1.1)
+  const c11x = useDrift(1.7, 130);   const c11o = useFade(1.4)
+  const c14x = useDrift(2.6, -50);   const c14o = useFade(2.1)
+  const c15x = useDrift(2.1, 85);    const c15o = useFade(1.7)
+  const c18x = useDrift(3.0, -35);   const c18o = useFade(2.5)
+  const c6x  = useDrift(2.0, 110);   const c6o  = useFade(1.6)
+  const c19x = useDrift(1.4, 150);   const c19o = useFade(1.1)
+  const c20x = useDrift(1.7, 120);   const c20o = useFade(1.3)
+
+  return (
+    <div className="hero-clouds hero-clouds-lower" aria-hidden="true">
+      <PaintFilter />
 
       {/* Row 3 — spread edges + one center-ish */}
       <motion.div className="cloud-solo" style={{ x: c9x, opacity: c9o }}>
@@ -295,7 +315,16 @@ export default function HeroClouds() {
         <Cloud className="sz-sm" variant="a" filter="cloud-paint"
                style={{ top: '16%', left: '93%' }} />
       </motion.div>
-
     </div>
+  )
+}
+
+/* Default export kept for backwards compat (not used by HeroScene anymore) */
+export default function HeroClouds() {
+  return (
+    <>
+      <CloudsLower />
+      <CloudsUpper />
+    </>
   )
 }

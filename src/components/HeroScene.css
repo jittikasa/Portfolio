@@ -9,16 +9,7 @@
   z-index: -1;
 }
 
-/* Clouds sit above the painting within the scene */
-.hero-scene .hero-clouds {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 45vh;
-  z-index: 1;
-  overflow: visible;
-}
+/* Cloud layers are z-indexed in HeroClouds.css (lower=1, upper=3) */
 
 .scene-painting {
   position: absolute;
@@ -26,6 +17,24 @@
   transform-origin: center top;
   will-change: transform;
   overflow: hidden;
+}
+
+.hero-bird {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 140px;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .hero-bird {
+    width: 90px;
+  }
 }
 
 .scene-painting img {

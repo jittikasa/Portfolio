@@ -170,22 +170,44 @@ export default function WorkCaseStudy() {
         {/* Gallery placeholders */}
         <FadeUp>
           <div className="cs-gallery">
-            <div className="cs-gallery-grid cs-gallery-full">
-              <div className="cs-gallery-item cs-gallery-item--hero">
-                <div className="cs-gallery-wash" aria-hidden="true" />
-                <span className="mono">Image</span>
-              </div>
-            </div>
-            <div className="cs-gallery-grid cs-gallery-pair">
-              <div className="cs-gallery-item cs-gallery-item--pair">
-                <div className="cs-gallery-wash" aria-hidden="true" />
-                <span className="mono">Image</span>
-              </div>
-              <div className="cs-gallery-item cs-gallery-item--pair">
-                <div className="cs-gallery-wash" aria-hidden="true" />
-                <span className="mono">Image</span>
-              </div>
-            </div>
+            {project.images?.length ? (
+              <>
+                <div className="cs-gallery-grid cs-gallery-full">
+                  <div className="cs-gallery-item cs-gallery-item--hero">
+                    <img src={project.images[0]} alt={`${project.title} screenshot 1`} />
+                  </div>
+                </div>
+
+                {project.images.length > 1 && (
+                  <div className="cs-gallery-grid cs-gallery-pair">
+                    {project.images.slice(1).map((image, index) => (
+                      <div key={image} className="cs-gallery-item cs-gallery-item--pair">
+                        <img src={image} alt={`${project.title} screenshot ${index + 2}`} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="cs-gallery-grid cs-gallery-full">
+                  <div className="cs-gallery-item cs-gallery-item--hero">
+                    <div className="cs-gallery-wash" aria-hidden="true" />
+                    <span className="mono">Image</span>
+                  </div>
+                </div>
+                <div className="cs-gallery-grid cs-gallery-pair">
+                  <div className="cs-gallery-item cs-gallery-item--pair">
+                    <div className="cs-gallery-wash" aria-hidden="true" />
+                    <span className="mono">Image</span>
+                  </div>
+                  <div className="cs-gallery-item cs-gallery-item--pair">
+                    <div className="cs-gallery-wash" aria-hidden="true" />
+                    <span className="mono">Image</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </FadeUp>
       </div>
