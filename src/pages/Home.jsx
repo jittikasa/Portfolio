@@ -20,7 +20,7 @@ const mist = {
 const vh = typeof window !== 'undefined' ? window.innerHeight : 800
 
 function HeroStatus({ scrollY }) {
-  const opacity = useTransform(scrollY, [vh * 2.0, vh * 2.6], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 3.0, vh * 3.6], [1, 0])
   return (
     <motion.div
       className="hero-status"
@@ -35,7 +35,7 @@ function HeroStatus({ scrollY }) {
 }
 
 function HeroInner({ scrollY, children }) {
-  const opacity = useTransform(scrollY, [vh * 2.0, vh * 2.6], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 3.0, vh * 3.6], [1, 0])
   return (
     <motion.div className="h-hero-inner" style={{ opacity }}>
       {children}
@@ -73,7 +73,7 @@ export default function Home() {
     },
     {
       title: "Web Development",
-      icon: "◌",
+      icon: "✧",
       key: "web-dev",
       link: "/work",
       description: "Hand-built in React or WordPress — custom themes, plugins, and everything in between. Fast, accessible, and faithful to the design."
@@ -150,8 +150,7 @@ export default function Home() {
             {services.map((s, i) => (
               <motion.div
                 key={i}
-                className={`service-stroke ${activeService === i ? 'active' : ''}`}
-                onClick={() => setActiveService(activeService === i ? null : i)}
+                className="service-stroke"
                 initial="hidden"
                 whileInView="show"
                 variants={fade}
@@ -159,55 +158,31 @@ export default function Home() {
                 <div className="stroke-header">
                   <span className="stroke-icon">{s.icon}</span>
                   <span className="stroke-title">{s.title}</span>
-                  <span className="stroke-toggle">{activeService === i ? '−' : '+'}</span>
                 </div>
-                <AnimatePresence initial={false}>
-                  {activeService === i && (
-                    <motion.div
-                      style={{ overflow: 'hidden' }}
-                      initial={{ height: 0 }}
-                      animate={{ height: 'auto' }}
-                      exit={{ height: 0 }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                
+                <div className="stroke-content">
+                  <p className="stroke-description">
+                    {s.description}
+                  </p>
+                  <div className="stroke-projects">
+                    {getProjectsByService(s.key).slice(0, 3).map(p => (
+                      <Link
+                        key={p.id}
+                        to={p.category === 'play' ? '/play' : p.subcategory === 'design' ? '/work/design' : `/work/${p.id}`}
+                        className="stroke-project-pill"
+                      >
+                        <span className="pill-dot" style={{ background: p.accentColor }} />
+                        {p.title}
+                      </Link>
+                    ))}
+                    <Link
+                      to={s.link}
+                      className="stroke-see-all"
                     >
-                      <motion.p
-                        className="stroke-description"
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeOut', delay: 0.18 }}
-                      >
-                        {s.description}
-                      </motion.p>
-                      <motion.div
-                        className="stroke-projects"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, delay: 0.28 }}
-                      >
-                        {getProjectsByService(s.key).slice(0, 3).map(p => (
-                          <Link
-                            key={p.id}
-                            to={p.category === 'play' ? '/play' : p.subcategory === 'design' ? '/work/design' : `/work/${p.id}`}
-                            className="stroke-project-pill"
-                            onClick={e => e.stopPropagation()}
-                          >
-                            <span className="pill-dot" style={{ background: p.accentColor }} />
-                            {p.title}
-                          </Link>
-                        ))}
-                        <Link
-                          to={s.link}
-                          className="stroke-see-all"
-                          onClick={e => e.stopPropagation()}
-                        >
-                          See all →
-                        </Link>
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      See all →
+                    </Link>
+                  </div>
+                </div>
                 <div className="stroke-wash"></div>
               </motion.div>
             ))}
