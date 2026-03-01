@@ -44,19 +44,26 @@ export default function Play() {
                       <span className="binder-eyebrow mono">{activeIndex + 1} / {projects.length}</span>
                     </div>
                     <h1 className="binder-title">{active.title}</h1>
-                    <p className="binder-subtitle serif-italic">{active.subtitle}</p>
                   </div>
 
                   <div className="binder-body">
                     <p className="binder-desc">{active.description}</p>
 
                     <div className="binder-tags">
-                      {active.tags.map(t => <span key={t} className="tag mono">{t}</span>)}
+                      {active.tags.map((t, i) => {
+                        const dotColors = ['#8BAABF', '#C9A8A8', '#7A7850', '#5B7A96', '#8A8760', '#B0AE8A']
+                        return (
+                          <span key={t} className="tag mono">
+                            <span className="tag-dot" style={{ background: dotColors[i % dotColors.length] }} />
+                            {t}
+                          </span>
+                        )
+                      })}
                     </div>
 
                     {active.features && active.features.length > 0 && (
                       <div className="binder-section">
-                        <h3 className="binder-section-title mono">Features</h3>
+                        <h3 className="binder-section-title">Features</h3>
                         <ul className="binder-features">
                           {active.features.map(f => <li key={f}>{f}</li>)}
                         </ul>

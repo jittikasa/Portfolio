@@ -194,41 +194,36 @@ export default function Work() {
           <Cloud className="sz-xs" variant="a" filter="cloud-paint-wispy" style={{ top: '85%',  left: '60%'  }} />
         </div>
 
-        <motion.div
-          className="work-inner"
-          initial="hidden"
-          animate="show"
-          variants={stagger}
-        >
+        <div className="work-inner">
           {/* Hero — matches contact/support pattern */}
-          <motion.div className="work-header" variants={fade}>
+          <div className="work-header">
             <p className="work-eyebrow mono">Selected Work</p>
             <h1 className="work-title">Development, design<br /><em>& everything between.</em></h1>
             <p className="work-sub">
               Client projects, freelance builds, and design work — from full-stack platforms to Figma prototypes.
             </p>
-          </motion.div>
+          </div>
 
           {/* Dev + Design — full case studies */}
-          <motion.section className="work-grid-section" variants={fade}>
-            <span className="work-section-label mono">Development & Design</span>
+          <section className="work-grid-section">
+            <span className="work-section-label">Development & Design</span>
             <div className="work-grid">
               {devProjects.map((p, i) => (
                 <ProjectCard key={p.id} project={p} index={i} onOpenDesign={setSelectedDesign} />
               ))}
             </div>
-          </motion.section>
+          </section>
 
           {/* Design only */}
-          <motion.section className="work-grid-section" variants={fade}>
-            <span className="work-section-label mono">Design</span>
+          <section className="work-grid-section">
+            <span className="work-section-label">Design</span>
             <div className="work-grid work-grid--design">
               {designProjects.map((p, i) => (
                 <ProjectCard key={p.id} project={p} index={devProjects.length + i} onOpenDesign={setSelectedDesign} />
               ))}
             </div>
-          </motion.section>
-        </motion.div>
+          </section>
+        </div>
       </div>
 
       <AnimatePresence>

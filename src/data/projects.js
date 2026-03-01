@@ -86,7 +86,8 @@ export const projects = [
       '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.webp',
       '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.webp',
       '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.webp',
-      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp'
+      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp',
+      '/work/dinipetty/screencapture-dinipetty-product-patty-duke-on-the-dini-petty-show-2026-03-01-16_42_30.png'
     ],
     overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The project evolved from a standard brand site into a complex media archive engine.',
     pillars: [
@@ -103,7 +104,7 @@ export const projects = [
         title: 'The Engine',
         subtitle: 'Media Archive & Licensing System',
         description: 'The core innovation: a custom-built archival system. We scraped and cleaned decades of raw episode data, structured it into a searchable database, and replaced the standard e-commerce checkout with a bespoke licensing quote workflow.',
-        imageIndices: [0, 1], // Homepage (Archive), Licensing page
+        imageIndices: [5, 1], // New PNG, Licensing page
         tags: ['Database Architecture', 'Custom Plugin', 'Data Scraping']
       }
     ],
@@ -113,7 +114,7 @@ export const projects = [
       { year: '2025', title: 'Maintenance & Updates' },
       { year: '2026', title: 'Archives & Licensing System' }
     ],
-    pageLabels: ['Homepage', 'Media Licensing', 'Booking', 'Product Detail', 'Blog Post'],
+    pageLabels: ['Homepage', 'Media Licensing', 'Booking', 'Product Detail', 'Blog Post', 'Quote Cart'],
     systemOverview: {
       title: 'Data & Archives',
       description: 'Scraped and cleaned decades of raw episode data — standardizing guest names, dates, topics, and media references across hundreds of entries. Built the data pipeline from scratch and structured everything into a searchable WooCommerce-based archive.',

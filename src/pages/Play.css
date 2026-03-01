@@ -20,7 +20,7 @@
 .binder-container {
   width: 100%;
   max-width: 1300px;
-  height: 90vh;
+  height: 80vh;
   position: relative;
   z-index: 10;
   flex-shrink: 0;
@@ -153,7 +153,7 @@
 }
 
 .binder-header {
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .binder-header-top {
@@ -164,10 +164,8 @@
 }
 
 .binder-eyebrow {
-  font-size: 0.62rem;
-  color: var(--ink-muted);
+  color: var(--ink);
   display: block;
-  opacity: 1;
 }
 
 .binder-support-pill {
@@ -201,9 +199,10 @@
 }
 
 .binder-subtitle {
-  font-size: 1.1rem;
+  font-family: 'Shorelines Script', cursive;
+  font-style: normal;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
   color: var(--ink);
-  opacity: 0.65;
 }
 
 .binder-body {
@@ -229,13 +228,22 @@
 }
 
 .tag {
-  font-size: 0.6rem;
-  background: var(--sage-pale);
-  opacity: 0.7;
-  padding: 6px 16px;
-  border-radius: 99px;
-  color: var(--ink-muted);
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--sage-mid, #c5c9c0);
+}
+
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ──────────────────────────────────────────
@@ -246,12 +254,10 @@
 }
 
 .binder-section-title {
-  font-size: 0.58rem;
-  color: var(--ink-muted);
-  opacity: 0.6;
+  font-family: 'Shorelines Script', cursive;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  color: var(--sage);
   margin-bottom: 0.8rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(55, 53, 30, 0.06);
 }
 
 .binder-features {
@@ -264,9 +270,8 @@
 
 .binder-features li {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--ink);
-  opacity: 0.8;
   padding-left: 1rem;
   position: relative;
   line-height: 1.5;
@@ -293,9 +298,7 @@
 }
 
 .binder-detail-label {
-  font-size: 0.55rem;
-  color: var(--ink-muted);
-  opacity: 0.55;
+  color: var(--ink);
   text-transform: capitalize;
   flex-shrink: 0;
   min-width: 4.5rem;
@@ -305,7 +308,6 @@
   font-family: var(--font-body);
   font-size: 0.82rem;
   color: var(--ink);
-  opacity: 0.75;
 }
 
 /* ──────────────────────────────────────────
@@ -321,15 +323,14 @@
 }
 
 .binder-meta-link {
-  color: var(--ink-muted);
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 0.64rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  opacity: 0.9;
-  border-bottom: 1px solid rgba(55, 53, 30, 0.12);
+  border-bottom: 1px solid var(--sage-mid, #c5c9c0);
   padding-bottom: 0.12rem;
   transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
@@ -391,7 +392,6 @@
   color: var(--ink);
   font-size: 0.8rem;
   letter-spacing: 0.14em;
-  opacity: 0.8;
 }
 
 /* ──────────────────────────────────────────
@@ -407,7 +407,7 @@
 .binder-tabs {
   position: absolute;
   top: 2rem;
-  right: -40px;
+  right: -30px;
   z-index: 20;
 }
 
@@ -434,12 +434,11 @@
 }
 
 .binder-tab .tab-label {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 0.53rem;
-  letter-spacing: 0.18em;
+  writing-mode: vertical-lr;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--ink);
   white-space: nowrap;
 }
 
@@ -448,7 +447,7 @@
 }
 
 .binder-tab.is-active {
-  background: #F3EFE6;
+  background: #F9F8F4;
   width: 34px;
   border-color: rgba(55,53,30,0.1);
   border-left: none;
@@ -644,7 +643,6 @@
   text-transform: uppercase;
   text-align: center;
   color: var(--sage-deep);
-  opacity: 0.9;
 }
 
 .cta-header,
@@ -669,9 +667,9 @@
   letter-spacing: 0.01em;
   margin: 0 auto 2rem;
   max-width: 34ch;
-  font-size: clamp(1rem, 1.9vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.19rem);
   line-height: 1.6;
-  color: rgba(55, 53, 30, 0.78);
+  color: var(--ink);
 }
 
 .cta-atelier-details {
@@ -750,7 +748,7 @@
   background: rgba(255, 255, 255, 0.36);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: clamp(0.95rem, 1.71vw, 1.14rem);
   font-weight: 500;
   letter-spacing: 0.01em;
   backdrop-filter: blur(8px);
@@ -806,7 +804,6 @@
   color: var(--sage-deep);
   letter-spacing: 0.2em;
   margin-bottom: 1.5rem;
-  opacity: 0.6;
 }
 
 .cta-title {
@@ -820,7 +817,6 @@
   font-family: var(--font-body);
   font-size: 1.05rem;
   color: var(--ink);
-  opacity: 0.7;
   margin-bottom: 2rem;
   line-height: 1.6;
 }
@@ -843,9 +839,7 @@
 }
 
 .cta-detail-label {
-  font-size: 0.55rem;
-  color: var(--ink-muted);
-  opacity: 0.5;
+  color: var(--ink);
   text-transform: uppercase;
 }
 
@@ -853,7 +847,6 @@
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--ink);
-  opacity: 0.8;
   max-width: 35ch;
 }
 

@@ -132,7 +132,7 @@ export default function WorkCaseStudy() {
 
       <div className="cs-container">
 
-        {hasTimeline && (
+        {hasTimeline ? (
           <FadeUp>
             <div className="cs-hero-row">
               <div className="cs-hero-row-media">
@@ -155,16 +155,15 @@ export default function WorkCaseStudy() {
                   </a>
                 )}
 
-                {/* Atelier Timeline — Back in hero info area */}
+                {/* Atelier Timeline */}
                 <div className="cs-atelier-wrap">
                   <span className="cs-timeline-label-script">Project Timeline</span>
                   <div className="cs-atelier-timeline">
                     {project.timeline.map((entry, i) => (
-                    <motion.button 
-                      key={entry.year} 
+                    <motion.button
+                      key={entry.year}
                       className="cs-atelier-step"
                       onClick={() => {
-                        // Scroll to foundation for 2023, engine for 2026, or respective phase
                         let targetId = `phase-${entry.year}`
                         if (hasPillars) {
                           if (entry.year === '2023') targetId = 'pillar-foundation'
@@ -183,11 +182,11 @@ export default function WorkCaseStudy() {
                       whileHover="hover"
                     >
                       <div className="cs-atelier-marker">
-                        <motion.div 
-                          className="cs-atelier-bloom" 
+                        <motion.div
+                          className="cs-atelier-bloom"
                           style={{ backgroundColor: dotColors[i % dotColors.length] }}
-                          variants={{ 
-                            hover: { scale: 1.8, filter: 'blur(3px)', opacity: 0.85 } 
+                          variants={{
+                            hover: { scale: 1.8, filter: 'blur(3px)', opacity: 0.85 }
                           }}
                         />
                       </div>
@@ -200,7 +199,51 @@ export default function WorkCaseStudy() {
                 </div>
               </div>
             </div>
-          </FadeUp>
+          </div>
+        </FadeUp>
+        ) : (
+          /* Simple case study — no timeline, no pillars */
+          <>
+            <FadeUp>
+              <div className="cs-hero-row">
+                <div className="cs-hero-row-media">
+                  {images[0] && (
+                    <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
+                  )}
+                </div>
+                <div className="cs-hero-row-info">
+                  {project.overview && (
+                    <p className="cs-intro-text">{project.overview}</p>
+                  )}
+                  {project.links?.live && (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cs-visit mono"
+                    >
+                      Visit Site →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </FadeUp>
+
+            {images.length > 1 && (
+              <div className="cs-simple-gallery">
+                {images.slice(1).map((img, i) => (
+                  <FadeUp key={img}>
+                    <div className="cs-simple-gallery-item">
+                      {project.pageLabels?.[i + 1] && (
+                        <span className="cs-simple-gallery-label mono">{project.pageLabels[i + 1]}</span>
+                      )}
+                      <BrowserFrame src={img} alt={`${project.title} — ${project.pageLabels?.[i + 1] || `page ${i + 2}`}`} />
+                    </div>
+                  </FadeUp>
+                ))}
+              </div>
+            )}
+          </>
         )}
 
         {/* Dynamic Pillars (The Storytelling Backbone) */}
@@ -214,7 +257,12 @@ export default function WorkCaseStudy() {
                     <h3 className="cs-pillar-subtitle">{pillar.subtitle}</h3>
                     <p className="cs-pillar-desc">{pillar.description}</p>
                     <div className="cs-pillar-tags">
-                      {pillar.tags.map(t => <span key={t} className="cs-pillar-tag mono">{t}</span>)}
+                      {pillar.tags.map((t, ti) => (
+                        <span key={t} className="cs-pillar-tag mono">
+                          <span className="cs-pillar-tag-dot" style={{ background: dotColors[ti % dotColors.length] }} />
+                          {t}
+                        </span>
+                      ))}
                     </div>
                   </div>
                   
@@ -252,6 +300,7 @@ export default function WorkCaseStudy() {
         )}
 
         {/* Project Results Summary */}
+        {(project.systemOverview || project.whatWasBuilt?.length > 0) && (
         <FadeUp>
           <div className="cs-results-grid">
             {project.systemOverview && (
@@ -279,6 +328,7 @@ export default function WorkCaseStudy() {
             )}
           </div>
         </FadeUp>
+        )}
 
         {/* Other projects navigation */}
         {devProjects.length > 1 && (
