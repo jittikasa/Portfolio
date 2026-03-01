@@ -154,16 +154,16 @@ export const projects = [
     title: 'Elyana',
     subtitle: 'Brand identity & web design',
     type: 'Web Design',
-    year: '2024',
+    year: '2023',
     role: 'Designer',
     tags: ['Figma', 'UI/UX'],
     color: '#4A3F35',
     accentColor: '#C5D8E8',
     services: ['product-design'],
     images: [
-      '/work/elyana/Home.png',
-      '/work/elyana/Hillside%20Collection.png',
-      '/work/elyana/4%20Bedrooms%20Villa.png'
+      '/work/elyana/Home.webp',
+      '/work/elyana/Hillside%20Collection.webp',
+      '/work/elyana/4%20Bedrooms%20Villa.webp'
     ]
   },
   {
@@ -180,10 +180,10 @@ export const projects = [
     accentColor: '#8BAABF',
     services: ['product-design'],
     images: [
-      '/work/baanazalea/Homepage.png',
-      '/work/baanazalea/Villas.png',
-      '/work/baanazalea/Villa%20Juniper.png',
-      '/work/baanazalea/Villa%20Magnolia.png'
+      '/work/baanazalea/Homepage.webp',
+      '/work/baanazalea/Villas.webp',
+      '/work/baanazalea/Villa%20Juniper.webp',
+      '/work/baanazalea/Villa%20Magnolia.webp'
     ]
   },
   {
@@ -193,16 +193,16 @@ export const projects = [
     title: 'Phuket Prime',
     subtitle: 'UX design for a premium property platform',
     type: 'Web Design',
-    year: '2024',
+    year: '2023',
     role: 'Designer',
     tags: ['Figma', 'UX Research', 'UI/UX'],
     color: '#1E2A37',
     accentColor: '#8BAABF',
     services: ['product-design'],
     images: [
-      '/work/phuketprime/Discover.png',
-      '/work/phuketprime/Buy.png',
-      '/work/phuketprime/Single%20Property%201.png'
+      '/work/phuketprime/Discover.webp',
+      '/work/phuketprime/Buy.webp',
+      '/work/phuketprime/Single%20Property%201.webp'
     ]
   },
   {
@@ -219,10 +219,10 @@ export const projects = [
     accentColor: '#C9A8A8',
     services: ['product-design'],
     images: [
-      '/work/kudohotel/Homepage.png',
-      '/work/kudohotel/Hotel.png',
-      '/work/kudohotel/About.png',
-      '/work/kudohotel/Blogs.png'
+      '/work/kudohotel/Homepage.webp',
+      '/work/kudohotel/Hotel.webp',
+      '/work/kudohotel/About.webp',
+      '/work/kudohotel/Blogs.webp'
     ]
   },
 ]

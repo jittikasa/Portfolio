@@ -86,7 +86,7 @@ function DesignPreviewModal({ project, onClose }) {
           {project.images?.length
             ? (
               <div className="work-modal-shot-gallery">
-                {project.images.map((image, index) => (
+                {project.images.slice(0, 3).map((image, index) => (
                   <div key={image} className="work-modal-shot-frame">
                     <img src={image} alt={`${project.title} design preview ${index + 1}`} />
                   </div>
@@ -111,7 +111,6 @@ function DesignPreviewModal({ project, onClose }) {
               <span key={tag} className="work-modal-tag mono">{tag}</span>
             ))}
           </div>
-          <p className="work-modal-note">Full case study can come later. For now this keeps the browsing flow on the same page.</p>
         </div>
       </motion.div>
     </motion.div>
@@ -132,7 +131,10 @@ function ProjectCard({ project, index, onOpenDesign }) {
     <>
       <div className="work-card-image">
         {project.images?.[0]
-          ? <img src={project.images[0]} alt={project.title} />
+          ? <>
+              <img src={project.images[0]} alt={project.title} />
+              <div className="work-card-overlay" aria-hidden="true" />
+            </>
           : <>
               <div className="work-card-wash" aria-hidden="true" />
               <span className="work-card-number mono">{number}</span>
