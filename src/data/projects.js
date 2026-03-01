@@ -73,7 +73,7 @@ export const projects = [
     title: 'Dini Petty',
     subtitle: 'Archive & licensing platform for a Canadian television icon',
     type: 'Web Platform',
-    year: '2024',
+    year: '2023',
     role: 'Full-Stack Developer',
     tags: ['WordPress', 'WooCommerce', 'PHP', 'REST API', 'Custom Plugins'],
     color: '#37351E',
@@ -89,21 +89,40 @@ export const projects = [
       '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp'
     ],
     overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The system turns WooCommerce products into searchable archive entries with a quote-based licensing workflow — no traditional e-commerce checkout, no payment gateway.',
+    timeline: [
+      {
+        year: '2023',
+        title: 'Website & E-Commerce',
+        description: 'Built the initial WordPress + WooCommerce site with standard product pages, booking functionality, and content management for Dini Petty\'s media brand.',
+        imageIndex: 2
+      },
+      {
+        year: '2024',
+        title: 'Continued Support',
+      },
+      {
+        year: '2025',
+        title: 'Maintenance & Updates',
+      },
+      {
+        year: '2026',
+        title: 'Archives & Licensing System',
+        description: 'Scraped, cleaned, and structured decades of episode data — then built a custom archives plugin with filterable search, REST API, and a quote-based licensing workflow replacing traditional checkout.',
+        imageIndex: 1
+      }
+    ],
+    pageLabels: ['Homepage', 'Media Licensing', 'Booking', 'Product Detail', 'Blog Post'],
     systemOverview: {
-      title: '3-Plugin Architecture',
-      plugins: [
-        { name: 'Dini Petty Archives', description: 'Core plugin — registers WooCommerce metadata, powers REST API endpoints, admin tools, cache control.' },
-        { name: 'Dini Petty Search', description: 'Frontend search experience — filterable archive via shortcode with pagination, sorting, year/topic filters.' },
-        { name: 'Dini Petty Quotes', description: 'WooCommerce-native licensing workflow — quote requests through cart/checkout without standard payment.' }
-      ]
+      title: 'Data & Archives',
+      description: 'Scraped and cleaned decades of raw episode data — standardizing guest names, dates, topics, and media references across hundreds of entries. Built the data pipeline from scratch and structured everything into a searchable WooCommerce-based archive.',
     },
     whatWasBuilt: [
-      'Custom WooCommerce data model with _dinipetty_* metadata fields',
-      'REST API endpoints for archive listings, year filters, guest autocomplete',
-      'Shortcode-driven frontend archive search experience',
-      'Quote request system integrated into WooCommerce orders & statuses',
-      'Admin dashboards for cache control, search defaults, quote handling',
-      'Simplified architecture with WooCommerce products as single source of truth'
+      'Data scraping, cleanup, and structuring of decades of episode records',
+      'Custom archives plugin with REST API, metadata, and admin tools',
+      'Filterable search with pagination, sorting, and year/topic filters',
+      'Quote-based licensing workflow replacing standard WooCommerce checkout',
+      'Guest name autocomplete and episode cross-referencing',
+      'Admin dashboards for cache control, search defaults, and quote handling'
     ]
   },
   {
@@ -115,7 +134,7 @@ export const projects = [
     type: 'Website',
     year: '2024',
     role: 'Developer & Designer',
-    tags: ['WordPress', 'Booking System', 'PHP'],
+    tags: ['WordPress', 'Booking System', 'PHP', 'Theme Customization'],
     color: '#2C3E2D',
     accentColor: '#8BA899',
     services: ['web-dev', 'product-design'],
@@ -126,7 +145,8 @@ export const projects = [
       '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.webp',
       '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.webp'
     ],
-    overview: 'Customized a WordPress theme for Baan Imjai, a nature-connected homestay and café in Nakhon Sawan. The site tells the story of earth-built bungalows, locally sourced café menus, and a philosophy rooted in simple living — with an integrated booking system for their five named bungalows.',
+    overview: 'Customized a WordPress theme for Baan Imjai, a mud-brick homestay and café in Nakhon Sawan. The site showcases their five earth-built guest rooms, an organic café, and hands-on workshops — from mud-house construction to farm tours — with an integrated booking system and bilingual support.',
+    pageLabels: ['Homepage', 'About Us', 'Our Café'],
     systemOverview: null,
     whatWasBuilt: []
   },
@@ -135,11 +155,11 @@ export const projects = [
     subcategory: 'dev',
     id: 'anodard',
     title: 'Anodard',
-    subtitle: 'Digital presence for a Thai hospitality brand',
+    subtitle: 'Website for a boutique villa-hotel in Nai Yang, Phuket',
     type: 'Website',
     year: '2023',
     role: 'Developer & Designer',
-    tags: ['WordPress', 'PHP', 'Custom Theme', 'WooCommerce'],
+    tags: ['WordPress', 'PHP', 'Theme Customization'],
     color: '#3D2E2E',
     accentColor: '#C9A8A8',
     services: ['web-dev', 'product-design'],
@@ -150,7 +170,8 @@ export const projects = [
       '/work/anodard/screencapture-anodardphuket-about-us-2026-03-01-11_48_32.webp',
       '/work/anodard/screencapture-anodardphuket-contact-us-2026-03-01-11_49_14.webp'
     ],
-    overview: 'Designed and developed a WordPress website for Anodard, a Thai hospitality brand in Phuket. Custom theme with WooCommerce integration for their product offerings alongside the main brand presence.',
+    overview: 'Customized a WordPress theme for Anodard, a boutique villa-hotel tucked near Nai Yang Beach in Phuket. The site highlights their individually designed villas, pet-friendly philosophy, eco-friendly practices, and the quiet charm of staying five minutes from the airport and the sea.',
+    pageLabels: ['Homepage', 'About Us', 'Contact'],
     systemOverview: null,
     whatWasBuilt: []
   },

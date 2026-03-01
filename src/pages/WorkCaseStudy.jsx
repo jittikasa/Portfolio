@@ -57,6 +57,7 @@ export default function WorkCaseStudy() {
     return <Navigate to="/work" replace />
   }
 
+  const hasTimeline = project.timeline?.length > 0
   const isDetailed = project.systemOverview || project.whatWasBuilt?.length > 0
   const images = project.images || []
   const dotColors = ['#8BAABF', '#C9A8A8', '#7A7850', '#5B7A96', '#8A8760', '#B0AE8A']
@@ -101,55 +102,149 @@ export default function WorkCaseStudy() {
           </motion.p>
 
           <motion.div
-            className="cs-hero-meta"
+            className="cs-tags"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <span className="cs-hero-role mono">{project.role}</span>
-            <div className="cs-tags">
-              {project.tags.map((tag, i) => (
-                <span key={tag} className="cs-tag">
-                  <span className="cs-tag-dot" style={{ background: dotColors[i % dotColors.length] }} />
-                  {tag}
-                </span>
-              ))}
-            </div>
+            {project.tags.map((tag, i) => (
+              <span key={tag} className="cs-tag">
+                <span className="cs-tag-dot" style={{ background: dotColors[i % dotColors.length] }} />
+                {tag}
+              </span>
+            ))}
           </motion.div>
         </div>
       </header>
 
       <div className="cs-container">
 
-        {/* Hero screenshot — full width */}
-        {images[0] && (
-          <FadeUp>
-            <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
-          </FadeUp>
-        )}
-
-        {/* Overview + Visit */}
-        {project.overview && (
-          <FadeUp>
-            <div className="cs-intro">
-              <p className="cs-intro-text">{project.overview}</p>
-              {project.links?.live && (
-                <a
-                  href={project.links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cs-visit mono"
-                >
-                  Visit Site →
-                </a>
-              )}
-            </div>
-          </FadeUp>
-        )}
-
-        {/* Editorial rows — alternating screenshot + text */}
-        {isDetailed ? (
+        {hasTimeline ? (
           <>
+            {/* Hero row — 60/40 screenshot + overview */}
+            <FadeUp>
+              <div className="cs-hero-row">
+                <div className="cs-hero-row-media">
+                  {images[0] && (
+                    <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
+                  )}
+                </div>
+                <div className="cs-hero-row-info">
+                  {project.overview && (
+                    <p className="cs-intro-text">{project.overview}</p>
+                  )}
+                  {project.links?.live && (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cs-visit mono"
+                    >
+                      Visit Site →
+                    </a>
+                  )}
+
+                  {/* Timeline widget — compact vertical marker */}
+                  <div className="cs-timeline-widget">
+                    {project.timeline.map((entry, i) => (
+                      <div key={entry.year} className="cs-timeline-step">
+                        <span className="cs-timeline-dot" style={{ background: dotColors[i % dotColors.length] }} />
+                        <span className="cs-timeline-year mono">{entry.year}</span>
+                        <span className="cs-timeline-title">{entry.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </FadeUp>
+
+            {/* Phase rows — normal editorial layout */}
+            {project.timeline.map((entry, i) => (
+              <FadeUp key={entry.year}>
+                <div className={`cs-editorial ${i % 2 !== 0 ? 'cs-editorial--reverse' : ''}`}>
+                  <div className="cs-editorial-text">
+                    <span className="cs-editorial-label mono">{entry.year} — {entry.title}</span>
+                    <p className="cs-plugin-desc">{entry.description}</p>
+                  </div>
+                  <div className="cs-editorial-media">
+                    {images[entry.imageIndex] && (
+                      <BrowserFrame src={images[entry.imageIndex]} alt={`${project.title} — ${entry.title}`} />
+                    )}
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+
+            {/* Row: system overview + screenshot */}
+            {project.systemOverview && (
+              <FadeUp>
+                <div className="cs-editorial">
+                  <div className="cs-editorial-text">
+                    <span className="cs-editorial-label mono">{project.systemOverview.title}</span>
+                    {project.systemOverview.description && (
+                      <p className="cs-plugin-desc">{project.systemOverview.description}</p>
+                    )}
+                    {project.systemOverview.plugins?.map((plugin) => (
+                      <div key={plugin.name} className="cs-plugin">
+                        <h4 className="cs-plugin-name">{plugin.name}</h4>
+                        <p className="cs-plugin-desc">{plugin.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="cs-editorial-media">
+                    <BrowserFrame src={images[3] || images[1]} alt={`${project.title} — detail`} />
+                  </div>
+                </div>
+              </FadeUp>
+            )}
+
+            {/* Row: screenshot + what was built (reversed) */}
+            {project.whatWasBuilt?.length > 0 && (
+              <FadeUp>
+                <div className="cs-editorial cs-editorial--reverse">
+                  <div className="cs-editorial-text">
+                    <span className="cs-editorial-label mono">What Was Built</span>
+                    <ul className="cs-built-list">
+                      {project.whatWasBuilt.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="cs-editorial-media">
+                    <BrowserFrame src={images[4] || images[2]} alt={`${project.title} — detail`} />
+                  </div>
+                </div>
+              </FadeUp>
+            )}
+          </>
+        ) : isDetailed ? (
+          <>
+            {/* Hero screenshot — full width */}
+            {images[0] && (
+              <FadeUp>
+                <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
+              </FadeUp>
+            )}
+
+            {/* Overview + Visit */}
+            {project.overview && (
+              <FadeUp>
+                <div className="cs-intro">
+                  <p className="cs-intro-text">{project.overview}</p>
+                  {project.links?.live && (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cs-visit mono"
+                    >
+                      Visit Site →
+                    </a>
+                  )}
+                </div>
+              </FadeUp>
+            )}
+
             {/* Row: system overview + screenshot */}
             {project.systemOverview && images[1] && (
               <FadeUp>
@@ -201,16 +296,51 @@ export default function WorkCaseStudy() {
             ))}
           </>
         ) : (
-          /* Generic projects — alternating editorial rows for each remaining image */
-          images.slice(1).map((image, index) => (
-            <FadeUp key={image}>
-              <div className={`cs-editorial ${index % 2 === 0 ? 'cs-editorial--reverse' : ''}`}>
-                <div className="cs-editorial-media cs-editorial-media--solo">
-                  <BrowserFrame src={image} alt={`${project.title} — page ${index + 2}`} />
+          <>
+            {/* Hero screenshot + overview side by side */}
+            <FadeUp>
+              <div className="cs-hero-row">
+                <div className="cs-hero-row-media">
+                  {images[0] && (
+                    <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
+                  )}
+                </div>
+                <div className="cs-hero-row-info">
+                  {project.overview && (
+                    <p className="cs-intro-text">{project.overview}</p>
+                  )}
+                  {project.links?.live && (
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cs-visit mono"
+                    >
+                      Visit Site →
+                    </a>
+                  )}
                 </div>
               </div>
             </FadeUp>
-          ))
+
+            {/* Remaining screenshots — fanned stack */}
+            {images.length > 1 && (
+              <FadeUp>
+                <div className="cs-pages-fan">
+                  <div className="cs-pages-fan-stack">
+                    {images.slice(1).map((image, index) => (
+                      <div key={image} className="cs-pages-card">
+                        <span className="cs-pages-card-label mono">
+                          {project.pageLabels?.[index + 1] || `Page ${index + 2}`}
+                        </span>
+                        <BrowserFrame src={image} alt={`${project.title} — ${project.pageLabels?.[index + 1] || `page ${index + 2}`}`} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </FadeUp>
+            )}
+          </>
         )}
 
         {/* Other projects */}
@@ -219,6 +349,10 @@ export default function WorkCaseStudy() {
             <div className="cs-others">
               <span className="cs-others-label">Other Projects</span>
               <div className="cs-others-list">
+                <Link to="/work" className="cs-others-link">
+                  <span>All Work</span>
+                  <span className="cs-others-arrow">↗</span>
+                </Link>
                 {devProjects.filter(p => p.id !== project.id).map(p => (
                   <Link key={p.id} to={`/work/${p.id}`} className="cs-others-link">
                     <span>{p.title}</span>
@@ -226,7 +360,6 @@ export default function WorkCaseStudy() {
                   </Link>
                 ))}
               </div>
-              <Link to="/work" className="cs-back-link">← All Work</Link>
             </div>
           </FadeUp>
         )}
