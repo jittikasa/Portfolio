@@ -7,33 +7,32 @@ export default function HeroScene() {
   const { scrollY } = useScroll()
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800
 
-  // Zoom completes at 1.5vh (was 2.3vh)
-  const rawScale     = useTransform(scrollY, [0, vh * 1.5], [1.7, 1])
+  // Zoom completes earlier so the atelier section arrives sooner.
+  const rawScale     = useTransform(scrollY, [0, vh * 1.1], [1.7, 1])
   const scale        = useSpring(rawScale, { stiffness: 40, damping: 25, mass: 1.2 })
 
-  // Scene fades out 2.0–2.5vh (was 3.2–3.8vh)
-  const sceneOpacity = useTransform(scrollY, [vh * 2.0, vh * 2.5], [1, 0])
+  const sceneOpacity = useTransform(scrollY, [vh * 1.15, vh * 1.45], [1, 0])
 
   // Bird — compressed flight arc
   const rawBirdX = useTransform(scrollY,
-    [0, vh * 0.3, vh * 0.6, vh * 1.0, vh * 1.5, vh * 2.0],
+    [0, vh * 0.25, vh * 0.5, vh * 0.8, vh * 1.1, vh * 1.4],
     ['59vw', '50vw', '30vw', '15vw', '8vw', '12vw']
   )
   const birdX = useSpring(rawBirdX, { stiffness: 18, damping: 28, mass: 1.2 })
 
   // Sine-wave hover on air currents
-  const birdHover = useTransform(scrollY, [0, vh * 2.0], [0, Math.PI * 12])
+  const birdHover = useTransform(scrollY, [0, vh * 1.4], [0, Math.PI * 12])
   const birdYOffset = useTransform(birdHover, (v) => Math.sin(v) * 18)
 
   // Organic arc: dip slightly first, then sweep up steeply
   const rawBirdY = useTransform(scrollY,
-    [0, vh * 0.2, vh * 0.5, vh * 0.8, vh * 1.2, vh * 1.6, vh * 2.0],
+    [0, vh * 0.18, vh * 0.38, vh * 0.6, vh * 0.9, vh * 1.15, vh * 1.4],
     ['31vh', '33vh', '24vh', '14vh', '2vh', '-20vh', '-55vh']
   )
   const birdY = useSpring(rawBirdY, { stiffness: 12, damping: 32, mass: 1.5 })
 
   // Bird fades out with scene
-  const birdOpacity = useTransform(scrollY, [0, vh * 1.8, vh * 2.3], [1, 1, 0])
+  const birdOpacity = useTransform(scrollY, [0, vh * 1.1, vh * 1.4], [1, 1, 0])
 
   return (
     <>

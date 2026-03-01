@@ -19,7 +19,7 @@ const mist = {
 const vh = typeof window !== 'undefined' ? window.innerHeight : 800
 
 function HeroStatus({ scrollY }) {
-  const opacity = useTransform(scrollY, [vh * 1.8, vh * 2.3], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 1.2, vh * 1.55], [1, 0])
   return (
     <motion.div
       className="hero-status"
@@ -34,7 +34,7 @@ function HeroStatus({ scrollY }) {
 }
 
 function HeroInner({ scrollY, children }) {
-  const opacity = useTransform(scrollY, [vh * 1.8, vh * 2.3], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 1.2, vh * 1.55], [1, 0])
   return (
     <motion.div className="h-hero-inner" style={{ opacity }}>
       {children}
@@ -42,10 +42,9 @@ function HeroInner({ scrollY, children }) {
   )
 }
 
-function HeroBio({ scrollY, children }) {
-  const opacity = useTransform(scrollY, [vh * 1.05, vh * 1.45], [1, 0])
+function HeroBio({ children }) {
   return (
-    <motion.div className="h-hero-inner h-hero-bio-persist" style={{ opacity }}>
+    <motion.div className="h-hero-inner h-hero-bio-persist">
       <div className="hero-bio">
         {children}
       </div>
@@ -110,7 +109,7 @@ export default function Home() {
           </HeroInner>
 
           {/* Bio persists after reveal but fades before next section */}
-          <HeroBio scrollY={scrollY}>
+          <HeroBio>
               <motion.span
                 style={{ display: 'block' }}
                 initial={{ opacity: 0 }}
