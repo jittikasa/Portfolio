@@ -1,8 +1,8 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { getProjectById } from '../data/projects'
-import { PaintFilter, Cloud } from '../components/HeroClouds'
+import { getProjectById, getWorkProjects } from '../data/projects'
+import { PaintFilter } from '../components/HeroClouds'
 import './WorkCaseStudy.css'
 
 function useFadeUp() {
@@ -34,6 +34,21 @@ function FadeUp({ children, className = '' }) {
   )
 }
 
+function BrowserFrame({ src, alt, loading = 'lazy' }) {
+  return (
+    <div className="cs-frame">
+      <div className="cs-frame-bar">
+        <span className="cs-frame-dot" />
+        <span className="cs-frame-dot" />
+        <span className="cs-frame-dot" />
+      </div>
+      <div className="cs-frame-viewport">
+        <img src={src} alt={alt} loading={loading} />
+      </div>
+    </div>
+  )
+}
+
 export default function WorkCaseStudy() {
   const { id } = useParams()
   const project = getProjectById(id)
@@ -42,28 +57,26 @@ export default function WorkCaseStudy() {
     return <Navigate to="/work" replace />
   }
 
+  const isDetailed = project.systemOverview || project.whatWasBuilt?.length > 0
+  const images = project.images || []
+  const dotColors = ['#8BAABF', '#C9A8A8', '#7A7850', '#5B7A96', '#8A8760', '#B0AE8A']
+
+  // Next project navigation
+  const devProjects = getWorkProjects('dev')
+  const currentIndex = devProjects.findIndex(p => p.id === project.id)
+  const nextProject = devProjects[(currentIndex + 1) % devProjects.length]
+
   return (
     <div className="cs-page">
       <PaintFilter />
 
-      {/* Back link */}
-      <div className="cs-back-wrap">
-        <Link to="/work" className="cs-back mono">← All Work</Link>
-      </div>
-
       {/* Hero */}
       <header className="cs-hero">
-        <div className="cs-hero-clouds" aria-hidden="true">
-          <Cloud className="sz-sm" variant="c" filter="cloud-paint-soft"  style={{ top: '-10%', left: '-8%'  }} />
-          <Cloud className="sz-xs" variant="a" filter="cloud-paint-wispy" style={{ top: '20%',  left: '82%'  }} />
-          <Cloud className="sz-xs" variant="d" filter="cloud-paint"       style={{ top: '70%',  left: '88%'  }} />
-        </div>
-
         <div className="cs-hero-inner">
           <motion.span
             className="cs-hero-type mono"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
             {project.type} · {project.year}
@@ -79,68 +92,70 @@ export default function WorkCaseStudy() {
           </motion.h1>
 
           <motion.p
-            className="cs-hero-subtitle serif-italic"
+            className="cs-hero-subtitle"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.55 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1.0, delay: 0.3 }}
           >
             {project.subtitle}
           </motion.p>
 
-          <motion.span
-            className="cs-hero-role mono"
+          <motion.div
+            className="cs-hero-meta"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            {project.role}
-          </motion.span>
+            <span className="cs-hero-role mono">{project.role}</span>
+            <div className="cs-tags">
+              {project.tags.map((tag, i) => (
+                <span key={tag} className="cs-tag">
+                  <span className="cs-tag-dot" style={{ background: dotColors[i % dotColors.length] }} />
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </header>
 
       <div className="cs-container">
-        <hr className="cs-divider" />
 
-        {/* Tags */}
-        <FadeUp>
-          <div className="cs-tags">
-            {project.tags.map((tag, i) => (
-              <span key={tag}>
-                <span className="cs-tag">{tag}</span>
-                {i < project.tags.length - 1 && (
-                  <span className="cs-tag-sep">/</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </FadeUp>
+        {/* Hero screenshot — full width */}
+        {images[0] && (
+          <FadeUp>
+            <BrowserFrame src={images[0]} alt={`${project.title} — homepage`} loading="eager" />
+          </FadeUp>
+        )}
 
-        <hr className="cs-divider" />
-
-        {/* Body — 2 column */}
+        {/* Overview + Visit */}
         {project.overview && (
-          <div className="cs-body">
-            <FadeUp>
-              <div className="cs-overview">
-                <p>{project.overview}</p>
-                {project.links?.live && (
-                  <a
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cs-visit mono"
-                  >
-                    Visit Site →
-                  </a>
-                )}
-              </div>
-            </FadeUp>
+          <FadeUp>
+            <div className="cs-intro">
+              <p className="cs-intro-text">{project.overview}</p>
+              {project.links?.live && (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cs-visit mono"
+                >
+                  Visit Site →
+                </a>
+              )}
+            </div>
+          </FadeUp>
+        )}
 
-            <div className="cs-sidebar">
-              {project.systemOverview && (
-                <FadeUp>
-                  <div className="cs-sidebar-section">
-                    <span className="cs-sidebar-label mono">{project.systemOverview.title}</span>
+        {/* Editorial rows — alternating screenshot + text */}
+        {isDetailed ? (
+          <>
+            {/* Row: system overview + screenshot */}
+            {project.systemOverview && images[1] && (
+              <FadeUp>
+                <div className="cs-editorial">
+                  <div className="cs-editorial-text">
+                    <span className="cs-editorial-label mono">{project.systemOverview.title}</span>
                     {project.systemOverview.plugins.map((plugin) => (
                       <div key={plugin.name} className="cs-plugin">
                         <h4 className="cs-plugin-name">{plugin.name}</h4>
@@ -148,68 +163,73 @@ export default function WorkCaseStudy() {
                       </div>
                     ))}
                   </div>
-                </FadeUp>
-              )}
+                  <div className="cs-editorial-media">
+                    <BrowserFrame src={images[1]} alt={`${project.title} — detail`} />
+                  </div>
+                </div>
+              </FadeUp>
+            )}
 
-              {project.whatWasBuilt?.length > 0 && (
-                <FadeUp>
-                  <div className="cs-sidebar-section">
-                    <span className="cs-sidebar-label mono">What Was Built</span>
+            {/* Row: screenshot + what was built (reversed) */}
+            {project.whatWasBuilt?.length > 0 && images[2] && (
+              <FadeUp>
+                <div className="cs-editorial cs-editorial--reverse">
+                  <div className="cs-editorial-text">
+                    <span className="cs-editorial-label mono">What Was Built</span>
                     <ul className="cs-built-list">
                       {project.whatWasBuilt.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
                   </div>
-                </FadeUp>
-              )}
-            </div>
-          </div>
+                  <div className="cs-editorial-media">
+                    <BrowserFrame src={images[2]} alt={`${project.title} — detail`} />
+                  </div>
+                </div>
+              </FadeUp>
+            )}
+
+            {/* Remaining screenshots */}
+            {images.slice(3).map((image, index) => (
+              <FadeUp key={image}>
+                <div className={`cs-editorial ${index % 2 === 0 ? '' : 'cs-editorial--reverse'}`}>
+                  <div className="cs-editorial-media cs-editorial-media--full">
+                    <BrowserFrame src={image} alt={`${project.title} — page ${index + 4}`} />
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </>
+        ) : (
+          /* Generic projects — alternating editorial rows for each remaining image */
+          images.slice(1).map((image, index) => (
+            <FadeUp key={image}>
+              <div className={`cs-editorial ${index % 2 === 0 ? 'cs-editorial--reverse' : ''}`}>
+                <div className="cs-editorial-media cs-editorial-media--solo">
+                  <BrowserFrame src={image} alt={`${project.title} — page ${index + 2}`} />
+                </div>
+              </div>
+            </FadeUp>
+          ))
         )}
 
-        {/* Gallery placeholders */}
-        <FadeUp>
-          <div className="cs-gallery">
-            {project.images?.length ? (
-              <>
-                <div className="cs-gallery-grid cs-gallery-full">
-                  <div className="cs-gallery-item cs-gallery-item--hero">
-                    <img src={project.images[0]} alt={`${project.title} screenshot 1`} />
-                  </div>
-                </div>
-
-                {project.images.length > 1 && (
-                  <div className="cs-gallery-grid cs-gallery-pair">
-                    {project.images.slice(1).map((image, index) => (
-                      <div key={image} className="cs-gallery-item cs-gallery-item--pair">
-                        <img src={image} alt={`${project.title} screenshot ${index + 2}`} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <>
-                <div className="cs-gallery-grid cs-gallery-full">
-                  <div className="cs-gallery-item cs-gallery-item--hero">
-                    <div className="cs-gallery-wash" aria-hidden="true" />
-                    <span className="mono">Image</span>
-                  </div>
-                </div>
-                <div className="cs-gallery-grid cs-gallery-pair">
-                  <div className="cs-gallery-item cs-gallery-item--pair">
-                    <div className="cs-gallery-wash" aria-hidden="true" />
-                    <span className="mono">Image</span>
-                  </div>
-                  <div className="cs-gallery-item cs-gallery-item--pair">
-                    <div className="cs-gallery-wash" aria-hidden="true" />
-                    <span className="mono">Image</span>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </FadeUp>
+        {/* Other projects */}
+        {devProjects.length > 1 && (
+          <FadeUp>
+            <div className="cs-others">
+              <span className="cs-others-label">Other Projects</span>
+              <div className="cs-others-list">
+                {devProjects.filter(p => p.id !== project.id).map(p => (
+                  <Link key={p.id} to={`/work/${p.id}`} className="cs-others-link">
+                    <span>{p.title}</span>
+                    <span className="cs-others-arrow">→</span>
+                  </Link>
+                ))}
+              </div>
+              <Link to="/work" className="cs-back-link">← All Work</Link>
+            </div>
+          </FadeUp>
+        )}
       </div>
     </div>
   )

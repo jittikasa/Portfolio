@@ -82,11 +82,11 @@ export const projects = [
     featured: true,
     links: { live: 'https://dinipetty.com' },
     images: [
-      '/work/dinipetty/screencapture-dinipetty-2026-03-01-08_21_00.png',
-      '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.png',
-      '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.png',
-      '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.png',
-      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.png'
+      '/work/dinipetty/screencapture-dinipetty-2026-03-01-08_21_00.webp',
+      '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.webp',
+      '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.webp',
+      '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.webp',
+      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp'
     ],
     overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The system turns WooCommerce products into searchable archive entries with a quote-based licensing workflow — no traditional e-commerce checkout, no payment gateway.',
     systemOverview: {
@@ -111,18 +111,22 @@ export const projects = [
     subcategory: 'dev',
     id: 'baanimjai',
     title: 'Baan Imjai',
-    subtitle: 'Property listing platform for a Phuket real estate agency',
-    type: 'Web Platform',
+    subtitle: 'Website for a nature homestay & café in Nakhon Sawan',
+    type: 'Website',
     year: '2024',
     role: 'Developer & Designer',
-    tags: ['WordPress', 'PHP', 'Custom Theme', 'Property Listings'],
+    tags: ['WordPress', 'Booking System', 'PHP'],
     color: '#2C3E2D',
     accentColor: '#8BA899',
     services: ['web-dev', 'product-design'],
     featured: true,
-    links: {},
-    images: [],
-    overview: '',
+    links: { live: 'https://baanimjai.com' },
+    images: [
+      '/work/baanimjai/screencapture-baanimjai-2026-03-01-12_01_39.webp',
+      '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.webp',
+      '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.webp'
+    ],
+    overview: 'Customized a WordPress theme for Baan Imjai, a nature-connected homestay and café in Nakhon Sawan. The site tells the story of earth-built bungalows, locally sourced café menus, and a philosophy rooted in simple living — with an integrated booking system for their five named bungalows.',
     systemOverview: null,
     whatWasBuilt: []
   },
@@ -140,9 +144,13 @@ export const projects = [
     accentColor: '#C9A8A8',
     services: ['web-dev', 'product-design'],
     featured: true,
-    links: {},
-    images: [],
-    overview: '',
+    links: { live: 'https://anodardphuket.com' },
+    images: [
+      '/work/anodard/screencapture-anodardphuket-2026-03-01-11_48_06.webp',
+      '/work/anodard/screencapture-anodardphuket-about-us-2026-03-01-11_48_32.webp',
+      '/work/anodard/screencapture-anodardphuket-contact-us-2026-03-01-11_49_14.webp'
+    ],
+    overview: 'Designed and developed a WordPress website for Anodard, a Thai hospitality brand in Phuket. Custom theme with WooCommerce integration for their product offerings alongside the main brand presence.',
     systemOverview: null,
     whatWasBuilt: []
   },
