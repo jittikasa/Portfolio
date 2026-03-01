@@ -11,7 +11,7 @@
 .cs-hero {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 7rem 2rem var(--space-3xl);
+  padding: 10rem 2rem 8rem;
 }
 
 .cs-hero-type {
@@ -140,82 +140,6 @@
   padding-top: var(--space-lg);
 }
 
-/* Pages fan — generic template: fanned overlapping screenshots */
-.cs-pages-fan {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: var(--space-3xl) 0 var(--space-4xl);
-  min-height: 1000px;
-  margin-bottom: 200px;
-}
-
-.cs-pages-fan-label {
-  text-align: center;
-  color: var(--ink);
-  margin-bottom: var(--space-xl);
-}
-
-.cs-pages-fan-stack {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.cs-pages-card {
-  position: absolute;
-  width: 38%;
-  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
-}
-
-.cs-pages-card:nth-child(1) {
-  transform: rotate(-4deg) translateX(-55%);
-  z-index: 1;
-}
-
-.cs-pages-card:nth-child(2) {
-  transform: rotate(3deg) translateX(55%);
-  z-index: 2;
-}
-
-.cs-pages-card:hover {
-  z-index: 10;
-  transform: rotate(0deg) translateY(-8px) scale(1.02);
-}
-
-.cs-pages-card .cs-frame {
-  box-shadow: 0 8px 28px rgba(42, 31, 20, 0.12);
-}
-
-.cs-pages-card:hover .cs-frame {
-  box-shadow: 0 24px 48px rgba(42, 31, 20, 0.14);
-}
-
-.cs-pages-card-label {
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-/* Intro — overview text */
-.cs-intro {
-  max-width: 680px;
-  padding: var(--space-4xl) 0;
-}
-
-.cs-intro-text {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-  margin: 0 0 2rem;
-  max-width: 65ch;
-}
-
 .cs-visit {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -227,6 +151,8 @@
   border-bottom: 2px solid var(--sage-deep);
   padding-bottom: 0.35rem;
   transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 .cs-visit:hover {
@@ -235,48 +161,173 @@
   transform: translateY(-2px);
 }
 
-/* Editorial rows — 2 column alternating */
-.cs-editorial {
+/* Pillars — the core storytelling sections */
+.cs-pillar-section {
+  padding: 12rem 0; /* Significantly increased spacing between chapters */
+  border-top: 1px solid rgba(55, 53, 30, 0.05);
+}
+
+.cs-pillar {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 4rem;
-  align-items: start;
-  padding: var(--space-3xl) 0;
+  grid-template-columns: 4.5fr 5.5fr;
+  gap: 5rem;
+  align-items: center;
 }
 
-.cs-editorial--reverse {
-  grid-template-columns: 1.2fr 1fr;
+.cs-pillar--reverse {
+  direction: rtl; /* simple trick to swap columns */
 }
 
-.cs-editorial--reverse .cs-editorial-text {
-  order: 2;
+.cs-pillar--reverse .cs-pillar-text,
+.cs-pillar--reverse .cs-pillar-media {
+  direction: ltr; /* reset text direction */
 }
 
-.cs-editorial--reverse .cs-editorial-media {
-  order: 1;
-}
-
-.cs-editorial-text {
-  padding-top: var(--space-lg);
-}
-
-.cs-editorial-label {
-  /* .mono handles font-family, size, letter-spacing, uppercase */
-  color: var(--ink);
-  margin: 0 0 1.2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(55, 53, 30, 0.08);
+.cs-pillar-label {
   display: block;
+  margin-bottom: 1.5rem;
+  color: var(--ink-muted);
 }
 
-.cs-editorial-media--full,
-.cs-editorial-media--solo {
-  grid-column: 1 / -1;
-  max-width: 900px;
+.cs-pillar-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 1.5rem;
 }
 
-.cs-editorial-media--solo {
-  margin: 0 auto;
+.cs-pillar-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 2rem;
+  max-width: 50ch;
+}
+
+.cs-pillar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.cs-pillar-tag {
+  font-size: 0.72rem;
+  padding: 0.35rem 0.7rem;
+  background: rgba(55, 53, 30, 0.04);
+  color: var(--ink-muted);
+  border-radius: 2px;
+}
+
+/* Screenshot Stack — overlapping fanned layout */
+.cs-screenshot-stack {
+  position: relative;
+  height: 600px;
+  width: 100%;
+}
+
+.cs-stack-item {
+  position: absolute;
+  width: 75%;
+  transition: transform 0.6s var(--ease-out), z-index 0s;
+}
+
+.cs-stack-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+}
+
+.cs-stack-item--0 {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transform: rotate(-2deg);
+}
+
+.cs-stack-item--1 {
+  top: 15%;
+  right: 0;
+  z-index: 2;
+  transform: rotate(1deg) scale(1.02);
+}
+
+.cs-stack-item--2 {
+  top: 35%;
+  left: 10%;
+  z-index: 3;
+  transform: rotate(-1deg) scale(1.04);
+}
+
+.cs-stack-item:hover {
+  z-index: 10;
+  transform: rotate(0deg) translateY(-10px) scale(1.05);
+}
+
+/* Results Grid — the final summary cards */
+.cs-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-top: var(--space-4xl);
+  padding: 4rem;
+  background: #FFFFFF; /* Pure white as requested */
+  border: 1px solid rgba(55, 53, 30, 0.05);
+  box-shadow: 0 12px 48px rgba(42, 31, 20, 0.04);
+}
+
+.cs-results-grid .cs-editorial-label {
+  font-size: 0.95rem; /* Larger */
+  font-weight: 700;   /* Bolder */
+  color: var(--ink);  /* Darker for more presence */
+  border-bottom: 2px solid var(--sage-mist);
+  padding-bottom: 0.75rem;
+}
+
+.cs-results-card--system {
+  padding-right: 2.5rem;
+  border-right: 1px solid rgba(55, 53, 30, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cs-pillar {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .cs-pillar--reverse {
+    direction: ltr;
+  }
+  
+  .cs-screenshot-stack {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .cs-stack-item {
+    position: static;
+    width: 100%;
+    transform: none !important;
+  }
+  
+  .cs-results-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+  
+  .cs-results-card--system {
+    padding-right: 0;
+    padding-bottom: 2.5rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(55, 53, 30, 0.08);
+  }
 }
 
 /* Plugins */
@@ -377,55 +428,112 @@
 }
 
 
-/* Timeline widget — compact vertical marker inside hero info */
-.cs-timeline-widget {
-  position: relative;
-  margin-top: var(--space-xl);
-  padding-left: 1.4rem;
+/* ============================================
+   ATELIER TIMELINE — Editorial & Line-less
+   ============================================ */
+.cs-atelier-wrap {
+  margin-top: 4.5rem;
 }
 
-.cs-timeline-widget::before {
+.cs-timeline-label-script {
+  display: block;
+  font-family: 'Shorelines Script', cursive;
+  font-size: 1.25rem;
+  color: var(--sage);
+  margin-bottom: 1.8rem;
+  opacity: 0.8;
+}
+
+.cs-atelier-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+/* Rounded Dashes Connector — Smaller & Denser */
+.cs-atelier-timeline::before {
   content: '';
   position: absolute;
-  left: 4px;
-  top: 4px;
-  bottom: 4px;
-  width: 2px;
-  background: rgba(55, 53, 30, 0.12);
+  left: 16px; /* Centered with the 16px bloom dot */
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1.5px;
+  --s: 4px;    /* smaller dash size */
+  --c: var(--sage);
+  opacity: 0.15;
+  --_g: var(--s) left 50%,var(--c) calc(100% - 1px),#0000;
+  background: 0/100% calc(2.2*var(--s)) no-repeat space;
+  background-image: 
+   radial-gradient(circle closest-side at top    var(--_g)),   
+   radial-gradient(circle closest-side at bottom var(--_g)),   
+   linear-gradient(#0000 25%,var(--c) 0 75%,#0000 0);
+  pointer-events: none;
 }
 
-.cs-timeline-step {
-  position: relative;
+.cs-atelier-step {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  padding-bottom: 0.65rem;
+  align-items: flex-start;
+  gap: 1.8rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-.cs-timeline-step:last-child {
-  padding-bottom: 0;
-}
-
-.cs-timeline-dot {
-  position: absolute;
-  left: -1.4rem;
-  top: 0.35rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transform: translateX(-4px);
+.cs-atelier-marker {
+  padding-top: 0.4rem; /* Adjusted for larger dot */
   flex-shrink: 0;
+  background: var(--canvas); 
+  box-shadow: 0 0 0 6px var(--canvas); /* Larger mask for larger dot */
+  border-radius: 50%;
 }
 
-.cs-timeline-year {
-  color: var(--ink);
+.cs-atelier-bloom {
+  width: 16px; /* 2x size */
+  height: 16px; /* 2x size */
+  border-radius: 50%;
+  opacity: 0.85;
+  filter: blur(1.5px);
+  transition: all 0.4s var(--ease-out);
 }
 
-.cs-timeline-title {
-  font-family: var(--font-body);
-  font-size: 0.92rem;
+.cs-atelier-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cs-atelier-year {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.cs-atelier-title {
+  font-family: var(--font-display); /* Elegant Serif! */
+  font-size: 1.45rem;
   font-weight: 400;
   color: var(--ink);
+  margin: 0;
+  line-height: 1.15;
+  transition: color 0.3s ease, transform 0.4s var(--ease-out);
+}
+
+.cs-atelier-step:hover .cs-atelier-title {
+  color: var(--sage-deep);
+  transform: translateX(4px);
+}
+
+.cs-atelier-step:hover .cs-atelier-year {
+  opacity: 1;
 }
 
 /* Fade up */

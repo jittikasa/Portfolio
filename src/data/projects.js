@@ -88,28 +88,30 @@ export const projects = [
       '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.webp',
       '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp'
     ],
-    overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The system turns WooCommerce products into searchable archive entries with a quote-based licensing workflow — no traditional e-commerce checkout, no payment gateway.',
-    timeline: [
+    overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The project evolved from a standard brand site into a complex media archive engine.',
+    pillars: [
       {
-        year: '2023',
-        title: 'Website & E-Commerce',
-        description: 'Built the initial WordPress + WooCommerce site with standard product pages, booking functionality, and content management for Dini Petty\'s media brand.',
-        imageIndex: 2
+        id: 'foundation',
+        title: 'The Foundation',
+        subtitle: 'Website & UX Build',
+        description: 'The initial phase focused on creating a digital home for Dini Petty’s brand. We built a high-performance WordPress site that prioritized content readability, media management, and a clean booking workflow for her public speaking and media engagements.',
+        imageIndices: [2, 3, 4], // Booking, Product, Blog
+        tags: ['UX Design', 'Custom Theme', 'Media Management']
       },
       {
-        year: '2024',
-        title: 'Continued Support',
-      },
-      {
-        year: '2025',
-        title: 'Maintenance & Updates',
-      },
-      {
-        year: '2026',
-        title: 'Archives & Licensing System',
-        description: 'Scraped, cleaned, and structured decades of episode data — then built a custom archives plugin with filterable search, REST API, and a quote-based licensing workflow replacing traditional checkout.',
-        imageIndex: 1
+        id: 'engine',
+        title: 'The Engine',
+        subtitle: 'Media Archive & Licensing System',
+        description: 'The core innovation: a custom-built archival system. We scraped and cleaned decades of raw episode data, structured it into a searchable database, and replaced the standard e-commerce checkout with a bespoke licensing quote workflow.',
+        imageIndices: [0, 1], // Homepage (Archive), Licensing page
+        tags: ['Database Architecture', 'Custom Plugin', 'Data Scraping']
       }
+    ],
+    timeline: [
+      { year: '2023', title: 'Website & E-Commerce' },
+      { year: '2024', title: 'Continued Support' },
+      { year: '2025', title: 'Maintenance & Updates' },
+      { year: '2026', title: 'Archives & Licensing System' }
     ],
     pageLabels: ['Homepage', 'Media Licensing', 'Booking', 'Product Detail', 'Blog Post'],
     systemOverview: {

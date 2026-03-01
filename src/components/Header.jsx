@@ -19,18 +19,22 @@ function HeaderPaintFilter() {
   )
 }
 
-const ElasticLink = ({ label, id, onClick }) => {
+const ElasticLink = ({ label, id, onClick, isHome }) => {
   const letters = label.split('')
   const isRoutePage = id === 'contact' || id === 'play' || id === 'support'
-  if (isRoutePage) {
+  
+  // If it's a route page, OR it's 'work' and we're NOT on the home page
+  if (isRoutePage || (id === 'work' && !isHome)) {
+    const targetPath = id === 'work' ? '/work' : `/${id}`
     return (
-      <Link to={`/${id}`} className="nav-link-elastic" style={{ '--total': letters.length }}>
+      <Link to={targetPath} className="nav-link-elastic" style={{ '--total': letters.length }}>
         {letters.map((char, i) => (
           <span key={i} style={{ '--index': i + 1 }}>{char}</span>
         ))}
       </Link>
     )
   }
+
   return (
     <a href={`#${id}`} onClick={(e) => onClick(e, id)} className="nav-link-elastic" style={{ '--total': letters.length }}>
       {letters.map((char, i) => (
@@ -43,6 +47,7 @@ const ElasticLink = ({ label, id, onClick }) => {
 export default function Header() {
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +58,7 @@ export default function Header() {
   }, [])
 
   const handleNavClick = (e, targetId) => {
-    if (location.pathname === '/') {
+    if (isHome) {
       e.preventDefault()
       const element = document.getElementById(targetId)
       if (element) {
@@ -95,13 +100,13 @@ export default function Header() {
         </div>
 
         <nav className="nav">
-          <ElasticLink label="Work" id="work" onClick={handleNavClick} />
+          <ElasticLink label="Work" id="work" onClick={handleNavClick} isHome={isHome} />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Play" id="play" onClick={handleNavClick} />
+          <ElasticLink label="Play" id="play" onClick={handleNavClick} isHome={isHome} />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Support" id="support" onClick={handleNavClick} />
+          <ElasticLink label="Support" id="support" onClick={handleNavClick} isHome={isHome} />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Contact" id="contact" onClick={handleNavClick} />
+          <ElasticLink label="Contact" id="contact" onClick={handleNavClick} isHome={isHome} />
         </nav>
       </div>
     </header>
