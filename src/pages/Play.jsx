@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { getProjectsByCategory } from '../data/projects'
 import { PaintFilter, Cloud } from '../components/HeroClouds'
 import './Play.css'
 
 export default function Play() {
   const projects = getProjectsByCategory('play')
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [searchParams] = useSearchParams()
+  const appParam = searchParams.get('app')
+  const initialIndex = appParam ? Math.max(0, projects.findIndex(p => p.id === appParam)) : 0
+  const [activeIndex, setActiveIndex] = useState(initialIndex)
   const active = projects[activeIndex]
   const isComingSoonProject = active.id === 'polamoment'
 

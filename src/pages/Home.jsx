@@ -165,16 +165,21 @@ export default function Home() {
                     {s.description}
                   </p>
                   <div className="stroke-projects">
-                    {getProjectsByService(s.key).slice(0, 3).map(p => (
-                      <div
-                        key={p.id}
-                        className="stroke-project-pill"
-                        style={{ cursor: 'default' }}
-                      >
-                        <span className="pill-dot" style={{ background: p.accentColor }} />
-                        {p.title}
-                      </div>
-                    ))}
+                    {getProjectsByService(s.key).slice(0, 3).map(p => {
+                      const pillTo = p.category === 'play' ? `/play?app=${p.id}`
+                        : p.subcategory === 'dev' ? `/work/${p.id}`
+                        : '/work'
+                      return (
+                        <Link
+                          key={p.id}
+                          to={pillTo}
+                          className="stroke-project-pill"
+                        >
+                          <span className="pill-dot" style={{ background: p.accentColor }} />
+                          {p.title}
+                        </Link>
+                      )
+                    })}
                     <Link
                       to={s.link}
                       className="stroke-see-all"
