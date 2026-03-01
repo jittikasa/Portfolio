@@ -42,9 +42,10 @@ function HeroInner({ scrollY, children }) {
   )
 }
 
-function HeroBio({ children }) {
+function HeroBio({ scrollY, children }) {
+  const opacity = useTransform(scrollY, [vh * 1.05, vh * 1.45], [1, 0])
   return (
-    <motion.div className="h-hero-inner h-hero-bio-persist">
+    <motion.div className="h-hero-inner h-hero-bio-persist" style={{ opacity }}>
       <div className="hero-bio">
         {children}
       </div>
@@ -109,7 +110,7 @@ export default function Home() {
           </HeroInner>
 
           {/* Bio persists after reveal but fades before next section */}
-          <HeroBio>
+          <HeroBio scrollY={scrollY}>
               <motion.span
                 style={{ display: 'block' }}
                 initial={{ opacity: 0 }}

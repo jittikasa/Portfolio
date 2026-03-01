@@ -82,11 +82,11 @@ export const projects = [
     featured: true,
     links: { live: 'https://dinipetty.com' },
     images: [
-      '/work/dinipetty/screencapture-dinipetty-2026-03-01-08_21_00.webp',
-      '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.webp',
-      '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.webp',
-      '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.webp',
-      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.webp',
+      '/work/dinipetty/screencapture-dinipetty-2026-03-01-08_21_00.jpg',
+      '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.jpg',
+      '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.jpg',
+      '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.jpg',
+      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.jpg',
       '/work/dinipetty/screencapture-dinipetty-product-patty-duke-on-the-dini-petty-show-2026-03-01-16_42_30.png'
     ],
     overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The project evolved from a standard brand site into a complex media archive engine.',
@@ -144,9 +144,9 @@ export const projects = [
     featured: true,
     links: { live: 'https://baanimjai.com' },
     images: [
-      '/work/baanimjai/screencapture-baanimjai-2026-03-01-12_01_39.png',
-      '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.png',
-      '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.png'
+      '/work/baanimjai/screencapture-baanimjai-2026-03-01-12_01_39.jpg',
+      '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.jpg',
+      '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.jpg'
     ],
     overview: 'Customized a WordPress theme for Baan Imjai, a mud-brick homestay and café in Nakhon Sawan. The site showcases their five earth-built guest rooms, an organic café, and hands-on workshops — from mud-house construction to farm tours — with an integrated booking system and bilingual support.',
     pageLabels: ['Homepage', 'About Us', 'Our Café'],
@@ -169,9 +169,9 @@ export const projects = [
     featured: true,
     links: { live: 'https://anodardphuket.com' },
     images: [
-      '/work/anodard/screencapture-anodardphuket-2026-03-01-11_48_06.webp',
-      '/work/anodard/screencapture-anodardphuket-about-us-2026-03-01-11_48_32.webp',
-      '/work/anodard/screencapture-anodardphuket-contact-us-2026-03-01-11_49_14.webp'
+      '/work/anodard/screencapture-anodardphuket-2026-03-01-11_48_06.jpg',
+      '/work/anodard/screencapture-anodardphuket-about-us-2026-03-01-11_48_32.jpg',
+      '/work/anodard/screencapture-anodardphuket-contact-us-2026-03-01-11_49_14.jpg'
     ],
     overview: 'Customized a WordPress theme for Anodard, a boutique villa-hotel tucked near Nai Yang Beach in Phuket. The site highlights their individually designed villas, pet-friendly philosophy, eco-friendly practices, and the quiet charm of staying five minutes from the airport and the sea.',
     pageLabels: ['Homepage', 'About Us', 'Contact'],
