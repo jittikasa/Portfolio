@@ -21,11 +21,10 @@ function HeaderPaintFilter() {
 
 const ElasticLink = ({ label, id, onClick, isHome }) => {
   const letters = label.split('')
-  const isRoutePage = id === 'contact' || id === 'play' || id === 'support'
-  
-  // If it's a route page, OR it's 'work' and we're NOT on the home page
-  if (isRoutePage || (id === 'work' && !isHome)) {
-    const targetPath = id === 'work' ? '/work' : `/${id}`
+  const isRoutePage = id === 'contact' || id === 'play' || id === 'support' || id === 'work'
+
+  if (isRoutePage) {
+    const targetPath = `/${id}`
     return (
       <Link to={targetPath} className="nav-link-elastic" style={{ '--total': letters.length }}>
         {letters.map((char, i) => (
@@ -83,7 +82,7 @@ export default function Header() {
         <div className="logo-wrapper">
           <AnimatePresence>
             {scrolled && (
-              <motion.div 
+              <motion.div
                 className="header-paint-bg logo-paint"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 0.7, scale: 1 }}

@@ -130,12 +130,14 @@ export function Cloud({ className, style, variant = 'a', filter = 'cloud-paint' 
   )
 }
 
-/* Shared scroll helpers */
+/* Shared scroll helpers — clouds linger until scene fades (3.2vh) */
 function useCloudScroll() {
   const { scrollY } = useScroll()
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800
   const useDrift = (range, px) => useTransform(scrollY, [0, vh * range], [0, px], { clamp: true })
-  const useFade  = (range)     => useTransform(scrollY, [0, vh * range], [1, 0], { clamp: true })
+  // Clouds stay fully visible longer, then fade out closer to scene exit
+  const useFade  = (fadeStart, fadeEnd = 3.2) =>
+    useTransform(scrollY, [vh * fadeStart, vh * fadeEnd], [1, 0], { clamp: true })
   return { useDrift, useFade }
 }
 
@@ -147,17 +149,17 @@ function useCloudScroll() {
 export function CloudsUpper() {
   const { useDrift, useFade } = useCloudScroll()
 
-  // Row 1
-  const c1x  = useDrift(1.3, -180);  const c1o  = useFade(1.0)
-  const c2x  = useDrift(1.5, 160);   const c2o  = useFade(1.2)
-  const c17x = useDrift(1.6, 140);   const c17o = useFade(1.3)
-  const c21x = useDrift(1.5, 115);   const c21o = useFade(1.2)
-  const c22x = useDrift(1.3, -95);   const c22o = useFade(1.0)
-  const c23x = useDrift(1.8, 80);    const c23o = useFade(1.4)
+  // Row 1 — fade(startVisible, fullyGone)
+  const c1x  = useDrift(1.6, -180);  const c1o  = useFade(1.3, 2.0)
+  const c2x  = useDrift(1.8, 160);   const c2o  = useFade(1.5, 2.2)
+  const c17x = useDrift(2.0, 140);   const c17o = useFade(1.6, 2.2)
+  const c21x = useDrift(1.8, 115);   const c21o = useFade(1.5, 2.1)
+  const c22x = useDrift(1.6, -95);   const c22o = useFade(1.3, 2.0)
+  const c23x = useDrift(2.0, 80);    const c23o = useFade(1.7, 2.2)
 
   // Row 2
-  const c10x = useDrift(1.5, -150);  const c10o = useFade(1.2)
-  const c4x  = useDrift(1.6, 120);   const c4o  = useFade(1.3)
+  const c10x = useDrift(1.8, -150);  const c10o = useFade(1.5, 2.1)
+  const c4x  = useDrift(2.0, 120);   const c4o  = useFade(1.6, 2.2)
 
   return (
     <div className="hero-clouds hero-clouds-upper" aria-hidden="true">
@@ -214,24 +216,24 @@ export function CloudsUpper() {
 export function CloudsLower() {
   const { useDrift, useFade } = useCloudScroll()
 
-  // Row 3
-  const c9x  = useDrift(2.5, -60);   const c9o  = useFade(2.0)
-  const c5x  = useDrift(1.8, -100);  const c5o  = useFade(1.5)
-  const c8x  = useDrift(2.0, 90);    const c8o  = useFade(1.7)
+  // Row 3 — fade(startVisible, fullyGone)
+  const c9x  = useDrift(2.2, -60);   const c9o  = useFade(1.6, 2.2)
+  const c5x  = useDrift(2.0, -100);  const c5o  = useFade(1.5, 2.1)
+  const c8x  = useDrift(2.1, 90);    const c8o  = useFade(1.5, 2.2)
 
   // Row 4
-  const c12x = useDrift(2.3, -70);   const c12o = useFade(1.9)
-  const c7x  = useDrift(2.2, -80);   const c7o  = useFade(1.8)
-  const c13x = useDrift(1.9, 100);   const c13o = useFade(1.5)
-  const c16x = useDrift(2.8, -45);   const c16o = useFade(2.3)
-  const c3x  = useDrift(1.4, -140);  const c3o  = useFade(1.1)
-  const c11x = useDrift(1.7, 130);   const c11o = useFade(1.4)
-  const c14x = useDrift(2.6, -50);   const c14o = useFade(2.1)
-  const c15x = useDrift(2.1, 85);    const c15o = useFade(1.7)
-  const c18x = useDrift(3.0, -35);   const c18o = useFade(2.5)
-  const c6x  = useDrift(2.0, 110);   const c6o  = useFade(1.6)
-  const c19x = useDrift(1.4, 150);   const c19o = useFade(1.1)
-  const c20x = useDrift(1.7, 120);   const c20o = useFade(1.3)
+  const c12x = useDrift(2.3, -70);   const c12o = useFade(1.7, 2.2)
+  const c7x  = useDrift(2.2, -80);   const c7o  = useFade(1.6, 2.2)
+  const c13x = useDrift(2.0, 100);   const c13o = useFade(1.5, 2.1)
+  const c16x = useDrift(2.4, -45);   const c16o = useFade(1.8, 2.3)
+  const c3x  = useDrift(1.7, -140);  const c3o  = useFade(1.3, 2.0)
+  const c11x = useDrift(1.8, 130);   const c11o = useFade(1.4, 2.1)
+  const c14x = useDrift(2.3, -50);   const c14o = useFade(1.7, 2.2)
+  const c15x = useDrift(2.1, 85);    const c15o = useFade(1.5, 2.2)
+  const c18x = useDrift(2.5, -35);   const c18o = useFade(1.9, 2.4)
+  const c6x  = useDrift(2.1, 110);   const c6o  = useFade(1.5, 2.2)
+  const c19x = useDrift(1.7, 150);   const c19o = useFade(1.3, 2.0)
+  const c20x = useDrift(1.8, 120);   const c20o = useFade(1.4, 2.1)
 
   return (
     <div className="hero-clouds hero-clouds-lower" aria-hidden="true">

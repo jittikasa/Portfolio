@@ -20,7 +20,7 @@ const mist = {
 const vh = typeof window !== 'undefined' ? window.innerHeight : 800
 
 function HeroStatus({ scrollY }) {
-  const opacity = useTransform(scrollY, [vh * 3.0, vh * 3.6], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 1.8, vh * 2.3], [1, 0])
   return (
     <motion.div
       className="hero-status"
@@ -35,10 +35,22 @@ function HeroStatus({ scrollY }) {
 }
 
 function HeroInner({ scrollY, children }) {
-  const opacity = useTransform(scrollY, [vh * 3.0, vh * 3.6], [1, 0])
+  const opacity = useTransform(scrollY, [vh * 1.8, vh * 2.3], [1, 0])
   return (
     <motion.div className="h-hero-inner" style={{ opacity }}>
       {children}
+    </motion.div>
+  )
+}
+
+function HeroBio({ scrollY, children }) {
+  // Stay visible after bio reveals, fade out well before next section
+  const opacity = useTransform(scrollY, [vh * 2.2, vh * 2.6], [1, 0])
+  return (
+    <motion.div className="h-hero-inner h-hero-bio-persist" style={{ opacity }}>
+      <div className="hero-bio">
+        {children}
+      </div>
     </motion.div>
   )
 }
@@ -98,28 +110,31 @@ export default function Home() {
             >
               Designer &amp; maker
             </motion.p>
+          </HeroInner>
 
-            <div className="hero-bio">
-              <BioLine scrollY={scrollY} at={0.25}>
+          {/* Bio persists after reveal but fades before next section */}
+          <HeroBio scrollY={scrollY}>
+              <motion.span
+                style={{ display: 'block' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+              >
                 Hi I'm Jittika.
+              </motion.span>
+              <BioLine scrollY={scrollY} at={0.3}>
+                Just someone who can't stop making things — websites, apps, brand work, and paintings on free afternoons.
               </BioLine>
-              <BioLine scrollY={scrollY} at={0.45}>
-                Just someone who can't stop making things —
-              </BioLine>
-              <BioLine scrollY={scrollY} at={0.65}>
-                websites, apps, brand work, and paintings on free afternoons.
-              </BioLine>
-              <BioLine scrollY={scrollY} at={0.85}>
+              <BioLine scrollY={scrollY} at={0.5}>
                 This is where I keep some of them.
               </BioLine>
-              <BioLine scrollY={scrollY} at={1.05}>
+              <BioLine scrollY={scrollY} at={0.65}>
                 Full-time in digital marketing,
               </BioLine>
-              <BioLine scrollY={scrollY} at={1.2}>
+              <BioLine scrollY={scrollY} at={0.75}>
                 making things and designing on the side.
               </BioLine>
-            </div>
-          </HeroInner>
+          </HeroBio>
 
         </div>
       </section>

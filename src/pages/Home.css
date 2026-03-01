@@ -8,7 +8,7 @@
 
 /* ── 1. HERO ── */
 .h-hero {
-  height: 400vh;
+  height: 280vh;
 }
 
 /* Sticky viewport — pins hero text while fixed scene plays */
@@ -74,9 +74,15 @@
   text-transform: none;
   color: var(--ink);
   opacity: 1;
-  margin-top: 10px;
+  margin-top: -15px;
   margin-bottom: 1.5rem;
   max-width: none;
+}
+
+/* Bio persists independently — not tied to scene fade */
+.h-hero-bio-persist {
+  top: 52%;
+  transform: translate(-50%, -10%);
 }
 
 .hero-bio {

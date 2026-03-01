@@ -28,9 +28,9 @@ function AppShell() {
       <GrainOverlay />
       <CustomCursor />
       <ScrollProgress />
-      
+
       <Header />
-      
+
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -43,7 +43,7 @@ function AppShell() {
           <Route path="/privacy" element={<Privacy />} />
         </Routes>
       </main>
-      
+
       <Footer />
       <BackToTop />
     </div>
