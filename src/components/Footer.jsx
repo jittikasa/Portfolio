@@ -42,8 +42,7 @@ export default function Footer() {
             {/* Left — message + ruled lines */}
             <div className="pc-message">
               <p className="pc-text typewriter">
-                Available for projects, collaborations &<br />
-                good conversations.
+                Always looking for the next meaningful <Link to="/work" className="pc-body-link">project</Link> to dive into, or a curious <Link to="/play" className="pc-body-link">experiment</Link> to bring to life. If you have a specific vision in mind or just want to talk shop, please <Link to="/contact" className="pc-body-link">drop a line</Link> and say hi.
               </p>
               <div className="pc-sig">
                 <SignatureName variant="footer" />
@@ -92,8 +91,8 @@ export default function Footer() {
                 </div>
                 <div className="pc-address-line">
                   <div className="pc-link-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <Link to="/support">App Support</Link>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="pc-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <Link to="/privacy">Privacy Policy</Link>
                   </div>
                 </div>
               </div>

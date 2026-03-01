@@ -1,10 +1,71 @@
-/* Footer — Floating Postcard */
+/* Footer — Floating Postcard resting on "Nacreous Sand" Oil Study */
 
 .footer {
-  background-color: var(--canvas);
+  background-color: #E6E1D5; /* Luminous sand base */
   position: relative;
-  padding: 6rem 2rem 4rem;
+  padding: 10rem 2rem 3rem;
   margin-top: 4rem;
+  overflow: hidden;
+  
+  /* Luminous, High-Detail Wet Oil Wash */
+  background-image: 
+    /* 1. Fine Organic Grain (3x Intensity & Detail) */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.35'/%3E%3C/svg%3E"),
+    /* 2. Secondary Rough Grain Wash */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='20'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='transparent' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E"),
+    /* 3. Deep Wet Sand Troughs (Darker pools) */
+    radial-gradient(ellipse 60% 80% at 20% 90%, rgba(70, 65, 45, 0.22) 0%, transparent 100%),
+    /* 4. Damp Silt Spots */
+    radial-gradient(ellipse 40% 30% at 70% 80%, rgba(55, 53, 30, 0.15) 0%, transparent 100%),
+    /* 5. Soft Horizontal Tide Ripples */
+    repeating-linear-gradient(
+      175deg,
+      transparent,
+      transparent 70px,
+      rgba(255, 255, 255, 0.15) 71px,
+      transparent 73px
+    ),
+    /* 6. Reflective Glints (Tiny wet highlights) */
+    radial-gradient(circle 2px at 35% 85%, rgba(255, 255, 255, 0.5) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 78% 92%, rgba(255, 255, 255, 0.4) 0%, transparent 100%),
+    /* 7. Sea-foam & Salt Bloom */
+    radial-gradient(ellipse 80% 50% at 85% 5%, rgba(139, 170, 191, 0.25) 0%, transparent 100%),
+    /* 8. Damp Clay/Silt Bloom */
+    radial-gradient(circle 900px at 45% 50%, rgba(201, 168, 168, 0.22) 0%, transparent 100%),
+    /* 9. Golden Hour Glow */
+    radial-gradient(circle 1000px at 100% 100%, rgba(184, 152, 112, 0.18) 0%, transparent 100%),
+    /* 10. Iridescent Wet Sheen */
+    linear-gradient(110deg, 
+      rgba(255, 255, 255, 0.25) 0%, 
+      transparent 30%, 
+      rgba(139, 170, 191, 0.2) 50%, 
+      rgba(201, 168, 168, 0.15) 100%
+    );
+  
+  background-blend-mode: normal, overlay, multiply, multiply, soft-light, screen, screen, screen, multiply, normal, overlay;
+  animation: sand-shimmer 20s ease-in-out infinite alternate;
+}
+
+@keyframes sand-shimmer {
+  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: 0% 0%, 1% 1%, 2% 1%, -2% 3%, -1% 2%, 1% 1%, -1% -1%, 3% -2%, -2% 1%, 1% 3%, 0% 0%; }
+}
+
+/* Soft transition from the section above */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(to bottom, 
+    var(--canvas) 0%, 
+    rgba(230, 225, 213, 0.8) 20%, 
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Wrapper — more traditional postcard aspect ratio */
@@ -12,7 +73,8 @@
   max-width: 680px;
   margin: 0 auto;
   position: relative;
-  perspective: 1000px; /* Enable 3D perspective for tilt */
+  perspective: 1000px;
+  z-index: 2;
 }
 
 /* ─── Floating card ─── */
@@ -24,11 +86,8 @@
   background-size: 100% 100%, 4px 4px;
   border-radius: 2px;
   box-shadow:
-    /* Contact shadow */
     0 1px 2px rgba(55, 53, 30, 0.08),
-    /* Mid shadow */
     0 8px 24px rgba(55, 53, 30, 0.12),
-    /* Deep ambient shadow */
     0 24px 64px rgba(55, 53, 30, 0.08);
   overflow: hidden;
   position: relative;
@@ -37,7 +96,6 @@
   cursor: default;
 }
 
-/* Internal edge highlight for paper thickness */
 .pc-card::after {
   content: '';
   position: absolute;
@@ -47,7 +105,6 @@
   z-index: 3;
 }
 
-/* Top bar */
 .pc-topbar {
   display: flex;
   justify-content: space-between;
@@ -62,19 +119,17 @@
   opacity: 1;
 }
 
-/* Body */
 .pc-body {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   min-height: 280px;
 }
 
-/* Message area */
 .pc-message {
   padding: 2.2rem 2.5rem 2.2rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
 }
 
@@ -101,20 +156,59 @@
   font-family: 'Caveat', cursive;
   font-size: 1.3rem;
   line-height: 2.4rem;
-  color: rgba(55, 53, 30, 0.8);
+  color: rgba(55, 53, 30, 0.65);
   opacity: 1;
   position: relative;
   z-index: 1;
   text-transform: none;
-  font-weight: 500;
+  font-weight: 400;
   transform: rotate(-1.2deg);
-  margin-top: -0.5rem;
+  margin-top: -0.9rem;
+}
+
+.pc-body-link {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+  background-image: linear-gradient(var(--brand), var(--brand));
+  background-position: 0% 92%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.3s var(--ease-out);
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 1px;
+}
+
+.pc-body-link:hover {
+  background-size: 100% 1.5px;
+}
+
+.pc-footer-credit {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 2rem;
+  z-index: 2;
+}
+
+.pc-footer-credit a {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  opacity: 0.8;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.pc-footer-credit a:hover {
+  opacity: 0.8;
 }
 
 .pc-sig {
   position: relative;
   z-index: 1;
-  margin-top: 1rem;
+  margin-top: 2.3rem;
   opacity: 1;
   transform: scale(0.85);
   transform-origin: right bottom;
@@ -122,13 +216,11 @@
   margin-right: -0.5rem;
 }
 
-/* Vertical Divider */
 .pc-divider {
   background: rgba(55, 53, 30, 0.12);
   margin: 0;
 }
 
-/* Address side */
 .pc-address {
   padding: 1.5rem 2rem 2.2rem;
   display: flex;
@@ -173,7 +265,6 @@
   display: block;
 }
 
-/* Address Lines */
 .pc-address-lines {
   display: flex;
   flex-direction: column;
@@ -195,6 +286,7 @@
   opacity: 1;
   margin-right: 0.2rem;
 }
+
 .pc-link-item {
   display: flex;
   align-items: center;
@@ -226,22 +318,22 @@
   color: var(--brand);
 }
 
-/* Copyright */
 .footer-bottom {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 1rem; /* Further reduced from 2rem */
-  padding: 0.5rem 0; /* Further reduced vertical padding */
+  margin-top: 1rem;
+  padding: 0.5rem 0;
   text-align: center;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   color: var(--sage-deep);
-  opacity: 1; /* Full opacity as requested */
+  opacity: 1;
+  position: relative;
+  z-index: 2;
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .pc-body {
     grid-template-columns: 1fr;

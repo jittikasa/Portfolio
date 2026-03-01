@@ -1,0 +1,106 @@
+.privacy-page {
+  background-color: var(--canvas);
+  min-height: 100vh;
+  padding: 8rem 2rem 6rem;
+}
+
+.privacy-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.privacy-header {
+  margin-bottom: 4rem;
+}
+
+.privacy-header .eyebrow {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.privacy-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem); /* Matched to App Support scale */
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.privacy-title .decorative {
+  font-family: 'Shorelines Script', cursive;
+  color: var(--brand);
+  display: block;
+  font-size: 0.9em; /* Matched to polamoment script weight */
+  margin-top: 0.15em;
+  text-transform: none;
+}
+
+.privacy-intro {
+  font-family: var(--font-body);
+  font-size: 1.1rem; /* Matched to intro body scale */
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+}
+
+.privacy-updated {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  opacity: 0.6;
+  padding-top: 1.5rem;
+  display: inline-block;
+}
+
+.privacy-content {
+  max-width: 700px;
+  margin-top: 4rem;
+}
+
+.privacy-content section {
+  margin-bottom: 4rem;
+}
+
+.privacy-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem; /* Scaled down to match brand H2s */
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+
+.privacy-content p {
+  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.privacy-content a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: opacity 0.3s;
+}
+
+.privacy-content a:hover {
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .privacy-page {
+    padding-top: 6rem;
+  }
+  
+  .privacy-title {
+    font-size: 2.5rem;
+  }
+}
