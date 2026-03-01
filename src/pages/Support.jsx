@@ -94,20 +94,27 @@ const generalFaqs = [
   }
 ]
 
-function FaqItem({ item, isOpen, onToggle }) {
+function FaqItem({ item, isOpen, onToggle, buttonId, answerId }) {
   return (
     <div className={`support-faq-item ${isOpen ? 'is-open' : ''}`}>
       <button
         type="button"
         className="support-faq-trigger"
+        id={buttonId}
         onClick={onToggle}
         aria-expanded={isOpen}
+        aria-controls={answerId}
       >
         <span className="support-faq-question">{item.question}</span>
         <span className="support-faq-chevron" aria-hidden="true">+</span>
       </button>
       {isOpen && (
-        <div className="support-faq-answer">
+        <div
+          id={answerId}
+          className="support-faq-answer"
+          role="region"
+          aria-labelledby={buttonId}
+        >
           <div className="support-faq-answer-inner">{item.answer}</div>
         </div>
       )}
@@ -125,14 +132,21 @@ function FaqSection({ number, title, items }) {
         <h2 className="support-section-title">{title}</h2>
       </div>
       <div className="support-faq-list">
-        {items.map((item, index) => (
-          <FaqItem
-            key={item.question}
-            item={item}
-            isOpen={openIndex === index}
-            onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
-          />
-        ))}
+        {items.map((item, index) => {
+          const buttonId = `faq-${number}-${index}-button`
+          const answerId = `faq-${number}-${index}-answer`
+
+          return (
+            <FaqItem
+              key={item.question}
+              item={item}
+              isOpen={openIndex === index}
+              onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
+              buttonId={buttonId}
+              answerId={answerId}
+            />
+          )
+        })}
       </div>
     </section>
   )
@@ -149,6 +163,9 @@ export default function Support() {
   })
 
   const handleChange = (e) => {
+    if (status !== 'idle' && status !== 'sending') {
+      setStatus('idle')
+    }
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -202,7 +219,7 @@ export default function Support() {
           </p>
         </motion.div>
 
-        <motion.form className="contact-form support-form" onSubmit={handleSubmit} variants={fade} noValidate>
+        <motion.form className="contact-form support-form" onSubmit={handleSubmit} variants={fade}>
           <input
             type="hidden"
             name="form_type"
@@ -225,7 +242,7 @@ export default function Support() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               />
             </div>
             <div className="form-group">
@@ -239,7 +256,7 @@ export default function Support() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               />
             </div>
           </div>
@@ -254,7 +271,7 @@ export default function Support() {
                 value={form.app}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               >
                 <option value="" disabled>Select app</option>
                 <option value="Shellist">Shellist</option>
@@ -271,7 +288,7 @@ export default function Support() {
                 value={form.subject}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               >
                 <option value="" disabled>Select type</option>
                 <option value="Bug Report">Bug Report</option>
@@ -293,13 +310,15 @@ export default function Support() {
               value={form.message}
               onChange={handleChange}
               required
-              disabled={status === 'sending' || status === 'success'}
+              disabled={status === 'sending'}
             />
           </div>
 
           {status === 'success' && (
             <motion.p
               className="form-feedback form-success"
+              role="status"
+              aria-live="polite"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -310,6 +329,7 @@ export default function Support() {
           {status === 'error' && (
             <motion.p
               className="form-feedback form-error"
+              role="alert"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -320,7 +340,7 @@ export default function Support() {
           <button
             type="submit"
             className="form-submit"
-            disabled={status === 'sending' || status === 'success'}
+            disabled={status === 'sending'}
           >
             {status === 'sending' ? 'Sending...' : status === 'success' ? 'Sent' : 'Send support request'}
           </button>

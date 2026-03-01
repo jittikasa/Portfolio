@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import SignatureName from './SignatureName'
 import { Cloud } from './HeroClouds'
@@ -19,34 +19,19 @@ function HeaderPaintFilter() {
   )
 }
 
-const ElasticLink = ({ label, id, onClick, isHome }) => {
+const ElasticLink = ({ label, id }) => {
   const letters = label.split('')
-  const isRoutePage = id === 'contact' || id === 'play' || id === 'support' || id === 'work'
-
-  if (isRoutePage) {
-    const targetPath = `/${id}`
-    return (
-      <Link to={targetPath} className="nav-link-elastic" style={{ '--total': letters.length }}>
-        {letters.map((char, i) => (
-          <span key={i} style={{ '--index': i + 1 }}>{char}</span>
-        ))}
-      </Link>
-    )
-  }
-
   return (
-    <a href={`#${id}`} onClick={(e) => onClick(e, id)} className="nav-link-elastic" style={{ '--total': letters.length }}>
+    <Link to={`/${id}`} className="nav-link-elastic" style={{ '--total': letters.length }}>
       {letters.map((char, i) => (
         <span key={i} style={{ '--index': i + 1 }}>{char}</span>
       ))}
-    </a>
+    </Link>
   )
 }
 
 export default function Header() {
-  const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
-  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,25 +40,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const handleNavClick = (e, targetId) => {
-    if (isHome) {
-      e.preventDefault()
-      const element = document.getElementById(targetId)
-      if (element) {
-        const offset = 80
-        const bodyRect = document.body.getBoundingClientRect().top
-        const elementRect = element.getBoundingClientRect().top
-        const elementPosition = elementRect - bodyRect
-        const offsetPosition = elementPosition - offset
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
-      }
-    }
-  }
 
   return (
     <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
@@ -99,13 +65,13 @@ export default function Header() {
         </div>
 
         <nav className="nav">
-          <ElasticLink label="Work" id="work" onClick={handleNavClick} isHome={isHome} />
+          <ElasticLink label="Work" id="work" />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Play" id="play" onClick={handleNavClick} isHome={isHome} />
+          <ElasticLink label="Play" id="play" />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Support" id="support" onClick={handleNavClick} isHome={isHome} />
+          <ElasticLink label="Support" id="support" />
           <span className="nav-dot">•</span>
-          <ElasticLink label="Contact" id="contact" onClick={handleNavClick} isHome={isHome} />
+          <ElasticLink label="Contact" id="contact" />
         </nav>
       </div>
     </header>

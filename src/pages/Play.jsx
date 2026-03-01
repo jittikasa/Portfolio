@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useSearchParams } from 'react-router-dom'
 import { getProjectsByCategory } from '../data/projects'
@@ -13,6 +13,10 @@ export default function Play() {
   const [activeIndex, setActiveIndex] = useState(initialIndex)
   const active = projects[activeIndex]
   const isComingSoonProject = active.id === 'polamoment'
+
+  useEffect(() => {
+    setActiveIndex(initialIndex)
+  }, [initialIndex])
 
   // Slightly scaled page-turn feel — scale pulls in as content exits/enters
   const pageContent = {

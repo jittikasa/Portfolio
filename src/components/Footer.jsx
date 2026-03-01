@@ -8,10 +8,14 @@ export default function Footer() {
   const year = new Date().getFullYear()
   const [copied, setCopied] = useState(false)
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText('hello@jittika.com')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('hello@jittika.com')
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      window.location.href = 'mailto:hello@jittika.com'
+    }
   }
 
   return (

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import HeroScene from '../components/HeroScene'
@@ -65,7 +64,6 @@ function BioLine({ children, scrollY, at }) {
 }
 
 export default function Home() {
-  const [activeService, setActiveService] = useState(null)
   const { scrollY } = useScroll()
 
   const services = [

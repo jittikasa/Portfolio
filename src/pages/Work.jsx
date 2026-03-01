@@ -5,16 +5,6 @@ import { getProjectsByCategory } from '../data/projects'
 import { PaintFilter, Cloud } from '../components/HeroClouds'
 import './Work.css'
 
-const fade = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } }
-}
-
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } }
-}
-
 function useFadeUp() {
   const ref = useRef(null)
   useEffect(() => {
@@ -36,10 +26,14 @@ function useFadeUp() {
 }
 
 function DesignPreviewModal({ project, onClose }) {
+  const closeButtonRef = useRef(null)
+
   useEffect(() => {
     if (!project) return undefined
 
+    const previousActiveElement = document.activeElement
     document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
@@ -50,6 +44,7 @@ function DesignPreviewModal({ project, onClose }) {
     return () => {
       document.body.style.overflow = 'unset'
       window.removeEventListener('keydown', handleKeyDown)
+      previousActiveElement?.focus?.()
     }
   }, [project, onClose])
 
@@ -65,6 +60,9 @@ function DesignPreviewModal({ project, onClose }) {
     >
       <motion.div
         className="work-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="design-preview-title"
         initial={{ opacity: 0, y: 28, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 28, scale: 0.98 }}
@@ -72,13 +70,19 @@ function DesignPreviewModal({ project, onClose }) {
         onClick={(event) => event.stopPropagation()}
         style={{ '--project-accent': project.accentColor, '--project-color': project.color }}
       >
-        <button type="button" className="work-modal-close" onClick={onClose} aria-label="Close design preview">
+        <button
+          type="button"
+          ref={closeButtonRef}
+          className="work-modal-close"
+          onClick={onClose}
+          aria-label="Close design preview"
+        >
           ×
         </button>
 
         <div className="work-modal-header">
           <span className="work-modal-meta mono">{project.type} · {project.year}</span>
-          <h2 className="work-modal-title">{project.title}</h2>
+          <h2 id="design-preview-title" className="work-modal-title">{project.title}</h2>
           <p className="work-modal-subtitle serif-italic">{project.subtitle}</p>
         </div>
 

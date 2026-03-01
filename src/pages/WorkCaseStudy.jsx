@@ -75,10 +75,7 @@ export default function WorkCaseStudy() {
   const images = project.images || []
   const dotColors = ['#8BAABF', '#C9A8A8', '#7A7850', '#5B7A96', '#8A8760', '#B0AE8A']
 
-  // Next project navigation
   const devProjects = getWorkProjects('dev')
-  const currentIndex = devProjects.findIndex(p => p.id === project.id)
-  const nextProject = devProjects[(currentIndex + 1) % devProjects.length]
 
   return (
     <div className="cs-page">
@@ -166,8 +163,11 @@ export default function WorkCaseStudy() {
                       onClick={() => {
                         let targetId = `phase-${entry.year}`
                         if (hasPillars) {
-                          if (entry.year === '2023') targetId = 'pillar-foundation'
-                          if (entry.year === '2026') targetId = 'pillar-engine'
+                          const pillarIndex = Math.min(
+                            project.pillars.length - 1,
+                            Math.floor((i * project.pillars.length) / project.timeline.length)
+                          )
+                          targetId = `pillar-${project.pillars[pillarIndex].id}`
                         }
                         const el = document.getElementById(targetId)
                         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })

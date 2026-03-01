@@ -20,6 +20,9 @@ export default function Contact() {
   const mailIconRef = useRef(null)
 
   const handleChange = (e) => {
+    if (status !== 'idle' && status !== 'sending') {
+      setStatus('idle')
+    }
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -82,7 +85,6 @@ export default function Contact() {
           className="contact-form"
           onSubmit={handleSubmit}
           variants={fade}
-          noValidate
         >
           {/* Honeypot — hidden from humans, bots fill it, Formspree rejects */}
           <input
@@ -106,7 +108,7 @@ export default function Contact() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               />
             </div>
             <div className="form-group">
@@ -120,7 +122,7 @@ export default function Contact() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                disabled={status === 'sending' || status === 'success'}
+                disabled={status === 'sending'}
               />
             </div>
           </div>
@@ -134,7 +136,7 @@ export default function Contact() {
               value={form.subject}
               onChange={handleChange}
               required
-              disabled={status === 'sending' || status === 'success'}
+              disabled={status === 'sending'}
             >
               <option value="" disabled>Select an inquiry</option>
               <option value="Product Design">Product Design</option>
@@ -156,7 +158,7 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               required
-              disabled={status === 'sending' || status === 'success'}
+              disabled={status === 'sending'}
             />
           </div>
 
@@ -164,6 +166,8 @@ export default function Contact() {
           {status === 'success' && (
             <motion.p
               className="form-feedback form-success"
+              role="status"
+              aria-live="polite"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -173,6 +177,7 @@ export default function Contact() {
           {status === 'error' && (
             <motion.p
               className="form-feedback form-error"
+              role="alert"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -184,7 +189,7 @@ export default function Contact() {
           <button
             type="submit"
             className="form-submit"
-            disabled={status === 'sending' || status === 'success'}
+            disabled={status === 'sending'}
             onMouseEnter={() => mailIconRef.current?.startAnimation()}
             onMouseLeave={() => mailIconRef.current?.stopAnimation()}
           >
