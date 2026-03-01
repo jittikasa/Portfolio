@@ -14,12 +14,13 @@ export const projects = [
     color: '#D9E4D2',
     accentColor: '#3E5234',
     rotation: -2,
+    services: ['app-dev', 'product-design'],
     featured: true,
-    links: { 
+    links: {
       appStore: 'https://apps.apple.com/us/app/shellist/id6755242144',
       support: '/support'
     },
-    images: ['/shellist-screens.webp', '/shellist-screens-2.webp', '/shellist-icon.png'],
+    images: ['/play/shellist/screens-1.webp', '/play/shellist/screens-2.webp', '/play/shellist/icon.png'],
     features: [
       'Vision boards that link to your habits',
       'Daily, weekly & monthly tracking views',
@@ -47,9 +48,10 @@ export const projects = [
     color: '#C5D8E8',
     accentColor: '#5B7A96',
     rotation: 1.5,
+    services: ['app-dev', 'product-design'],
     featured: true,
     links: { support: '/support' },
-    images: ['/pola-image-1.jpeg', '/pola-image-2.jpeg', '/pola-icon.png'],
+    images: ['/play/polamoment/icon.png'],
     features: [
       'Authentic film development animation',
       'Multiple vintage filter presets',
@@ -76,9 +78,16 @@ export const projects = [
     tags: ['WordPress', 'WooCommerce', 'PHP', 'REST API', 'Custom Plugins'],
     color: '#37351E',
     accentColor: '#8BAABF',
+    services: ['web-dev'],
     featured: true,
     links: { live: 'https://dinipetty.com' },
-    images: [],
+    images: [
+      '/work/dinipetty/screencapture-dinipetty-2026-03-01-08_21_00.png',
+      '/work/dinipetty/screencapture-dinipetty-the-dini-petty-show-media-licensing-2026-03-01-08_21_34.png',
+      '/work/dinipetty/screencapture-dinipetty-booking-2026-03-01-08_21_19.png',
+      '/work/dinipetty/screencapture-dinipetty-product-britney-spears-jeanne-cooper-sandraa-shamas-more-2026-03-01-08_21_53.png',
+      '/work/dinipetty/screencapture-dinipetty-elmore-leonard-writing-without-an-outline-why-characters-must-talk-2026-03-01-08_22_26.png'
+    ],
     overview: 'Built a custom WordPress/WooCommerce platform to organize, surface, and license historical TV content from The Dini Petty Show. The system turns WooCommerce products into searchable archive entries with a quote-based licensing workflow — no traditional e-commerce checkout, no payment gateway.',
     systemOverview: {
       title: '3-Plugin Architecture',
@@ -109,6 +118,7 @@ export const projects = [
     tags: ['WordPress', 'PHP', 'Custom Theme', 'Property Listings'],
     color: '#2C3E2D',
     accentColor: '#8BA899',
+    services: ['web-dev', 'product-design'],
     featured: true,
     links: {},
     images: [],
@@ -128,6 +138,7 @@ export const projects = [
     tags: ['WordPress', 'PHP', 'Custom Theme', 'WooCommerce'],
     color: '#3D2E2E',
     accentColor: '#C9A8A8',
+    services: ['web-dev', 'product-design'],
     featured: true,
     links: {},
     images: [],
@@ -148,7 +159,12 @@ export const projects = [
     tags: ['Figma', 'UI/UX'],
     color: '#4A3F35',
     accentColor: '#C5D8E8',
-    images: []
+    services: ['product-design'],
+    images: [
+      '/work/elyana/Home.png',
+      '/work/elyana/Hillside%20Collection.png',
+      '/work/elyana/4%20Bedrooms%20Villa.png'
+    ]
   },
   {
     category: 'work',
@@ -162,7 +178,13 @@ export const projects = [
     tags: ['Figma', 'UI/UX'],
     color: '#2E3D3E',
     accentColor: '#8BAABF',
-    images: []
+    services: ['product-design'],
+    images: [
+      '/work/baanazalea/Homepage.png',
+      '/work/baanazalea/Villas.png',
+      '/work/baanazalea/Villa%20Juniper.png',
+      '/work/baanazalea/Villa%20Magnolia.png'
+    ]
   },
   {
     category: 'work',
@@ -176,21 +198,12 @@ export const projects = [
     tags: ['Figma', 'UX Research', 'UI/UX'],
     color: '#1E2A37',
     accentColor: '#8BAABF',
-    images: []
-  },
-  {
-    category: 'work',
-    subcategory: 'design',
-    id: 'phuketrent',
-    title: 'Phuket.rent',
-    subtitle: 'UX design for a rental property marketplace',
-    type: 'Web Design',
-    year: '2024',
-    role: 'Designer',
-    tags: ['Figma', 'UX Research', 'UI/UX'],
-    color: '#2A3728',
-    accentColor: '#A4BDB3',
-    images: []
+    services: ['product-design'],
+    images: [
+      '/work/phuketprime/Discover.png',
+      '/work/phuketprime/Buy.png',
+      '/work/phuketprime/Single%20Property%201.png'
+    ]
   },
   {
     category: 'work',
@@ -204,21 +217,13 @@ export const projects = [
     tags: ['Figma', 'UI/UX'],
     color: '#37351E',
     accentColor: '#C9A8A8',
-    images: []
-  },
-  {
-    category: 'work',
-    subcategory: 'design',
-    id: 'propertylawphuket',
-    title: 'Property Law Phuket',
-    subtitle: 'Website design for a legal services firm',
-    type: 'Web Design',
-    year: '2024',
-    role: 'Designer',
-    tags: ['Figma', 'UI/UX'],
-    color: '#2E2E3D',
-    accentColor: '#8BAABF',
-    images: []
+    services: ['product-design'],
+    images: [
+      '/work/kudohotel/Homepage.png',
+      '/work/kudohotel/Hotel.png',
+      '/work/kudohotel/About.png',
+      '/work/kudohotel/Blogs.png'
+    ]
   },
 ]
 
@@ -227,3 +232,4 @@ export const getProjectsByType = (type) => projects.filter(p => p.type === type)
 export const getFeaturedProjects = () => projects.filter(p => p.featured)
 export const getProjectsByCategory = (category) => projects.filter(p => p.category === category)
 export const getWorkProjects = (subcategory) => projects.filter(p => p.category === 'work' && p.subcategory === subcategory)
+export const getProjectsByService = (key) => projects.filter(p => p.services?.includes(key))

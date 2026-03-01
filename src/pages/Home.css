@@ -17,19 +17,23 @@
   top: 0;
   height: 100vh;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .h-hero-inner {
-  position: absolute;
+  position: fixed;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -30%);
   z-index: 2;
-  top: 36vh;
-  left: 0;
-  right: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  pointer-events: none;
 }
 
 .hero-signature {
@@ -45,7 +49,7 @@
 
 
 .hero-status {
-  position: absolute;
+  position: fixed;
   bottom: 2.5vh;
   left: 50%;
   transform: translateX(-50%);
@@ -262,21 +266,62 @@
   color: var(--sage-deep);
 }
 
+.stroke-projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.25rem 0 0.75rem 2.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.stroke-project-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink);
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--sage-mid, #c5c9c0);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.stroke-project-pill:hover {
+  background: var(--sage-pale, #e8ebe5);
+  border-color: var(--sage-deep, #6B8E7F);
+  color: var(--sage-deep, #6B8E7F);
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stroke-see-all {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink);
+  opacity: 0.5;
+  text-decoration: none;
+  padding: 0.3rem 0.25rem;
+  transition: opacity 0.25s ease;
+}
+
+.stroke-see-all:hover {
+  opacity: 1;
+}
+
 /* ── 5. MONET GRID ── */
 .h-work {
   padding: 10vh 4rem;
   position: relative;
   z-index: 1;
-}
-
-.work-canvas {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.work-title {
-  margin-bottom: 4rem;
-  font-size: 2.5rem;
 }
 
 .monet-grid {

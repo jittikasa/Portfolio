@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import HeroScene from '../components/HeroScene'
 import SignatureName from '../components/SignatureName'
 import { Cloud } from '../components/HeroClouds'
+import { getProjectsByService } from '../data/projects'
 import './Home.css'
 
 const fade = {
@@ -15,23 +17,65 @@ const mist = {
   show: { opacity: 1, transition: { duration: 1.0, ease: "easeOut" } }
 }
 
+const vh = typeof window !== 'undefined' ? window.innerHeight : 800
+
+function HeroStatus({ scrollY }) {
+  const opacity = useTransform(scrollY, [vh * 2.0, vh * 2.6], [1, 0])
+  return (
+    <motion.div
+      className="hero-status"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.2, delay: 1.0 }}
+      style={{ opacity }}
+    >
+      Phuket, TH&nbsp;&nbsp;|&nbsp;&nbsp;<span className="status-dot">●</span> Open to projects
+    </motion.div>
+  )
+}
+
+function HeroInner({ scrollY, children }) {
+  const opacity = useTransform(scrollY, [vh * 2.0, vh * 2.6], [1, 0])
+  return (
+    <motion.div className="h-hero-inner" style={{ opacity }}>
+      {children}
+    </motion.div>
+  )
+}
+
+function BioLine({ children, scrollY, at }) {
+  const opacity = useTransform(scrollY, [vh * at, vh * (at + 0.35)], [0, 1])
+  return (
+    <motion.span style={{ opacity, display: 'block' }}>
+      {children}
+    </motion.span>
+  )
+}
+
 export default function Home() {
   const [activeService, setActiveService] = useState(null)
+  const { scrollY } = useScroll()
 
   const services = [
     {
       title: "Product Design",
       icon: "◈",
+      key: "product-design",
+      link: "/work",
       description: "UX, UI, and strategy for digital products. Turning messy problems into interfaces that feel obvious — from early concepts to polished screens ready to build."
     },
     {
       title: "App Development",
       icon: "◎",
+      key: "app-dev",
+      link: "/play",
       description: "iOS apps I build mostly for the fun of it — because an idea won't leave me alone until I see it exist. Native Swift, obsessively tweaked, and made for how people actually use their phones."
     },
     {
       title: "Web Development",
       icon: "◌",
+      key: "web-dev",
+      link: "/work",
       description: "Hand-built in React or WordPress — custom themes, plugins, and everything in between. Fast, accessible, and faithful to the design."
     }
   ]
@@ -43,16 +87,9 @@ export default function Home() {
       <section className="h-hero">
         <div className="h-hero-sticky">
           <HeroScene />
-          <motion.div
-            className="hero-status"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.0 }}
-          >
-            Phuket, TH&nbsp;&nbsp;|&nbsp;&nbsp;<span className="status-dot">●</span> Open to projects
-          </motion.div>
+          <HeroStatus scrollY={scrollY} />
 
-          <div className="h-hero-inner">
+          <HeroInner scrollY={scrollY}>
             <motion.p
               className="hero-tagline"
               initial={{ clipPath: 'inset(-20% 100% -20% -5%)', opacity: 0 }}
@@ -62,40 +99,27 @@ export default function Home() {
               Designer &amp; maker
             </motion.p>
 
-            <motion.div
-              className="hero-bio"
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.4,
-                    delayChildren: 0.8
-                  }
-                }
-              }}
-            >
-              {[
-                "Hi I'm Jittika. Just someone who can't stop making things —",
-                "websites, apps, brand work, and paintings on free afternoons.",
-                "This is where I keep some of them. Full-time in digital",
-                "marketing, making things and designing on the side."
-              ].map((line, idx) => (
-                <motion.span
-                  key={idx}
-                  style={{ display: 'block' }}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1, transition: { duration: 2.0, ease: "easeOut" } }
-                  }}
-                >
-                  {line}
-                </motion.span>
-              ))}
-            </motion.div>
-          </div>
+            <div className="hero-bio">
+              <BioLine scrollY={scrollY} at={0.25}>
+                Hi I'm Jittika.
+              </BioLine>
+              <BioLine scrollY={scrollY} at={0.45}>
+                Just someone who can't stop making things —
+              </BioLine>
+              <BioLine scrollY={scrollY} at={0.65}>
+                websites, apps, brand work, and paintings on free afternoons.
+              </BioLine>
+              <BioLine scrollY={scrollY} at={0.85}>
+                This is where I keep some of them.
+              </BioLine>
+              <BioLine scrollY={scrollY} at={1.05}>
+                Full-time in digital marketing,
+              </BioLine>
+              <BioLine scrollY={scrollY} at={1.2}>
+                making things and designing on the side.
+              </BioLine>
+            </div>
+          </HeroInner>
 
         </div>
       </section>
@@ -155,6 +179,32 @@ export default function Home() {
                       >
                         {s.description}
                       </motion.p>
+                      <motion.div
+                        className="stroke-projects"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, delay: 0.28 }}
+                      >
+                        {getProjectsByService(s.key).slice(0, 3).map(p => (
+                          <Link
+                            key={p.id}
+                            to={p.category === 'play' ? '/play' : p.subcategory === 'design' ? '/work/design' : `/work/${p.id}`}
+                            className="stroke-project-pill"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            <span className="pill-dot" style={{ background: p.accentColor }} />
+                            {p.title}
+                          </Link>
+                        ))}
+                        <Link
+                          to={s.link}
+                          className="stroke-see-all"
+                          onClick={e => e.stopPropagation()}
+                        >
+                          See all →
+                        </Link>
+                      </motion.div>
                     </motion.div>
                   )}
                 </AnimatePresence>
