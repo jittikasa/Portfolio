@@ -141,9 +141,9 @@ export const projects = [
     featured: true,
     links: { live: 'https://baanimjai.com' },
     images: [
-      '/work/baanimjai/screencapture-baanimjai-2026-03-01-12_01_39.webp',
-      '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.webp',
-      '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.webp'
+      '/work/baanimjai/screencapture-baanimjai-2026-03-01-12_01_39.png',
+      '/work/baanimjai/screencapture-baanimjai-about-us-2026-03-01-12_02_44.png',
+      '/work/baanimjai/screencapture-baanimjai-our-cafe-2026-03-01-12_03_07.png'
     ],
     overview: 'Customized a WordPress theme for Baan Imjai, a mud-brick homestay and café in Nakhon Sawan. The site showcases their five earth-built guest rooms, an organic café, and hands-on workshops — from mud-house construction to farm tours — with an integrated booking system and bilingual support.',
     pageLabels: ['Homepage', 'About Us', 'Our Café'],
