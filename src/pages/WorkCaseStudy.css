@@ -327,6 +327,22 @@
   margin-bottom: 0.75rem;
 }
 
+.cs-simple-stack-section {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 3rem;
+  align-items: start;
+  padding-top: var(--space-2xl);
+}
+
+.cs-simple-stack-text {
+  padding-top: 1rem;
+}
+
+.cs-simple-stack-media .cs-screenshot-stack {
+  height: 520px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .cs-pillar {
@@ -361,6 +377,15 @@
     padding-bottom: 2.5rem;
     border-right: none;
     border-bottom: 1px solid rgba(55, 53, 30, 0.08);
+  }
+
+  .cs-simple-stack-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cs-simple-stack-text {
+    padding-top: 0;
   }
 }
 
@@ -624,6 +649,10 @@
 
   .cs-intro {
     padding: var(--space-3xl) 0;
+  }
+
+  .cs-simple-stack-media .cs-screenshot-stack {
+    height: auto;
   }
 }
 

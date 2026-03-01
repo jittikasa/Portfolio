@@ -230,18 +230,24 @@ export default function WorkCaseStudy() {
             </FadeUp>
 
             {images.length > 1 && (
-              <div className="cs-simple-gallery">
-                {images.slice(1).map((img, i) => (
-                  <FadeUp key={img}>
-                    <div className="cs-simple-gallery-item">
-                      {project.pageLabels?.[i + 1] && (
-                        <span className="cs-simple-gallery-label mono">{project.pageLabels[i + 1]}</span>
-                      )}
-                      <BrowserFrame src={img} alt={`${project.title} — ${project.pageLabels?.[i + 1] || `page ${i + 2}`}`} />
-                    </div>
-                  </FadeUp>
-                ))}
-              </div>
+              <FadeUp>
+                <section className="cs-simple-stack-section">
+                  <div className="cs-simple-stack-text">
+                    <span className="cs-editorial-label mono">More Screens</span>
+                    <p className="cs-plugin-desc">
+                      Additional pages from the build, shown as a layered stack instead of a full long-scroll gallery.
+                    </p>
+                  </div>
+
+                  <div className="cs-simple-stack-media">
+                    <ScreenshotStack
+                      images={images.slice(1)}
+                      labels={images.slice(1).map((_, i) => project.pageLabels?.[i + 1])}
+                      project={project}
+                    />
+                  </div>
+                </section>
+              </FadeUp>
             )}
           </>
         )}
