@@ -340,7 +340,7 @@
 }
 
 .cs-simple-stack-media .cs-screenshot-stack {
-  height: 520px;
+  height: clamp(780px, 70vw, 960px);
 }
 
 /* Responsive */
@@ -441,8 +441,8 @@
 
 /* Other projects */
 .cs-others {
-  margin-top: var(--space-4xl);
-  padding-top: var(--space-3xl);
+  margin-top: clamp(6rem, 10vw, 8rem);
+  padding-top: clamp(3rem, 7vw, 5rem);
   border-top: 1px solid rgba(55, 53, 30, 0.08);
 }
 

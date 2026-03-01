@@ -235,7 +235,7 @@ export default function WorkCaseStudy() {
                   <div className="cs-simple-stack-text">
                     <span className="cs-editorial-label mono">More Screens</span>
                     <p className="cs-plugin-desc">
-                      Additional pages from the build, shown as a layered stack instead of a full long-scroll gallery.
+                      Additional pages from the build.
                     </p>
                   </div>
 
