@@ -166,14 +166,14 @@ export default function Home() {
                   </p>
                   <div className="stroke-projects">
                     {getProjectsByService(s.key).slice(0, 3).map(p => (
-                      <Link
+                      <div
                         key={p.id}
-                        to={p.category === 'play' ? '/play' : p.subcategory === 'design' ? '/work/design' : `/work/${p.id}`}
                         className="stroke-project-pill"
+                        style={{ cursor: 'default' }}
                       >
                         <span className="pill-dot" style={{ background: p.accentColor }} />
                         {p.title}
-                      </Link>
+                      </div>
                     ))}
                     <Link
                       to={s.link}
