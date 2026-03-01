@@ -13,11 +13,20 @@ export default function HeroScene() {
   // Freeze: 230vh, then fade out 220–260vh (50vh empty gap before atelier)
   const sceneOpacity = useTransform(scrollY, [vh * 2.2, vh * 2.6], [1, 0])
 
-  // Bird starts among Row 3 clouds (~22vh, ~55vw), glides left and slightly up
-  const rawBirdX = useTransform(scrollY, [0, vh * 1.8], ['55vw', '-25vw'])
-  const birdX = useSpring(rawBirdX, { stiffness: 30, damping: 20 })
-  const birdY = useTransform(scrollY, [0, vh * 0.8, vh * 1.8], ['22vh', '16vh', '8vh'])
-  const birdOpacity = useTransform(scrollY, [0, vh * 0.1, vh * 1.4, vh * 1.8], [0, 1, 1, 0])
+  // Bird starts among Row 3 clouds (~22vh, ~55vw), glides left toward logo, then glides UP
+  // Smoother springs (lower stiffness, higher damping) for "lazy" organic flight
+  const rawBirdX = useTransform(scrollY, [0, vh * 1.2, vh * 2.0], ['55vw', '12vw', '12vw'])
+  const birdX = useSpring(rawBirdX, { stiffness: 18, damping: 28, mass: 1.2 })
+
+  // Add a subtle sine wave "hover" to make it feel like it's catchin air currents
+  const birdHover = useTransform(scrollY, [0, vh * 2], [0, Math.PI * 8])
+  const birdYOffset = useTransform(birdHover, (v) => Math.sin(v) * 15) // ±15px drift
+
+  const rawBirdY = useTransform(scrollY, [0, vh * 0.8, vh * 1.2, vh * 2.0], ['22vh', '16vh', '12vh', '-30vh'])
+  const birdY = useSpring(rawBirdY, { stiffness: 12, damping: 32, mass: 1.5 })
+
+  // Keep bird visible until it's well off-screen
+  const birdOpacity = useTransform(scrollY, [0, vh * 1.8, vh * 2.1], [1, 1, 0])
 
   return (
     <motion.div className="hero-scene" style={{ opacity: sceneOpacity }}>
@@ -31,7 +40,11 @@ export default function HeroScene() {
         aria-hidden="true"
         draggable="false"
         className="hero-bird"
-        style={{ x: birdX, y: birdY, opacity: birdOpacity }}
+        style={{ 
+          x: birdX, 
+          y: useTransform([birdY, birdYOffset], ([y, offset]) => `calc(${y} + ${offset}px)`), 
+          opacity: birdOpacity 
+        }}
       />
       <CloudsUpper />
     </motion.div>
